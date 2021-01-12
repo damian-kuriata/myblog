@@ -15,6 +15,7 @@ from pathlib import Path
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 import dj_database_url
 import django_heroku
+from django.utils.translation import gettext_lazy as _
 
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -82,8 +83,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
 DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': "database.sqlite"
+    },
     # Use SQLITE for testing
-    # 'default' key isn't present because we  load db credentials from envvar
     'TEST': {
         'ENGINE': 'django.db.backends.sqlite3'
     }
@@ -159,5 +163,4 @@ LOCALE_PATHS = [
 # Load db credentianls from DATABASE_URL envvar
 db_from_env = dj_database_url.config(conn_max_age=500)
 DATABASES['default'].update(db_from_env)
-
 django_heroku.settings(locals())
