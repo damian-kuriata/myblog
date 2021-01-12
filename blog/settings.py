@@ -27,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = os.environ["DJANGO_SECRET_KEY"]
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -168,3 +168,5 @@ LOCALE_PATHS = [
 #DATABASES['default'].update(db_from_env)
 #print(DATABASES["default"])
 django_heroku.settings(locals())
+# TODO: Decouple settings into multiple files as in this tutorial:
+#  https://simpleisbetterthancomplex.com/tips/2017/07/03/django-tip-20-working-with-multiple-settings-modules.html
