@@ -84,8 +84,11 @@ WSGI_APPLICATION = 'blog.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': "database.sqlite"
+        'NAME': 'd2q8m3hf6c9071',
+        'USER': 'lmaoiqqcxyqdck',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'PASSWORD': os.environ["DJANGO_DB_PASSWORD"],
+        'HOST': 'ec2-54-217-206-236.eu-west-1.compute.amazonaws.com'
     },
     # Use SQLITE for testing
     'TEST': {
@@ -161,6 +164,7 @@ LOCALE_PATHS = [
 ]
 
 # Load db credentianls from DATABASE_URL envvar
-db_from_env = dj_database_url.config(conn_max_age=500)
-DATABASES['default'].update(db_from_env)
+#db_from_env = dj_database_url.config(conn_max_age=500)
+#DATABASES['default'].update(db_from_env)
+#print(DATABASES["default"])
 django_heroku.settings(locals())
