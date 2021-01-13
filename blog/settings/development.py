@@ -5,6 +5,7 @@ DEBUG = True
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+ALLOWED_HOSTS = ["*"]
 
 DATABASES = {
     'default': {

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    {% load static %}
+    {% load i18n %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{% block description %}{% endblock %}">
+    <title>{% block title %}{% endblock %}</title>
+    <link rel="stylesheet" href="{% static 'myblog/css/style.css' %}">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+</head>
+<body>
+    <nav class="main-navigation">
+        <div class="navigation-container">
+                <img class="mobile-nav-button" src="{% static 'myblog/images/mobile-nav-button.png' %}">
+
+                <form id="search" role="search" method="GET" action="/search">
+                    <input type="search" name="search" placeholder="{% translate 'Search' %}">
+                    <button type="submit"><i class="icon-search"></i></button>
+                </form>
+        </div>
+        <div class="mobile-navigation-list hidden">
+            <div>{% translate 'Main page' %}</div>
+            <div>First category</div>
+            <div>Second category</div>
+            <div>Third category</div>
+            <div>Fourth category</div>
+            <div>Fifth category</div>
+            <div>
+                <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
+            </div>
+            <!-- Social media icons -->
+            <div>
+                <a href="facebook.com"><i class="icon-facebook"></i></a>
+                <a href="instagram.com"><i class="icon-instagram"></i></a>
+                <a href="youtube.com"><i class="icon-play"></i></a>
+                <a href="twitter.com"><i class="icon-twitter"></i></a>
+            </div>
+        </div>
+    </nav>
+    <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}">
+    <header>
+        <h1 class="main-header">{% block mainheader %}{% endblock %}</h1>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+     <article class="socialmedia">
+            <i class="icon-facebook"></i>
+            <i class="icon-instagram"></i>
+            <i class="icon-play"></i>
+            <i class="icon-twitter"></i>
+     </article>
+    <footer>
+        <p>{% translate 'Created by Damian Kuriata. All right reserved' %}</p>
+    </footer>
+    <script type="module" src="{% static 'myblog/scripts/main.js' %}"></script>
+</body>
+</html>
