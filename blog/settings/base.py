@@ -89,6 +89,7 @@ ADMINS = [("Damian", "damian.kuriata2001@gmail.com")]
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
 MEDIA_URL = "/uploaded/"
 
+
 # Internationalization settings
 LANGUAGES = (
     ("en-us", _("English")),

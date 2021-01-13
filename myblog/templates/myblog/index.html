@@ -8,15 +8,23 @@
     <section>
         <h2>{% translate 'Latest' %}</h2>
         {% for entry in latest_entries %}
-        <article class="entry">
-            <h3>{{ entry.title }}</h3>
+        <article class="entry-preview">
+            <h3>
+                <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+            </h3>
             <div>
                 <p>
-                    {{ entry.creation_datetime }} {% translate 'by' %} {{ entry.author.username }} {% translate 'views:' %} {{ entry.visits_count }}
-                    safassfafsfasasffsafsaaf
+                    {{ entry.creation_datetime }}, {% translate 'by' %}
+                    <a href="{{ entry.author.get_absoute_url }}">{{ entry.author.username }}</a> ,
+                    {% translate 'views:' %} {{ entry.visits_count }}, categories:
+                    {% for category in entry.category_set.all %}
+                        <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                    {% endfor %}
                 </p>
                 <figure>
-                    <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                    <a href="{{ entry.get_absolute_url }}">
+                        <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                    </a>
                     <figcaption>
                         {{ entry.text_fragment }}...
                     </figcaption>
@@ -24,5 +32,35 @@
             </div>
         </article>
         {% endfor %}
+
+        <h2>{% translate 'Most popular' %}</h2>
+        {% for entry in most_popular_entries %}
+        <article class="entry-preview">
+            <a href="{{ entry.get_absolute_url }}">
+            <h3>
+                <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+            </h3>
+            </a>
+            <div>
+                <p>
+                    {{ entry.creation_datetime }}, {% translate 'by' %}
+                    <a href="{{ entry.author.get_absoute_url }}">{{ entry.author.username }}</a> ,
+                    {% translate 'views:' %} {{ entry.visits_count }}, categories:
+                    {% for category in entry.category_set.all %}
+                        <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                    {% endfor %}
+                </p>
+                <figure>
+                    <a href="{{ entry.get_absolute_url }}">
+                        <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                    </a>
+                    <figcaption>
+                        {{ entry.text_fragment }}...
+                    </figcaption>
+                </figure>
+            </div>
+        </article>
+        {% endfor %}
+
     </section>
 {% endblock %}
