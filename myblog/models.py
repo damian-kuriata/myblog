@@ -4,10 +4,13 @@ from django.db import models
 from django.utils.translation import gettext_lazy as _
 
 
+def get_upload_path(instance, filename):
+    return f"blog/{instance.title}/{filename}"
+
 
 class Entry(models.Model):
-    # Content isn't defined in this model as it's already defined
-    # In it's template
+    # Each time new entry is created in templates,
+    # corresponding Entry object must be created as well
     title = models.CharField(_("title"), max_length=60, unique=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                 verbose_name=_("author"))
@@ -17,6 +20,12 @@ class Entry(models.Model):
                                        validators=[
                                            MinValueValidator(0)
                                        ])
+    # Field containing first 100 letters of a corresponding article
+    text_fragment = models.CharField(_("text fragment"), max_length=100,
+                                     null=True)
+    image = models.ImageField(_("image"), upload_to=get_upload_path,
+                              null=True)
+
 
     def __str__(self):
         return self.title

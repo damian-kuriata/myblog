@@ -9,7 +9,6 @@ export function handleMobileNavigation() {
         if(mobileNavigationList.is(":hidden")) {
             mobileNavigationList.show(300, () => {
                 mobileNavigationList.addClass("display-flex");
-                //mobileNavigationList.css("display", "flex");
             })
         }
         else {

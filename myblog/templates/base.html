@@ -13,7 +13,6 @@
 <body>
     <nav class="main-navigation">
         <div class="navigation-container">
-
                 <img class="mobile-nav-button" src="{% static 'myblog/images/mobile-nav-button.png' %}">
 
                 <form id="search" role="search" method="GET" action="/search">
@@ -40,13 +39,19 @@
             </div>
         </div>
     </nav>
+    <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}">
     <header>
         <h1 class="main-header">{% block mainheader %}{% endblock %}</h1>
     </header>
     <main>
-        <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}">
         {% block content %}{% endblock %}
     </main>
+     <article class="socialmedia">
+            <i class="icon-facebook"></i>
+            <i class="icon-instagram"></i>
+            <i class="icon-play"></i>
+            <i class="icon-twitter"></i>
+     </article>
     <footer>
         <p>{% translate 'Created by Damian Kuriata. All right reserved' %}</p>
     </footer>

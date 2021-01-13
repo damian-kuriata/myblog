@@ -1,6 +1,28 @@
 {% extends "base.html" %}
-{% load 18n %}
+{% load i18n %}
 {% block title %}{% translate 'Blog Damian Kuriata|Programming,stories and more' %}{% endblock %}
 {% block description %}
     {% translate 'A blog about everything I can think of - history, facts,programmingg, motorization and more' %}
+{% endblock %}
+{% block content %}
+    <section>
+        <h2>{% translate 'Latest' %}</h2>
+        {% for entry in latest_entries %}
+        <article class="entry">
+            <h3>{{ entry.title }}</h3>
+            <div>
+                <p>
+                    {{ entry.creation_datetime }} {% translate 'by' %} {{ entry.author.username }} {% translate 'views:' %} {{ entry.visits_count }}
+                    safassfafsfasasffsafsaaf
+                </p>
+                <figure>
+                    <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                    <figcaption>
+                        {{ entry.text_fragment }}...
+                    </figcaption>
+                </figure>
+            </div>
+        </article>
+        {% endfor %}
+    </section>
 {% endblock %}
