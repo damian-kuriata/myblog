@@ -1,5 +1,5 @@
 from django.contrib.auth.models import User
-from django.core.validators import MinLengthValidator
+from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -15,7 +15,7 @@ class Entry(models.Model):
                                              auto_now=True)
     visits_count = models.IntegerField(_("visits count"), default=0,
                                        validators=[
-                                           MinLengthValidator(0)
+                                           MinValueValidator(0)
                                        ])
 
     def __str__(self):
@@ -30,7 +30,7 @@ class Entry(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(_("name"), max_length=60)
+    name = models.CharField(_("name"), max_length=60, unique=True)
     entries = models.ManyToManyField(Entry, verbose_name=_("entries"))
 
     def __str__(self):
