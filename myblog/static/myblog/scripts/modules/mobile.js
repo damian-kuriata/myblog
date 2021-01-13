@@ -6,10 +6,10 @@ export function handleMobileNavigation() {
     const mobileNavigationList = $("nav .mobile-navigation-list");
     //$('body').on('click','img',function(){alert('it works');})
     mobileNavigationButton.click((event) => {
-        console.log("click");
         if(mobileNavigationList.is(":hidden")) {
             mobileNavigationList.show(300, () => {
-                mobileNavigationList.css("display", "flex");
+                mobileNavigationList.addClass("display-flex");
+                //mobileNavigationList.css("display", "flex");
             })
         }
         else {

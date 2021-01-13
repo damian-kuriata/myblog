@@ -1,2 +1,6 @@
 {% extends "base.html" %}
-{% block test %}test{% endblock %}
+{% load 18n %}
+{% block title %}{% translate 'Blog Damian Kuriata|Programming,stories and more' %}{% endblock %}
+{% block description %}
+    {% translate 'A blog about everything I can think of - history, facts,programmingg, motorization and more' %}
+{% endblock %}

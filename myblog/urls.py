@@ -9,5 +9,5 @@ urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     re_path(r"^categories/((?P<name>\w+)/)?$",
             CategoriesView.as_view(),
-            name="categories")
+            name="aboutme")
 ]

@@ -22,16 +22,34 @@
                 </form>
         </div>
         <div class="mobile-navigation-list hidden">
-            <div>Test1</div>
-            <div>Test2</div>
+            <div>{% translate 'Main page' %}</div>
+            <div>First category</div>
+            <div>Second category</div>
+            <div>Third category</div>
+            <div>Fourth category</div>
+            <div>Fifth category</div>
+            <div>
+                <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
+            </div>
+            <!-- Social media icons -->
+            <div>
+                <a href="facebook.com"><i class="icon-facebook"></i></a>
+                <a href="instagram.com"><i class="icon-instagram"></i></a>
+                <a href="youtube.com"><i class="icon-play"></i></a>
+                <a href="twitter.com"><i class="icon-twitter"></i></a>
+            </div>
         </div>
     </nav>
     <header>
         <h1 class="main-header">{% block mainheader %}{% endblock %}</h1>
     </header>
     <main>
+        <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}">
         {% block content %}{% endblock %}
     </main>
+    <footer>
+        <p>{% translate 'Created by Damian Kuriata. All right reserved' %}</p>
+    </footer>
     <script type="module" src="{% static 'myblog/scripts/main.js' %}"></script>
 </body>
 </html>
