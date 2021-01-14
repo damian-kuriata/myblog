@@ -15,8 +15,9 @@
             <div>
                 <p>
                     {{ entry.creation_datetime }}, {% translate 'by' %}
-                    <a href="{{ entry.author.get_absoute_url }}">{{ entry.author.username }}</a> ,
-                    {% translate 'views:' %} {{ entry.visits_count }}, categories:
+                    <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                    {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                    ,{% translate 'categories:' %}
                     {% for category in entry.category_set.all %}
                         <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
                     {% endfor %}
@@ -47,8 +48,9 @@
             <div>
                 <p>
                     {{ entry.creation_datetime }}, {% translate 'by' %}
-                    <a href="{{ entry.author.get_absoute_url }}">{{ entry.author.username }}</a> ,
-                    {% translate 'views:' %} {{ entry.visits_count }}, categories:
+                    <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                    {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                    ,{% translate 'categories:' %}
                     {% for category in entry.category_set.all %}
                         <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
                     {% endfor %}

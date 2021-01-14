@@ -1,12 +1,13 @@
 from django.urls import path, re_path
 from django.views.generic import TemplateView
 
-from myblog.views import IndexView, CategoriesView
+from myblog.views import IndexView, CategoryView, SearchView
 
 app_name = "myblog"
 
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
-    re_path(r"^categories/((?P<name>\w+)/)?$",
-            CategoriesView.as_view(), name="categories")
+    path("category/<name>/",
+            CategoryView.as_view(), name="category"),
+    path("search/<query>", SearchView.as_view(), name="search")
 ]

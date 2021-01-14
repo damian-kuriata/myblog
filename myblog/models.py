@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
+from django.urls import reverse_lazy, reverse
 from django.utils.translation import gettext_lazy as _
 
 
@@ -30,6 +31,8 @@ class Entry(models.Model):
     def __str__(self):
         return self.title
 
+
+
     # TODO: Implement get absolute url
 
     class Meta:
@@ -44,7 +47,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
-    # TODO: Implement get absolute url
+
+    def get_absolute_url(self):
+        return reverse("myblog:category", kwargs={"name": self.name})
+
 
     class Meta:
         ordering = ["name"]

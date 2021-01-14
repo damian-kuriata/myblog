@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}
+    {% translate 'Blog Damian Kuriata|Search results for ' %}{{ search_query }}
+{% endblock %}
+{% block description %}
+    {% translate 'Search results' %}
+{% endblock %}
+{% block mainheader %}{% translate 'Search results for ' %}{{ search_query }}{% endblock %}
+
+{% block content %}
+{% if categories %}
+<h2>{% translate 'Categories' %}</h2>
+    <article class="category-preview">
+        {% for category in categories %}
+            <h3>{{ category.name }}</h3>
+            <p>{{ category.entries.count }} {% translate 'entries' %}</p>
+        {% endfor %}
+    </article>
+{% endif %}
+{% if entries %}
+<h2>{% translate 'Entries' %}</h2>
+{% for entry in entries %}
+    <article class="entry-preview">
+            <h3>
+                <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+            </h3>
+            <div>
+                <p>
+                    {{ entry.creation_datetime }}, {% translate 'by' %}
+                    <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                    {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                    ,{% translate 'categories:' %}
+                    {% for category in entry.category_set.all %}
+                        <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                    {% endfor %}
+                </p>
+                <figure>
+                    <a href="{{ entry.get_absolute_url }}">
+                        <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                    </a>
+                    <figcaption>
+                        {{ entry.text_fragment }}...
+                    </figcaption>
+                    <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
+                        {% translate 'Read more' %}
+                    </button>
+                </figure>
+            </div>
+        </article>
+{% endfor %}
+{% endif %}
+{% endblock %}

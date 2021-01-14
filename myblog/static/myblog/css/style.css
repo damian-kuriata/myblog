@@ -111,11 +111,19 @@ nav i {
 }
 h1, h2, h3 {
   text-align: center;
-  margin: 0;
   font-weight: normal;
 }
-.main-header {
-
+h1 {
+  font-size: 1em;
+  margin-bottom: .7em;
+}
+h2 {
+  font-size: .9em;
+  margin-bottom: .3em;
+}
+h3 {
+  font-size: .8em;
+  margin-bottom: .4em;
 }
 .logo {
   width: 99%;
@@ -143,6 +151,39 @@ h1, h2, h3 {
 .entry-preview figcaption {
   font-size: .5em;
   margin-top: 1em;
+}
+#sorting-form {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: .1em;
+  padding-bottom: .5em;
+}
+#sorting-form label, select{
+  margin-right: .3em;
+  border-radius: 6px;
+  font-size: .3em;
+}
+#sorting-form button {
+  font-size: .3em;
+}
+.pagination {
+  font-size: .5em;
+  margin: 0 auto .3em auto;
+  text-align: center;
+  width: 60%;
+}
+.pagination a {
+  font-size:  1.3em;
+}
+.pagination form {
+  display: inline;
+  width: 50%;
+}
+.pagination form button {
+  font-size: .6em;
+}
+.pagination form input {
+  width: 10%;
 }
 .socialmedia {
   border-top: 1px solid  rgb(0, 126, 194);

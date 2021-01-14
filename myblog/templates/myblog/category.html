@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate 'Blog Damian Kuriata|Category '%}{{ category.name }}{% endblock %}
+{% block description %}{% translate 'Preview of articles that are under ' %}{{ category.name }} {% endblock %}
+
+{% block mainheader %}{% translate 'Category: ' %}{{ category.name }}{% endblock %}
+{% block content %}
+    <form id="sorting-form" method="GET">
+        <label for="sort_by">{% translate 'Sorting: ' %}</label>
+        <select id="sort_by" name="sort_by">
+            <option value="title" selected>{% translate 'title' %}</option>
+            <option value="author__username">{% translate 'author' %}</option>
+            <option value="creation_datetime">{% translate 'creation date' %}</option>
+            <option value="visits_count">{% translate 'visits' %}</option>
+        </select>
+        <button type="submit">OK</button>
+    </form>
+    <!-- iterate over page object -->
+    {% for entry in page_obj %}
+        <article class="entry-preview">
+            <h3>
+                <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+            </h3>
+            <div>
+                <p>
+                    {{ entry.creation_datetime }}, {% translate 'by' %}
+                    <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                    {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                    ,{% translate 'categories:' %}
+                    {% for category in entry.category_set.all %}
+                        <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                    {% endfor %}
+                </p>
+                <figure>
+                    <a href="{{ entry.get_absolute_url }}">
+                        <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                    </a>
+                    <figcaption>
+                        {{ entry.text_fragment }}...
+                    </figcaption>
+                    <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
+                        {% translate 'Read more' %}
+                    </button>
+                </figure>
+            </div>
+        </article>
+    {% endfor %}
+
+    <!-- TODO: Implement pagination div -->
+    <div class="pagination">
+        {% if page_obj.has_previous %}
+            <a href="?page={{ page_obj.previous_page_number }}">☚</a>
+        {% endif %}
+        <span>
+            {% translate 'Page' %}
+            <form method="GET">
+                <input name="page" type="text" value="{{ page_obj.number }}">
+                <button type="submit">Go</button>
+            </form>
+
+            {% translate 'of' %} {{ page_obj.paginator.num_pages }}
+        </span>
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">☛</a>
+        {% endif %}
+    </div>
+{% endblock %}
