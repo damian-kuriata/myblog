@@ -8,6 +8,5 @@ app_name = "myblog"
 urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     re_path(r"^categories/((?P<name>\w+)/)?$",
-            CategoriesView.as_view(),
-            name="aboutme")
+            CategoriesView.as_view(), name="categories")
 ]

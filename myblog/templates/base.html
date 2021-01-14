@@ -13,8 +13,10 @@
 <body>
     <nav class="main-navigation">
         <div class="navigation-container">
-                <img class="mobile-nav-button" src="{% static 'myblog/images/mobile-nav-button.png' %}">
-
+                <div>
+                    <i class="icon-menu mobile-nav-button"></i>
+                </div>
+                <a href="/"><i class="icon-home"></i></a>
                 <form id="search" role="search" method="GET" action="/search">
                     <input type="search" name="search" placeholder="{% translate 'Search' %}">
                     <button type="submit"><i class="icon-search"></i></button>
@@ -47,7 +49,7 @@
         {% block content %}{% endblock %}
     </main>
      <article class="socialmedia">
-            <i class="icon-facebook"></i>
+         <a href="#"><i class="icon-facebook"></i></a>
             <i class="icon-instagram"></i>
             <i class="icon-play"></i>
             <i class="icon-twitter"></i>
