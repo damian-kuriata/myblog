@@ -67,28 +67,34 @@ nav .navigation-container .icon-home:active {
   color: #b0b0b0;
 }
 nav .navigation-container form {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   position: relative;
+  display: flex;
+  right: .1em;
   margin-left: auto;
-  width: 30%;
+  width: 50%;
   height: 70%;
+  border-radius: 6px;
+  background-color: white;
 }
 nav .navigation-container input[type="search"]{
-  flex-grow: 2;
-  border: 1px solid black;
   border-radius: 5px;
+  width: 90%;
+  border: none;
+  font-size: .6em;
 }
+nav .navigation-container input[type="search"]:active {
+  border: none;
+  outline: none;
+}
+nav .navigation-container input[type="search"]:focus {
+  border: none;
+  outline: none;
+}
+
 nav .navigation-container button {
   border: none;
   background: none;
-  z-index: 99;
   padding: 0;
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 1.2em;
 }
 nav .mobile-navigation-list {
   flex-direction: column;

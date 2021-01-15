@@ -9,5 +9,5 @@ urlpatterns = [
     path("", IndexView.as_view(), name="index"),
     path("category/<name>/",
             CategoryView.as_view(), name="category"),
-    path("search/<query>", SearchView.as_view(), name="search")
+    path("search/", SearchView.as_view(), name="search")
 ]

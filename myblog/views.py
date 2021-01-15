@@ -72,13 +72,13 @@ class SearchView(View):
 
     def get(self, request, *args, **kwargs):
         # Allowed search filters are: all, categories, entries, users
-        search_filter = request.GET.get("search")
-        search_query = kwargs["query"]
+        #search_filter = request.GET.get("search")
+        search_query = request.GET.get("search", '')
         categories = Category.objects.filter(
             name__icontains=search_query)
         entries = Entry.objects.filter(title__icontains=search_query)
         users = User.objects.filter(username__icontains=search_query)
-
+        '''
         if search_filter == "categories":
             context = {
                 "categories": categories
@@ -98,5 +98,11 @@ class SearchView(View):
                 "entries": entries,
                 "users": users
             }
-        context["search_query"] = kwargs["query"]
+        '''
+        context = {
+            "categories": categories,
+            "entries": entries,
+            "users": users
+        }
+        context["search_query"] = search_query
         return render(request, self.template_name, context)
