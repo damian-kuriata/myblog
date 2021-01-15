@@ -1,9 +1,12 @@
+import os
+
 from django import views
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.http import Http404, HttpResponse
 from django.shortcuts import render, get_object_or_404
+from django.template import TemplateDoesNotExist
 from django.views import View
 from django.views.generic import ListView, DetailView
 
@@ -115,8 +118,15 @@ class UserView(DetailView):
     context_object_name = "user"
 
 
-class EntryView(DetailView):
-    model = Entry
-    template_name = "myblog/entry.html"
-    slug_field = "title"
-    context_object_name = "entry"
+class EntryView(View):
+    def get(self, request, *args, **kwargs):
+        entry_title = kwargs["slug"].lower().strip()
+        entry = get_object_or_404(Entry, title__iexact=entry_title)
+        # Increment entry.visits_count each time this view is called
+        entry.visits_count += 1
+        entry.save()
+        # Template name should be in form <entry.title>.html
+        template_name = os.path.join("myblog", "entries",
+                                     entry_title + ".html")
+        return render(request, template_name, {"entry": entry})
+

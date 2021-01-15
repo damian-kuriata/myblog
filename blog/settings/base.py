@@ -93,6 +93,7 @@ MEDIA_URL = "/uploaded/"
 # Internationalization settings
 LANGUAGES = (
     ("en-us", _("English")),
+    ("pl-PL", _("Polish")),
     ("pl", _("Polish"))
 )
 LOCALE_PATHS = [

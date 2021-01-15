@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load i18n %}
 {% block title %}{% translate 'Blog Damian Kuriata|Category '%}{{ category.name }}{% endblock %}
-{% block description %}{% translate 'Preview of articles that are under ' %}{{ category.name }} {% endblock %}
+{% block description %}{% translate 'Preview of entries that are under ' %}{{ category.name }} {% endblock %}
 
 {% block mainheader %}{% translate 'Category: ' %}{{ category.name }}{% endblock %}
 {% block content %}
