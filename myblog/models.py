@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
+from django.db.models import Sum
 from django.urls import reverse_lazy, reverse
 from django.utils.translation import gettext_lazy as _
 
@@ -27,13 +28,11 @@ class Entry(models.Model):
     image = models.ImageField(_("image"), upload_to=get_upload_path,
                               null=True)
 
-
     def __str__(self):
         return self.title
 
-
-
-    # TODO: Implement get absolute url
+    def get_absolute_url(self):
+        return reverse("myblog:entry", kwargs={"slug": self.title})
 
     class Meta:
         ordering = ["-creation_datetime"]
@@ -51,6 +50,13 @@ class Category(models.Model):
     def get_absolute_url(self):
         return reverse("myblog:category", kwargs={"name": self.name})
 
+    def get_total_visits_count(self):
+        '''
+        Return summarized visits counts from all entries
+        '''
+
+        return self.entries.all().\
+            aggregate(Sum("visits_count"))["visits_count__sum"]
 
     class Meta:
         ordering = ["name"]

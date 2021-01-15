@@ -2,7 +2,7 @@ body {
   margin: 0;
   padding: 0;
   font-size: 40px;
-  font-family: Arial, SansSerif;
+  font-family: 'Lato', sans-serif;
   width: 100%;
   position: relative;
 }
@@ -171,6 +171,15 @@ h3 {
 }
 #sorting-form button {
   font-size: .3em;
+}
+.category-preview p {
+  font-size: .7em;
+  text-align: center;
+  margin: 0;
+}
+.apply-top-border {
+    border-top: 2px solid rgb(0, 126, 194);
+    padding-top: .5em;
 }
 .pagination {
   font-size: .5em;

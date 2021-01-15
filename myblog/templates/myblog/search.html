@@ -6,7 +6,7 @@
 {% block description %}
     {% translate 'Search results' %}
 {% endblock %}
-{% block mainheader %}{% translate 'Search results for ' %}{{ search_query }}{% endblock %}
+{% block mainheader %}{% translate 'Search results for ' %}'{{ search_query }}'{% endblock %}
 
 {% block content %}
 {% if categories %}
@@ -14,12 +14,19 @@
     <article class="category-preview">
         {% for category in categories %}
             <h3>{{ category.name }}</h3>
-            <p>{{ category.entries.count }} {% translate 'entries' %}</p>
+            <p>
+                <a href="{% url 'myblog:category' name=category.name %}">
+                    {{ category.entries.count }} {% translate 'entries' %}
+                </a>
+                <span style="font-size:inherit;">
+                    {{ category.get_total_visits_count }} {% translate 'visits' %}
+                </span>
+            </p>
         {% endfor %}
     </article>
 {% endif %}
 {% if entries %}
-<h2>{% translate 'Entries' %}</h2>
+<h2 class="apply-top-border">{% translate 'Entries' %}</h2>
 {% for entry in entries %}
     <article class="entry-preview">
             <h3>
@@ -49,5 +56,15 @@
             </div>
         </article>
 {% endfor %}
+{% endif %}
+{% if users %}
+    <h2 class="apply-top-border">{% translate 'Users' %}</h2>
+    {% for user in users %}
+        <article class="user-preview">
+            <h3>
+                <a href="{% url 'myblog:user' slug=user.username %}">{{ user.username }}</a>
+            </h3>
+        </article>
+    {% endfor %}
 {% endif %}
 {% endblock %}

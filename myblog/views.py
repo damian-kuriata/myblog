@@ -3,7 +3,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.http import Http404, HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views import View
 from django.views.generic import ListView, DetailView
 
@@ -106,3 +106,17 @@ class SearchView(View):
         }
         context["search_query"] = search_query
         return render(request, self.template_name, context)
+
+
+class UserView(DetailView):
+    model = User
+    template_name = "myblog/user.html"
+    slug_field = "username"
+    context_object_name = "user"
+
+
+class EntryView(DetailView):
+    model = Entry
+    template_name = "myblog/entry.html"
+    slug_field = "title"
+    context_object_name = "entry"
