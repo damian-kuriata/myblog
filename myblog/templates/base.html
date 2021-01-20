@@ -11,6 +11,10 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    {% if comment_form %}
+    {{ comment_form.media.css }}
+    {% endif %}
+
 </head>
 <body>
     <nav class="main-navigation">
@@ -26,12 +30,14 @@
                 </form>
         </div>
         <div class="mobile-navigation-list hidden">
-            <div>{% translate 'Main page' %}</div>
+            <div>
+                <a href="/">{% translate 'Main page' %}</a>
+            </div>
             {% for category in categories %}
             <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
             {% endfor %}
             <div>
-                <a href="#">{% translate 'About me' %}</a>
+                <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
             </div>
             <!-- Social media icons -->
             <div>
@@ -47,9 +53,19 @@
         <h1 class="main-header">{% block mainheader %}{% endblock %}</h1>
     </header>
     <main>
+        {% if entry %}
+        <p class="entry-info-bar">
+            {% translate 'Created: ' %}{{ entry.creation_datetime }},
+            <a href="{% url 'myblog:user' slug=entry.author %}">
+                {% translate 'Author: ' %}{{ entry.author.username }}
+            </a>
+        </p>
+        {% endif  %}
         {% block content %}{% endblock %}
     </main>
-     <article class="socialmedia">
+    {% block comments %}
+    {% endblock %}
+    <article class="socialmedia">
          <a href="https://facebook.com"><i class="icon-facebook"></i></a>
          <a href="https://instagram.com"><i class="icon-instagram"></i></a>
          <a href="https://youtube.com"><i class="icon-play"></i></a>
@@ -58,6 +74,10 @@
     <footer>
         <p>{% translate 'Created by Damian Kuriata. All right reserved' %}</p>
     </footer>
+    <script src="{% url 'javascript-catalog' %}"></script>
     <script type="module" src="{% static 'myblog/scripts/main.js' %}"></script>
+    {% if comment_form  %}
+        {{ comment_form.media.js }}
+    {% endif %}
 </body>
 </html>

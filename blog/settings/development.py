@@ -18,3 +18,4 @@ DATABASES = {
         'NAME': 'testing.sqlite'
     }
 }
+

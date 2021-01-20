@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% block title %}{% translate 'Blog Damian Kuriata|About me' %}{% endblock %}
+{% block description %}{% translate 'A page about me' %}{% endblock %}
+
+{% block content %}
+    <h1>{% translate 'About me' %}</h1>
+    <article class="aboutme">
+    <p>
+        Cześć, jestem Damian Kuriata, witaj na moim blogu! Mam 19 lat i aktualnie jestem uczniem 3 klasy liceum
+        ogólnokształcącego.
+        Na blogu będę na nim umieszczał wpisy na przeróżne tematy jakie tylko wpadną mi do głowy. Będzie to blog
+        ogólnotematyczny, ponieważ nie mam jednego, konkretnego zainteresowania.
+    </p>
+    <p>
+        Na pewno będą pojawiać się wpisy o programowaniu jako, że w tej chwili jest to moje główne zainteresowanie i
+        zajęcie. Na pewno nie zabraknie też tematu marynistyki (w szczególności statki i okręty), kolarstwa czy
+        nawet szeroko pojętej filozofii.
+        Możliwe, że pojawią się też zdjęcia kolei jako, że jestem małym fanem trainspottingu :)
+    </p>
+    </article>
+    <article class="aboutme">
+        <h2 class="apply-top-border">No dobrze, ale po co?</h2>
+        <p>
+            Stworzyłem ten blog głównie w celach edukacyjnych. Stanowi on moje małe portfolio, ale również chciałbym
+            wyćwiczyć sobie, postując na nim, pewne nawyki takie jak regularność wykonywania czynności czy pisanie
+            w sposób interesujący czytelnika.
+        </p>
+        <p>
+            Jeśli są tu jacyś czytelnicy ciekawscy technologii w jakich ten blog
+            został napisany - backend jest oparty na Django (wersja 3.1.3), frontend stoi na bardzo niewielkiej
+            ilości Javascriptu(+ jQuery), blog jest responsywny (lecz jeśli uważasz, że na Twoim urządzeniu wygląda
+            on źle lub coś trzeba poprawić - daj znać prosze!). Kod źródłowy jest dostępny na GitHubie
+            <a href="https://github.com/damian-kuriata/myblog">>>TUTAJ<<</a>.
+            To wszystko co chciałem Tobie przekazać na początek, pozdrawiam!
+        </p>
+    </article>
+{% endblock %}

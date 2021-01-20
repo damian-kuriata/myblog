@@ -1,2 +1,7 @@
 {% extends "base.html" %}
-<h1>New</h1>
+{% block content %}
+    Hello form new!
+{% endblock %}
+{% block comments %}
+    {% include "comments.html" %}
+{% endblock %}

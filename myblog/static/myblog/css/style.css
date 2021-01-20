@@ -18,7 +18,7 @@ a:hover, a:active, a:focus {
 a:active, a:focus {
   outline: 1px solid #7a7979;
 }
-button {
+button, input[type="submit"] {
   background-color: rgb(0, 126, 194);
   font-size: .5em;
   border: none;
@@ -135,6 +135,10 @@ h3 {
   width: 99%;
   margin-top: 8vh;
 }
+main .entry-info-bar {
+  font-size: .4em;
+  margin: 0 0 .5em .4em;
+}
 .entry-preview div {
   max-width: 90%;
   margin-left: auto;
@@ -181,6 +185,15 @@ h3 {
     border-top: 2px solid rgb(0, 126, 194);
     padding-top: .5em;
 }
+p {
+  width: 80%;
+  font-size: .5em;
+  margin-left: auto;
+  margin-right: auto;
+}
+ul {
+  font-size: .5em;
+}
 .pagination {
   font-size: .5em;
   margin: 0 auto .3em auto;
@@ -199,6 +212,23 @@ h3 {
 }
 .pagination form input {
   width: 10%;
+}
+.comments-section {
+  margin-left: .15em;
+}
+.comments-section > h3 {
+  font-size: .7em;
+  margin-bottom: .1em;
+  text-align: left;
+}
+.comments-section .comments-list {
+  max-height: 100em;
+  min-height: 5em;
+  overflow-y: auto;
+  width: 85%;
+}
+.comments-section .comments-list .comment {
+  font-size: .5em;
 }
 .socialmedia {
   border-top: 1px solid  rgb(0, 126, 194);

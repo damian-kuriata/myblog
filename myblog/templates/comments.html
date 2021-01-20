@@ -1,0 +1,41 @@
+<section class="comments-section">
+    {% load i18n %}
+    <h3>
+        {% translate 'Comments:' %} {{ comments.count }}
+    </h3>
+    <button type="button">{% translate 'hide' %}</button>
+    <div>
+        <div class="comments-list">
+            {% if comments %}
+            {% for comment in comments %}
+            <p class="comment">
+                {{ comment.author_nickname }}, {{ comment.creation_datetime }}: {{ comment.text }}
+            </p>
+            {% endfor %}
+            {% endif %}
+        </div>
+        <div class="comment-input apply-top-border">
+            <form action="/entry/{{ entry.title }}/add_comment/" method="post" id="comment-form">
+                {% csrf_token %}
+                <fieldset>
+                    <legend>{% translate 'Add comment' %}</legend>
+                    <div>
+                        {{ comment_form.author_email.label_tag }}
+                        {{ comment_form.author_email }}
+                    </div>
+                    <div>
+                        {{ comment_form.author_nickname.label_tag }}
+                        {{ comment_form.author_nickname }}
+                    </div>
+                    <div>
+                        <div>
+                            {{ comment_form.text.label_tag }}
+                        </div>
+                        {{ comment_form.text }}
+                    </div>
+                    <input type="submit" value="Send">
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</section>

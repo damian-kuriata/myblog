@@ -42,7 +42,10 @@ class Entry(models.Model):
 
 class Category(models.Model):
     name = models.CharField(_("name"), max_length=60, unique=True)
-    entries = models.ManyToManyField(Entry, verbose_name=_("entries"))
+    entries = models.ManyToManyField(Entry, verbose_name=_("entries"),
+                                     blank=True)
+    # Will be removed
+    test = models.TextField(default="test")
 
     def __str__(self):
         return self.name
@@ -69,7 +72,7 @@ class Comment(models.Model):
     author_nickname = models.CharField(_("author nickname"),
                                        max_length=60,
                                        default="Anonymous",
-                                       blank=True)
+                                       )
     text = models.TextField(_("text"), max_length=1000)
     creation_datetime = models.DateTimeField(_("creation_datetime"),
                                              auto_now_add=True)
@@ -80,6 +83,6 @@ class Comment(models.Model):
         return self.text
 
     class Meta:
-        ordering = ["-creation_datetime"]
+        ordering = ["creation_datetime"]
         verbose_name = _("comment")
         verbose_name_plural = _("comments")

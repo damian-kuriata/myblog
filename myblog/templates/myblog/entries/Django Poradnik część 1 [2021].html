@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Django Poradnik część 1|Blog Damian Kuriata{% endblock %}
+{% block description %}Poradnik dla początkujących o programowaniu aplikacji webowych z użyciem Django 3.1{% endblock %}
+{% block mainheader %}Django - Poradnik część 1{% endblock %}
+{% block content %}
+    <p>Witaj na moim blogu! Dzisiaj rozpoczniemy naszą przygodę z Django, dowiesz jak Django zainstalować, jak
+        skonfigurować project oraz stworzymy pierwszą aplikację. Do dzieła!</p>
+    <h2>Czego potrzebujemy?</h2>
+    <article>
+        <p>Oczywiście edytora kodu źródłowego lub środowiska programistycznego (IDE), lista edytorów to na przykład
+            Sublime Text, Atom, Notepad++. Ze środowisk programistycznych możemy wybrać Visual Studio Code
+            albo PyCharm. Ja polecam ten drugi, ponieważ od początku do końca jest dedykowany Pythonowi, a
+            wersja Professional (kosztuje 200 dolarów rocznie, ale jeśli jesteś studentem to możesz aplikować
+            o darmową wersję Professional, osobiście sprawdziłem i działa) zapewnia natywne wsparcie dla
+            narzędzi takich jak Django, Flask czy Twisted, w tym mamy np. podpowiadanie składni w szablonach.
+        </p>
+        <p>Oprócz tego potrzebujemy samego Pythona (zakładam, że to już masz zainstalowane) oraz
+        instalator pakietów do niego - <a href="https://pypi.org/project/pip/">Pip</a>. To już mamy ogarnięte,
+        teraz potrzebujemy zainstalować Django, robimy to komendą <i>pip install django</i>. Aby sprawdzić, czy
+        wszystko zainstalowało się poprawnie, po wpisaniu komendy <i>python -m django --version</i> do
+        terminala, powinieneś ujrzeć wersję Django, którą zainstalowałeś.</p>
+    </article>
+    <h2>Tworzenie projektu</h2>
+    <article>
+        <p>
+        Przechodzimy do stworzenia i konfiguracji projektu. W celu jego utworzenia, wpisujemy komendę
+        <i>django-admin startproject [nazwa_projektu]</i>. Nasz pierwszy projekt nazwę myfirstproject, więc
+        odpowiednio pełna treść komendy będzie: <i>django-admin startproject myfirstproject</i>. Jak widzimy,
+        utworzony został katalog o nazwie myfirstproject, a w jego wnętrzu plik <i>manage.py</i> oraz kolejny katalog o
+            takiej samej nazwie. Tak naprawdę nazwa katalogu zewnętrznego nie ma dla Django znaczenia, możemy
+            zmienić jego nazwę jeśli chcemy. Poniżej omówimy sobie czym są pliki w katalogach.<br><br>
+        - manage.py - narzędzie wiersza poleceń służące do interakcji z projektem, to za jego pomocą będziemy
+                uruchamiać loklany serwer czy wykonywać migracje bazy danych<br>
+        - myfirstproject/__init__.py - pusty plik mówiący o tym, że ten katalog powinien być traktowany
+                jako pakiet (czyli można go zaimportować)<br>
+        - myfirstproject/settings.py - przechowuje ustawienia naszego projektu, w przyszłości omówimy sobie część z nich<br>
+        - myfirstproject/urls.py -  plik z deklaracjami adresów URL naszego projektu, to w nim będziemy przypisywać
+            adresy URL do poszczególnych aplikacji (o aplikacjach poniżej)<br>
+        - myfirstproject/asgi.py - punkt wejścia dla serwera ASGI naszego projektu<br>
+        - myfirstproject/wsgi.py - punkt wejścia dla serwera WSGI naszego projektu</p>
+        <p>
+            Teraz sprawdzimy czy wszystkie pliki są na swoim miejscu i działają, wpisz komendę
+            <i>python manage.py runserver</i>, powinieneś ujrzeć taki tekst:
+            <code>Performing system checks...
+
+                    System check identified no issues (0 silenced).
+
+                    You have unapplied migrations; your app may not work properly until they are applied.
+                    Run 'python manage.py migrate' to apply them.
+
+                    January 14, 2021 - 15:50:53
+                    Django version 3.1, using settings 'myfirstproject.settings'
+                    Starting development server at http://127.0.0.1:8000/
+                    Quit the server with CONTROL-C.</code><br>
+            Uruchomiłeś serwer dostarczony przez Django. Nasłuchuje on na adresie "127.0.0.1" i porcie "8000".
+            Serwer ten jest o tyle fajny, że za każdym razem kiedy poczynisz zmiany w kodzie ten natychmiast się
+            automatycznie restartuje.
+        </p>
+    </article>
+    <article>
+        <h2>Tworzenie aplikacji</h2>
+        <p>
+            Czym się różni projekt od aplikacji? Projekt to zbiór aplikacji i ich konfiguracji. Aplikacja to część
+            projektu, która "coś" robi, np. aplikacja może być blogiem, może być systemem zarządzania treścią.
+            Jeden projekt może mieć wiele aplikacji, jedna aplikacja może być w wielu projektach. Gdy jesteśmy
+            w katalogu myfirstproject (tym zewnętrznym, tam gdzie mamy plik manage.py), do utworzenia
+            aplikacji używamy komendy <i>python manage.py startapp [nazwa_aplikacji]</i>. Naszą aplikację nazwiemy
+            "ankiety". Jak widzimy, utworzony został nowy katalog o nazwie "ankiety"
+        </p>
+    </article>
+    <article>
+        <h2>Pisanie pierwszego widoku</h2>
+        <p>
+            Widok to część aplikacji odpowiadająca za jej logikę, to tutaj będziemy wykonywać np. zapytania do
+            bazy danych. Każdy widok jest przypisany do konkretnego adresu URL. Gdy użytkownik wpisze w pasek
+            przeglądarki adres URL, zostanie wykonany widok przypisany do tego adresu.<br>
+            Wchodzimy do katalogu <i>ankiety</i> i tam tworzymy plik o nazwie <i>views.py</i>, nazwartość pliku jest
+            następująca:
+        </p>
+    </article>
+{% endblock %}
