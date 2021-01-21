@@ -15,7 +15,7 @@
         {% for category in categories %}
             <h3>{{ category.name }}</h3>
             <p>
-                <a href="{% url 'myblog:category' name=category.name %}">
+                <a href="{{ category.get_absolute_url }}">
                     {{ category.entries.count }} {% translate 'entries' %}
                 </a>
                 <span style="font-size:inherit;">

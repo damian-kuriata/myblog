@@ -29,12 +29,17 @@ class IndexView(ListView):
     context_object_name = "most_popular_entries"
 
     def get_context_data(self, **kwargs):
-        import sys
-        print(sys.path)
         context = super().get_context_data(**kwargs)
+        # Get 5 latest entries
         latest_entires = \
             Entry.objects.order_by("-creation_datetime")[:5]
-        context["latest_entries"] = latest_entires
+        # To prevent the same entry from being both in latest and most popular,
+        # Filter most popular and latest entries using filter function
+        # self.queryset contains 5 most popular entries
+        different_latest_entires = filter(lambda latest_entry:
+                                            latest_entry not in self.queryset,
+                                            latest_entires)
+        context["latest_entries"] = different_latest_entires
         context = _get_context_with_categories(context)
         return context
 
@@ -47,8 +52,8 @@ class CategoryView(View):
         try:
             # Indicates by what sort returned entries in category
             entries_sort_by = request.GET.get("sort_by")
-            name = kwargs.get("name")
-            category = Category.objects.get(name__iexact=name)
+            slug = kwargs.get("slug").strip().lower()
+            category = Category.objects.get(slug__iexact=slug)
             if entries_sort_by in ["title", "author__username",
                            "creation_datetime", "visits_count"]:
                 entries = category.entries.order_by(entries_sort_by)
@@ -56,7 +61,7 @@ class CategoryView(View):
                 entries = category.entries.order_by("title")
 
             # Enable entries pagination
-            ENTRIES_PER_PAGE = 1
+            ENTRIES_PER_PAGE = 10
             entries_paginator = Paginator(entries, ENTRIES_PER_PAGE)
             page_number = request.GET.get("page")
             page_obj = entries_paginator.get_page(page_number)
@@ -76,34 +81,11 @@ class SearchView(View):
     template_name = "myblog/search.html"
 
     def get(self, request, *args, **kwargs):
-        # Allowed search filters are: all, categories, entries, users
-        #search_filter = request.GET.get("search")
         search_query = request.GET.get("search", '')
         categories = Category.objects.filter(
             name__icontains=search_query)
         entries = Entry.objects.filter(title__icontains=search_query)
         users = User.objects.filter(username__icontains=search_query)
-        '''
-        if search_filter == "categories":
-            context = {
-                "categories": categories
-            }
-        elif search_filter == "entries":
-            context = {
-                "entries": entries
-            }
-        elif search_filter == "users":
-            context = {
-                "users": users
-            }
-        # If search filter is unknown or set to 'all' treat it as 'all'
-        else:
-            context = {
-                "categories": categories,
-                "entries": entries,
-                "users": users
-            }
-        '''
         context = {
             "categories": categories,
             "entries": entries,
@@ -127,10 +109,10 @@ class AboutmeView(TemplateView):
 class EntryView(View):
     def get(self, request, *args, **kwargs):
         entry_title = kwargs["slug"].lower().strip()
-        entry = get_object_or_404(Entry, title__iexact=entry_title)
+        entry = get_object_or_404(Entry, slug__iexact=entry_title)
         # Template name should be in form <entry.title>.html
         template_name = os.path.join("myblog", "entries",
-                                     entry_title + ".html")
+                                     entry_title.lower() + ".html")
         # Get comments written for a given entry
         comments = entry.comment_set.all()
         comment_form = CommentForm()
@@ -150,6 +132,7 @@ class EntryView(View):
 class AddCommentView(View):
     def post(self, request, *args, **kwargs):
         comment_form = CommentForm(request.POST)
+        print("add comment")
         if comment_form.is_valid():
             entry_for_comment = Entry.objects.get(title__iexact=kwargs["slug"])
             comment = Comment(**comment_form.cleaned_data)

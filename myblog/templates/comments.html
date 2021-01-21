@@ -15,7 +15,7 @@
             {% endif %}
         </div>
         <div class="comment-input apply-top-border">
-            <form action="/entry/{{ entry.title }}/add_comment/" method="post" id="comment-form">
+            <form action="/entry/{{ entry.slug }}/add-comment/" method="POST" id="comment-form">
                 {% csrf_token %}
                 <fieldset>
                     <legend>{% translate 'Add comment' %}</legend>
