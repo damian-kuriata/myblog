@@ -1,6 +1,6 @@
 export function handleComments() {
     const showHideButton = $(".comments-section > button");
-    const commentsContainer = $(".comments-section div");
+    const commentsContainer = $(".comments-section .comments-list");
     let commentsHidden = false;
 
     showHideButton.click((event) => {

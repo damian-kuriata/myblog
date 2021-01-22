@@ -9,9 +9,11 @@
             {% if comments %}
             {% for comment in comments %}
             <p class="comment">
-                {{ comment.author_nickname }}, {{ comment.creation_datetime }}: {{ comment.text }}
+                {{ comment.author_nickname }}, {{ comment.creation_datetime }}: <br>{{ comment.text }}
             </p>
             {% endfor %}
+            {% else %}
+                <p style="font-size: .7em;">{% translate 'No comments yet' %}</p>
             {% endif %}
         </div>
         <div class="comment-input apply-top-border">

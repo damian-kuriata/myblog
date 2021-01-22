@@ -48,7 +48,11 @@
             </div>
         </div>
     </nav>
-    <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}">
+
+    {% comment %} <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}"> {% endcomment %}
+    <div class="logo">
+        <a href="/"><span>DamianKuriata</span>.com</a>
+    </div>
     <header>
         <h1 class="main-header">{% block mainheader %}{% endblock %}</h1>
     </header>

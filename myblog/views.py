@@ -137,7 +137,8 @@ class AddCommentView(View):
     def post(self, request, *args, **kwargs):
         comment_form = CommentForm(request.POST)
         if comment_form.is_valid():
-            entry_for_comment = Entry.objects.get(title__iexact=kwargs["slug"])
+            entry_for_comment = Entry.objects.get(slug__iexact=kwargs["slug"])
+
             comment = Comment(**comment_form.cleaned_data)
             comment.entry = entry_for_comment
             comment.save()
