@@ -110,6 +110,11 @@ nav .mobile-navigation-list {
   height: 100vh;
   overflow: auto;
 }
+@media (orientation: landscape) {
+  nav .mobile-navigation-list {
+    height: 83vh;
+  }
+}
 nav .mobile-navigation-list .socialmedia-icons {
   margin-top: .5em;
   font-size: 1.5em;
