@@ -3,3 +3,5 @@
 development.py
 blog/media
 blog/staticfiles
+__pycache__
+.idea
