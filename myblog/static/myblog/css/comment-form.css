@@ -19,3 +19,6 @@
     font-size: .4em;
     color: red;
 }
+#comment-form fieldset input[type="submit"] {
+    margin-bottom: .4em;
+}

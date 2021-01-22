@@ -1,3 +1,4 @@
+/* All styles are mobile-first, initially designed for 1440x720 resolution */
 body {
   margin: 0;
   padding: 0;
@@ -5,6 +6,9 @@ body {
   font-family: 'Lato', sans-serif;
   width: 100%;
   position: relative;
+}
+input, textarea {
+  border: 1px solid rgb(0, 126, 194);
 }
 a {
   text-decoration: none;
@@ -159,8 +163,8 @@ main .entry-info-bar {
   margin-left: auto;
   margin-right: auto;
 }
-.entry-preview figure img{
-  max-width: 100%;
+.entry-preview figure img {
+  max-width: 70%;
 }
 
 .entry-preview figcaption {
@@ -226,21 +230,24 @@ ul {
   margin-bottom: .1em;
   text-align: left;
 }
+.comments-section button[type="button"] {
+  margin-bottom: .4em;
+}
 .comments-section .comments-list {
   max-height: 100em;
   min-height: 2em;
   overflow-y: auto;
-  width: 85%;
 }
 .comments-section .comments-list .comment {
   font-size: .4em;
   margin-left: 0;
+  width: 95%;
+  word-wrap: break-word;
 }
 .socialmedia {
   border-top: 1px solid  rgb(0, 126, 194);
   border-bottom: 1px solid  rgb(0, 126, 194);
-  padding-top: .2em;
-  padding-bottom: .2em;
+  padding: .2em 0 .2em 0;
   margin-bottom: .3em;
   text-align: center;
 }

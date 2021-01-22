@@ -4,9 +4,10 @@ from django import views
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Sum
-from django.http import Http404, HttpResponse, JsonResponse
+from django.http import Http404, HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.template import TemplateDoesNotExist
+from django.urls import reverse
 from django.views import View
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, DetailView, TemplateView
@@ -96,11 +97,16 @@ class SearchView(View):
         return render(request, self.template_name, context)
 
 
-class UserView(DetailView):
+class UserView(View):
+    def get(self, request, *args, **kwargs):
+        return HttpResponseRedirect(reverse("myblog:aboutme"))
+
+    '''
     model = User
     template_name = "myblog/user.html"
     slug_field = "username"
     context_object_name = "user"
+    '''
 
 
 class AboutmeView(TemplateView):

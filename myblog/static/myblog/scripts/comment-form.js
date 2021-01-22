@@ -35,7 +35,7 @@ function renderFormErrors(form, allErrors) {
 }
 
 function renderNewComment(commentsList, commentData) {
-    let newComment = $(`<p>${commentData.author_nickname}, ${commentData.creation_datetime}: ${commentData.text}</p>`);
+    let newComment = $(`<p>${commentData.author_nickname}, ${commentData.creation_datetime}: <br>${commentData.text}</p>`);
     newComment.attr("class", "comment");
     commentsList.append(newComment);
 }
