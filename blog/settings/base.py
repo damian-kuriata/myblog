@@ -56,6 +56,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'blog.wsgi.application'
 
+# Empty dict. Will be overridden
 DATABASES = {
     'default': {},
     'TEST': {}
@@ -64,7 +65,7 @@ DATABASES = {
 # Internationalization
 # https://docs.djangoproject.com/en/3.1/topics/i18n/
 
-LANGUAGE_CODE = 'pl-PL'
+LANGUAGE_CODE = 'en-US'
 
 TIME_ZONE = 'Europe/Warsaw'
 

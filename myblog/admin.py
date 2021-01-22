@@ -11,6 +11,7 @@ class MembershipInline(admin.TabularInline):
 
 @admin.register(Entry)
 class EntryAdmin(admin.ModelAdmin):
+    exclude = ("slug",)
     inlines = [
         MembershipInline
     ]
@@ -21,7 +22,7 @@ class CategoryAdmin(admin.ModelAdmin):
     inlines = [
         MembershipInline
     ]
-    exclude = ("members",)
+    exclude = ("members","slug")
 
 
 @admin.register(Comment)

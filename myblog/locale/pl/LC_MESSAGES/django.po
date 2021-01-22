@@ -1,0 +1,260 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2021-01-22 01:30+0100\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=(n==1 ? 0 : (n%10>=2 && n%10<=4) && (n"
+"%100<12 || n%100>14) ? 1 : n!=1 && (n%10>=0 && n%10<=1) || (n%10>=5 && n"
+"%10<=9) || (n%100>=12 && n%100<=14) ? 2 : 3);\n"
+
+#: .\forms.py:15
+msgid "Your email"
+msgstr "Twój email"
+
+#: .\forms.py:16
+msgid "Your nickname"
+msgstr "Twój pseudonim"
+
+#: .\models.py:30 .\templates\myblog\category.html:11
+msgid "title"
+msgstr "tytuł"
+
+#: .\models.py:32
+msgid ""
+"Should not be edited manually, it is automaticallyupdated when save() is "
+"called on Entry"
+msgstr ""
+"Nie powinno być edytowane manualnie, to jest aktualizowane automatycznie"
+" gdy wywołana jest funkcja save() na obiekcie Entry"
+
+#: .\models.py:37 .\templates\myblog\category.html:12
+msgid "author"
+msgstr "autor"
+
+#: .\models.py:38
+msgid "creation datetime"
+msgstr "data utworzenia"
+
+#: .\models.py:40
+msgid "visits count"
+msgstr "liczba wizyt"
+
+#: .\models.py:45
+msgid "text fragment"
+msgstr "fragment tekstu"
+
+#: .\models.py:47
+msgid "image"
+msgstr "obraz"
+
+#: .\models.py:58 .\models.py:103
+msgid "entry"
+msgstr "wpis"
+
+#: .\models.py:59 .\models.py:70 .\templates\myblog\search.html:19
+msgid "entries"
+msgstr "wpisy"
+
+#: .\models.py:63
+msgid "name"
+msgstr "nazwa"
+
+#: .\models.py:65
+msgid ""
+"Should not be edited manually, it is automaticallyupdated when save() is "
+"called on Category"
+msgstr ""
+"Nie powinno być edytowane ręcznie, jest aktualizowane automatycznie gdy "
+"wywołana jest funkcja save() na obiekcie Category"
+
+#: .\models.py:89
+msgid "category"
+msgstr "kategoria"
+
+#: .\models.py:90
+msgid "categories"
+msgstr "kategorie"
+
+#: .\models.py:94
+msgid "author email"
+msgstr "email autora"
+
+#: .\models.py:95
+msgid "author nickname"
+msgstr "pseudonim autora"
+
+#: .\models.py:99
+msgid "text"
+msgstr "tekst"
+
+#: .\models.py:100
+msgid "creation_datetime"
+msgstr "data utworzenia"
+
+#: .\models.py:110
+msgid "comment"
+msgstr "komentarz"
+
+#: .\models.py:111
+msgid "comments"
+msgstr "komentarze"
+
+#: .\templates\base.html:28
+msgid "Search"
+msgstr "Szukaj"
+
+#: .\templates\base.html:34
+msgid "Main page"
+msgstr "Strona główna"
+
+#: .\templates\base.html:40 .\templates\myblog\aboutme.html:7
+msgid "About me"
+msgstr "O mnie"
+
+#: .\templates\base.html:58
+msgid "Created: "
+msgstr "Utworzono: "
+
+#: .\templates\base.html:60
+msgid "Author: "
+msgstr "Author: "
+
+#: .\templates\base.html:75
+msgid "Created by Damian Kuriata. All right reserved"
+msgstr "Stworzone przez Damiana Kuriatę. Wszelkie prawa zastrzeżone"
+
+#: .\templates\comments.html:4
+msgid "Comments:"
+msgstr "Komentarze:"
+
+#: .\templates\comments.html:6
+msgid "hide"
+msgstr "schowaj"
+
+#: .\templates\comments.html:21
+msgid "Add comment"
+msgstr "Dodaj komentarz"
+
+#: .\templates\comments.html:36
+msgid "Send"
+msgstr "Wyślij"
+
+#: .\templates\myblog\aboutme.html:3
+msgid "Blog Damian Kuriata|About me"
+msgstr ""
+
+#: .\templates\myblog\aboutme.html:4
+msgid "A page about me"
+msgstr "Strona o mnie"
+
+#: .\templates\myblog\category.html:3
+msgid "Blog Damian Kuriata|Category "
+msgstr ""
+
+#: .\templates\myblog\category.html:4
+msgid "Preview of entries that are under "
+msgstr "Podgląd wpisów które są pod "
+
+#: .\templates\myblog\category.html:6
+msgid "Category: "
+msgstr "Kategoria: "
+
+#: .\templates\myblog\category.html:9
+msgid "Sorting: "
+msgstr "Sortowanie"
+
+#: .\templates\myblog\category.html:13
+msgid "creation date"
+msgstr "data utworzenia"
+
+#: .\templates\myblog\category.html:14 .\templates\myblog\search.html:22
+msgid "visits"
+msgstr "liczba wizyt"
+
+#: .\templates\myblog\category.html:26 .\templates\myblog\index.html:17
+#: .\templates\myblog\index.html:50 .\templates\myblog\search.html:37
+msgid "by"
+msgstr "przez"
+
+#: .\templates\myblog\category.html:28 .\templates\myblog\index.html:19
+#: .\templates\myblog\index.html:52 .\templates\myblog\search.html:39
+msgid "views:"
+msgstr "wyświetleń:"
+
+#: .\templates\myblog\category.html:28 .\templates\myblog\index.html:19
+#: .\templates\myblog\index.html:52 .\templates\myblog\search.html:39
+msgid "comments:"
+msgstr "komentarzy:"
+
+#: .\templates\myblog\category.html:29 .\templates\myblog\index.html:20
+#: .\templates\myblog\index.html:53 .\templates\myblog\search.html:40
+msgid "categories:"
+msgstr "kategorie:"
+
+#: .\templates\myblog\category.html:42 .\templates\myblog\index.html:33
+#: .\templates\myblog\index.html:66 .\templates\myblog\search.html:53
+msgid "Read more"
+msgstr "Czytaj dalej"
+
+#: .\templates\myblog\category.html:55
+msgid "Page"
+msgstr "Strona"
+
+#: .\templates\myblog\category.html:61
+msgid "of"
+msgstr "z"
+
+#: .\templates\myblog\index.html:3
+msgid "Blog Damian Kuriata|Programming,stories and more"
+msgstr ""
+
+#: .\templates\myblog\index.html:5
+msgid ""
+"A blog about everything I can think of - history, facts,programmingg, "
+"motorization and more"
+msgstr ""
+
+#: .\templates\myblog\index.html:9
+msgid "Latest"
+msgstr "Najnowsze"
+
+#: .\templates\myblog\index.html:40
+msgid "Most popular"
+msgstr "Najpopularniejsze"
+
+#: .\templates\myblog\search.html:4
+msgid "Blog Damian Kuriata|Search results for "
+msgstr "Blog Damian Kuriata|Wyniki wyszukiwania dla "
+
+#: .\templates\myblog\search.html:7
+msgid "Search results"
+msgstr "Wyniki wyszukiwania"
+
+#: .\templates\myblog\search.html:9
+msgid "Search results for "
+msgstr "Wyniki wyszukiwania dla "
+
+#: .\templates\myblog\search.html:13
+msgid "Categories"
+msgstr "Kategorie"
+
+#: .\templates\myblog\search.html:29
+msgid "Entries"
+msgstr "Wpisy"
+
+#: .\templates\myblog\search.html:61
+msgid "Users"
+msgstr "Użytkownicy"

@@ -28,11 +28,15 @@ class Entry(models.Model):
     # Each time new entry is created in templates,
     # corresponding Entry object must be created as well
     title = models.CharField(_("title"), max_length=60, unique=True)
-    slug = models.SlugField(max_length=60)
+    slug = models.SlugField(max_length=60, blank=True,
+                            help_text=_("Should not be edited manually, "
+                                        "it is automatically"
+                                        "updated when save() is called on Entry"
+                                        ))
     author = models.ForeignKey(User, on_delete=models.CASCADE,
                                 verbose_name=_("author"))
     creation_datetime = models.DateTimeField(_("creation datetime"),
-                                             auto_now=True)
+                                             auto_now_add=True)
     visits_count = models.IntegerField(_("visits count"), default=0,
                                        validators=[
                                            MinValueValidator(0)
@@ -57,7 +61,12 @@ class Entry(models.Model):
 
 class Category(models.Model):
     name = models.CharField(_("name"), max_length=60, unique=True)
-    slug = models.SlugField(max_length=60)
+    slug = models.SlugField(max_length=60, blank=True,
+                            help_text=_("Should not be edited manually, "
+                                        "it is automatically"
+                                        "updated when save() is called on "
+                                        "Category"
+                                        ))
     entries = models.ManyToManyField(Entry, verbose_name=_("entries"),
                                      blank=True)
 

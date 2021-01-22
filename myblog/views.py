@@ -125,14 +125,16 @@ class EntryView(View):
         # Increment entry.visits_count each time this view is called
         entry.visits_count += 1
         entry.save()
-        return render(request, template_name, context)
+        try:
+            return render(request, template_name, context)
+        except TemplateDoesNotExist:
+            return HttpResponse("Error: Template Does Not Exist")
 
 
 # --- API ---
 class AddCommentView(View):
     def post(self, request, *args, **kwargs):
         comment_form = CommentForm(request.POST)
-        print("add comment")
         if comment_form.is_valid():
             entry_for_comment = Entry.objects.get(title__iexact=kwargs["slug"])
             comment = Comment(**comment_form.cleaned_data)
