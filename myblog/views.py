@@ -109,11 +109,11 @@ class AboutmeView(TemplateView):
 
 class EntryView(View):
     def get(self, request, *args, **kwargs):
-        entry_title = kwargs["slug"].lower().strip()
-        entry = get_object_or_404(Entry, slug__iexact=entry_title)
+        entry_slug = kwargs["slug"].lower()
+        entry = get_object_or_404(Entry, slug__iexact=entry_slug)
         # Template name should be in form <entry.title>.html
         template_name = os.path.join("myblog", "entries",
-                                     entry_title.lower() + ".html")
+                                     entry_slug + ".html")
         # Get comments written for a given entry
         comments = entry.comment_set.all()
         comment_form = CommentForm()
