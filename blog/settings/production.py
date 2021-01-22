@@ -3,7 +3,6 @@ import django_heroku
 
 from blog.settings.base import *
 
-print("prod")
 DEBUG = False
 DEBUG_PROPAGATE_EXCEPTIONS = True
 
