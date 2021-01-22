@@ -34,7 +34,3 @@ AUTH_PASSWORD_VALIDATORS = [
 db_from_env = dj_database_url.config(conn_max_age=500, ssl_require=True)
 DATABASES['default'].update(db_from_env)
 django_heroku.settings(locals())
-
-# Media files serving using Amazon S3
-AWS_STORAGE_BUCKET_NAME = 'myblog-bucket-production'
-AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME

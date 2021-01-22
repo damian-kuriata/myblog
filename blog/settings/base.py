@@ -102,14 +102,15 @@ LOCALE_PATHS = [
 ]
 
 # Media files serving using Amazon S3
-AWS_ACCESS_KEY_ID = 'AKIA2LYBJBTJII5YQ4EN'
-AWS_SECRET_ACCESS_KEY = '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'
+#AWS_ACCESS_KEY_ID = 'AKIA2LYBJBTJII5YQ4EN'
+#AWS_SECRET_ACCESS_KEY = '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'
 AWS_STORAGE_BUCKET_NAME = 'media-bucker'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-#MEDIA_ROOT = "/media/"
+MEDIA_ROOT = "/media/"
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-#MEDIA_URL =AWS_S3_CUSTOM_DOMAIN + MEDIA_ROOT
+MEDIA_URL =AWS_S3_CUSTOM_DOMAIN + MEDIA_ROOT
+
 # Uncomment below line to enable amazon S3 file storage
-#DEFAULT_FILE_STORAGE = 'blog.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'blog.storage_backends.MediaStorage'
