@@ -47,7 +47,7 @@ function updateCommentsHeaderValue(commentsHeader) {
     commentsHeaderValue += 1;
     commentsHeader.text(commentsHeader.text().replace(regex, commentsHeaderValue.toString()))
 }
-function cleanFornErrors() {
+function cleanFormErrors() {
     const classToDelete = "errorlist";
     const errors = document.querySelectorAll(`#comment-form .${classToDelete}`);
     errors.forEach(e => e.remove());
