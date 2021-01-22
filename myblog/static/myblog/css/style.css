@@ -109,7 +109,8 @@ nav .mobile-navigation-list {
   font-size: .7em;
   height: 100vh;
 }
-nav .mobile-navigation-list:last-child {
+nav .mobile-navigation-list .socialmedia-icons {
+  /* TODO: Set margin-top */
   font-size: 1em;
 }
 /* Social media icons */

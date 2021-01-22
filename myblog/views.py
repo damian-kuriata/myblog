@@ -112,6 +112,11 @@ class UserView(View):
 class AboutmeView(TemplateView):
     template_name = "myblog/aboutme.html"
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context = _get_context_with_categories(context)
+        return context
+
 
 class EntryView(View):
     def get(self, request, *args, **kwargs):
