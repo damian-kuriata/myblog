@@ -88,8 +88,7 @@ ADMINS = [("Damian", "damian.kuriata2001@gmail.com")]
 
 # Media settings
 MEDIA_ROOT = os.path.join(BASE_DIR, "media")
-MEDIA_URL = "/uploaded/"
-
+MEDIA_URL = "/media/"
 
 # Internationalization settings
 LANGUAGES = (
@@ -102,16 +101,10 @@ LOCALE_PATHS = [
 ]
 
 # Media files serving using Amazon S3
-AWS_ACCESS_KEY_ID = 'AKIA2LYBJBTJII5YQ4EN'
-AWS_SECRET_ACCESS_KEY = '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'
+AWS_ACCESS_KEY_ID = os.environ.get("AWS_ACCESS_KEY_ID ")
+AWS_SECRET_ACCESS_KEY = os.environ.get("AWS_SECRET_ACCESS_KEY")
 AWS_STORAGE_BUCKET_NAME = 'media-bucker'
 AWS_S3_OBJECT_PARAMETERS = {
     'CacheControl': 'max-age=86400',
 }
-AWS_DEFAULT_ACL = None
-MEDIA_ROOT = "/media/"
 AWS_S3_CUSTOM_DOMAIN = '%s.s3.amazonaws.com' % AWS_STORAGE_BUCKET_NAME
-MEDIA_URL =AWS_S3_CUSTOM_DOMAIN + MEDIA_ROOT
-
-# Uncomment below line to enable amazon S3 file storage
-DEFAULT_FILE_STORAGE = 'blog.storage_backends.MediaStorage'

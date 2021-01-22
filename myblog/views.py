@@ -39,7 +39,8 @@ class IndexView(ListView):
         different_latest_entires = filter(lambda latest_entry:
                                             latest_entry not in self.queryset,
                                             latest_entires)
-        context["latest_entries"] = different_latest_entires
+        # For now don't implement the above feature
+        context["latest_entries"] = latest_entires
         context = _get_context_with_categories(context)
         return context
 
