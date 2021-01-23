@@ -1,3 +1,9 @@
+// Namespace for global variables
+let globalVars = {
+    commentAddingThresholdMillis: 10000,
+    canAddComment: true
+}
+
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -56,6 +62,17 @@ const submitButton = $(".comment-input input[type='submit']");
 submitButton.click((event) => {
     event.preventDefault();
 
+    if(!globalVars.canAddComment) {
+        alert(gettext("Wait a moment before adding next comment"));
+        return;
+    }
+    globalVars.canAddComment = false;
+
+    // Block adding comments for a given threshold
+    setTimeout(() => {
+        globalVars.canAddComment = true;
+    }, globalVars.commentAddingThresholdMillis);
+
     const commentForm = $("#comment-form").get(0);
     const commentTextarea = $("#comment-form textarea");
     const commentsHeader = $(".comments-section h3");
@@ -71,7 +88,6 @@ submitButton.click((event) => {
     }
     cleanFormErrors(commentForm);
     const commentsList = $(".comments-list");
-
 
     fetch(actionUrl, init).then((response) => {
         const contentType = response.headers.get("content-type");

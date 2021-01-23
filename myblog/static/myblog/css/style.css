@@ -10,12 +10,6 @@ body {
 input, textarea {
   border: 1px solid rgb(0, 126, 194);
 }
-pre {
-  font-size: .1em;
-}
-code {
-  font-size: .5em;
-}
 a {
   text-decoration: none;
   color: inherit;
@@ -127,16 +121,27 @@ nav .mobile-navigation-list {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
-  width: 80%;
+  width: 90%;
+}
+@media screen and (min-width: 950px) {
+  .text-image-container {
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+      width: 80%;
+  }
+}
+.text-image-container img {
+
 }
 .text-image-container .image-small {
-  width: 50%;
+  max-width: 50%;
 }
 .text-image-container .image-medium {
-  width: 80%;
+  max-width: 80%;
 }
 .text-image-container .image-big {
-  width: 100%;
+  max-width: 100%;
 }
 .text-image-container figcaption {
   font-size: .3em;
@@ -229,9 +234,6 @@ main .entry-info-bar {
   margin-left: auto;
   margin-right: auto;
 }
-.entry-preview figure img {
-  max-width: 70%;
-}
 
 .entry-preview figcaption {
   font-size: .5em;
@@ -261,10 +263,18 @@ main .entry-info-bar {
     padding-top: .5em;
 }
 p {
-  width: 80%;
+  width: 90%;
   font-size: .5em;
   margin-left: auto;
   margin-right: auto;
+}
+@media screen and (min-width: 950px) {
+  p {
+    width: 80%;
+    font-size: .6em;
+    margin-left: auto;
+    margin-right: auto;
+  }
 }
 ul {
   font-size: .5em;

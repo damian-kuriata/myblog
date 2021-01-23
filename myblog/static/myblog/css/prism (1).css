@@ -12,7 +12,7 @@ pre[class*="language-"] {
 	background: none;
 	text-shadow: 0 1px white;
 	font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
-	font-size: .8em;
+	font-size: .6em;
 	text-align: left;
 	white-space: pre;
 	word-spacing: normal;
@@ -53,10 +53,17 @@ code[class*="language-"]::selection, code[class*="language-"] ::selection {
 pre[class*="language-"] {
 	margin-left: auto;
 	margin-right: auto;
-	width: 80%;
+	width: 90%;
 	overflow: auto;
 }
-
+@media screen and (min-width: 950px) {
+	pre[class*="language-"] {
+		margin-left: auto;
+		margin-right: auto;
+		width: 80%;
+		overflow: auto;
+	}
+}
 :not(pre) > code[class*="language-"],
 pre[class*="language-"] {
 	background: #f5f2f0;
