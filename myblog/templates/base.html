@@ -10,10 +10,12 @@
     <link rel="stylesheet" href="{% static 'myblog/css/style.css' %}">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    {% if comment_form %}
-    {{ comment_form.media.css }}
+    {# Download Prism.css (syntax highlighting tool) only when on entry page #}
+    {% if entry %}
+        <link href="{% static 'myblog/css/prism (1).css' %}" rel="stylesheet" />
+        {{ comment_form.media.css }}
     {% endif %}
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body>
@@ -25,6 +27,7 @@
                 <div>
                     <a href="/"><i class="icon-home"></i></a>
                 </div>
+                <!-- Element for devices with screens wider than 950px -->
                 <div class="desktop-items">
                     {% for category in categories %}
                     <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
@@ -92,9 +95,12 @@
     <footer>
         <p>{% translate 'Created by Damian Kuriata. All right reserved' %}</p>
     </footer>
+    <!-- Javascript translate functions -->
     <script src="{% url 'javascript-catalog' %}"></script>
     <script type="module" src="{% static 'myblog/scripts/main.js' %}"></script>
-    {% if comment_form  %}
+    {# Download Prism.js (syntax highlighting tool) only when on entry page #}
+    {% if entry %}
+        <script src="{% static 'myblog/scripts/prism (1).js' %}"></script>
         {{ comment_form.media.js }}
     {% endif %}
 </body>

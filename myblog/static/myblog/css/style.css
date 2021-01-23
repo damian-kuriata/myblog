@@ -10,6 +10,12 @@ body {
 input, textarea {
   border: 1px solid rgb(0, 126, 194);
 }
+pre {
+  font-size: .1em;
+}
+code {
+  font-size: .5em;
+}
 a {
   text-decoration: none;
   color: inherit;
@@ -100,6 +106,12 @@ nav .navigation-container button {
 }
 nav .navigation-container .desktop-items {
   display: none;
+  overflow: auto;
+  color: white;
+  font-size: 1em;
+}
+nav .navigation-container .desktop-items div {
+
 }
 nav .mobile-navigation-list {
   flex-direction: column;
@@ -111,10 +123,31 @@ nav .mobile-navigation-list {
   height: 100vh;
   overflow: auto;
 }
+.text-image-container {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+  width: 80%;
+}
+.text-image-container .image-small {
+  width: 50%;
+}
+.text-image-container .image-medium {
+  width: 80%;
+}
+.text-image-container .image-big {
+  width: 100%;
+}
+.text-image-container figcaption {
+  font-size: .3em;
+  font-weight: lighter;
+}
 /* Query for desktop with min-width: 950px */
 @media screen and (min-width: 950px) {
   nav .navigation-container .mobile-nav-button-container {
     display: none;
+    padding: 0;
+    margin-left: .1em;
   }
   nav .navigation-container form {
     position: relative;
@@ -127,19 +160,13 @@ nav .mobile-navigation-list {
     background-color: white;
   }
   nav .navigation-container .desktop-items {
-    padding: 0;
-    margin-left: .1em;
     display: flex;
-    width: 80%;
-    overflow-x: auto;
-    color: white;
-    font-size: 1em;
   }
   nav .navigation-container .desktop-items div {
     margin-right: .2em;
   }
   nav .navigation-container .desktop-items div:last-child {
-    margin-left: auto;
+    overflow: auto;
   }
 }
 @media screen and (orientation: landscape) {

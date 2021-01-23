@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+{% extends "entry_base.html" %}
+    {% block content %}
+    <p>Lorem ipsum dolor sit amet consectetur</p>
+    <figure class="text-image-container">
+        <img class="image-big" src="{{ entry.get_in_text_url }}/abc.jpg">
+        <figcaption>First image</figcaption>
+    </figure>
+    <pre class="language-python">
+        <code>
+            print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")print("Hello world!")
+            for i in range(10):
+                for j in range(10:
+                    print(10)
+            class Test:
+                def __init__(self):
+                    self.test = 1
+                @property
+                def x(self):
+                    return 5
 
-</body>
-</html>
+        </code>
+    </pre>
+    {% endblock %}
+

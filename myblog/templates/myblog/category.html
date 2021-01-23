@@ -5,6 +5,9 @@
 
 {% block mainheader %}{% translate 'Category: ' %}{{ category.name }}{% endblock %}
 {% block content %}
+    <p style="text-align: center;margin-left:auto;margin-right:auto;">
+        {% translate 'Total visits: ' %}{{ category.total_visits_count }}
+    </p>
     <form id="sorting-form" method="GET">
         <label for="sort_by">{% translate 'Sorting: ' %}</label>
         <select id="sort_by" name="sort_by">

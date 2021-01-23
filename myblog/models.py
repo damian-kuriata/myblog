@@ -44,6 +44,9 @@ class Entry(models.Model):
     def get_absolute_url(self):
         return reverse("myblog:entry", kwargs={"slug": self.slug})
 
+    def get_in_text_url(self):
+        return self.image.url + "/../in_text"
+
     class Meta:
         ordering = ["-creation_datetime"]
         verbose_name = _("entry")
