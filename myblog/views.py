@@ -18,7 +18,8 @@ from myblog.models import Entry, Category, Comment
 
 
 def _get_context_with_categories(context):
-    context["categories"] = Category.objects.all()
+    context["categories"] = \
+        Category.objects.all().order_by("-total_visits_count")
     return context
 
 
@@ -94,6 +95,7 @@ class SearchView(View):
             "users": users
         }
         context["search_query"] = search_query
+        context = _get_context_with_categories(context)
         return render(request, self.template_name, context)
 
 

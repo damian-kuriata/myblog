@@ -19,11 +19,20 @@
 <body>
     <nav class="main-navigation">
         <div class="navigation-container">
-                <div>
+                <div class="mobile-nav-button-container">
                     <i class="icon-menu mobile-nav-button"></i>
                 </div>
-                <a href="/"><i class="icon-home"></i></a>
-
+                <div>
+                    <a href="/"><i class="icon-home"></i></a>
+                </div>
+                <div class="desktop-items">
+                    {% for category in categories %}
+                    <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
+                    {% endfor %}
+                    <div>
+                        <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
+                    </div>
+                </div>
                 <form id="search" role="search" method="GET" action="/search">
                     <input type="search" name="search" placeholder="{% translate 'Search' %}">
                     <button type="submit">Go</button>
@@ -33,9 +42,14 @@
             <div>
                 <a href="/">{% translate 'Main page' %}</a>
             </div>
+            {% with categories_limit=5 %}
+            <!-- Display only categories_limit first categories -->
             {% for category in categories %}
+            {% if forloop.counter0 < categories_limit %}
             <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
+            {% endif %}
             {% endfor %}
+            {% endwith %}
             <div>
                 <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
             </div>
