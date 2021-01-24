@@ -7,7 +7,8 @@
     border: none;
     padding: 0;
 }
-#comment-form textarea, label {
+#comment-form textarea,
+label {
     font-size: .5em;
 }
 #comment-form textarea {
@@ -15,10 +16,10 @@
     height: 5em;
     width: 98%;
 }
-#comment-form fieldset .errorlist {
+#comment-form .errorlist {
     font-size: .4em;
     color: red;
 }
-#comment-form fieldset input[type="submit"] {
+#comment-form input[type="submit"] {
     margin-bottom: .4em;
 }
