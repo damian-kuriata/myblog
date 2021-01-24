@@ -94,6 +94,7 @@ class Comment(models.Model):
     author_nickname = models.CharField(_("author nickname"),
                                        max_length=60,
                                        default="Anonymous",
+                                       validators=[MinLengthValidator(5)]
                                        )
     text = models.TextField(_("text"), max_length=1000)
     creation_datetime = models.DateTimeField(_("creation_datetime"),

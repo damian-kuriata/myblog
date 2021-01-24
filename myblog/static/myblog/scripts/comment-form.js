@@ -9,7 +9,14 @@ function getCookie(name) {
   const parts = value.split(`; ${name}=`);
   if (parts.length === 2) return parts.pop().split(';').shift();
 }
-
+function escapeHtml(unsafe) {
+    return unsafe
+         .replace(/&/g, "&amp;")
+         .replace(/</g, "&lt;")
+         .replace(/>/g, "&gt;")
+         .replace(/"/g, "&quot;")
+         .replace(/'/g, "&#039;");
+ }
 function renderFormErrors(form, allErrors) {
     allErrors = JSON.parse(allErrors);
     let formFieldset = form.children[1];
@@ -76,7 +83,10 @@ submitButton.click((event) => {
     const commentForm = $("#comment-form").get(0);
     const commentTextarea = $("#comment-form textarea");
     const commentsHeader = $(".comments-section h3");
-    const formData = new FormData(commentForm);
+    let formData = new FormData(commentForm);
+    // Escape HTML in text and author_nickname fields
+    formData.set("text", escapeHtml(formData.get("text")));
+    formData.set("author_nickname", escapeHtml(formData.get("author_nickname")));
     let csrftoken = getCookie("csrftoken");
     const actionUrl = commentForm.action;
     const init = {

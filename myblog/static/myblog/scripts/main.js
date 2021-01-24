@@ -7,13 +7,13 @@ $(document).ready(() => {
    // console.log(isMobile);
     handleMobileNavigation();
     handleComments();
-    handleDesktopNavigation();
 
     const windowNodes = {
         desktopItems: $("nav .navigation-container .desktop-items"),
         searchForm: $("nav .navigation-container #search")
     }
-    console.log("Main nodes---------------: " );
+    handleDesktopNavigation(windowNodes);
+
     //handleDesktopNavigation(windowNodes);
     $(window).resize(() => {
         handleDesktopNavigation(windowNodes);

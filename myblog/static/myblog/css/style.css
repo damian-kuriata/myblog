@@ -215,12 +215,17 @@ h3 {
 .logo span {
   color: rgb(0, 126, 194);
 }
+@media screen and (min-width: 950px) {
+  .logo {
+    font-size: 1.5em;
+  }
+}
 main .entry-info-bar {
   font-size: .4em;
   margin: 0 0 .5em .4em;
 }
 .entry-preview div {
-  max-width: 90%;
+  max-width: 100%;
   margin-left: auto;
   margin-right: auto;
 }
@@ -235,9 +240,12 @@ main .entry-info-bar {
   margin-right: auto;
 }
 
-.entry-preview figcaption {
+.entry-preview figure figcaption {
   font-size: .5em;
   margin-top: 1em;
+}
+.entry-preview figure  img {
+  max-width: 90%;
 }
 #sorting-form {
   display: flex;
