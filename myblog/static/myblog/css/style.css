@@ -100,12 +100,26 @@ nav .navigation-container button {
 }
 nav .navigation-container .desktop-items {
   display: none;
-  overflow: auto;
   color: white;
   font-size: 1em;
 }
+.desktop-items:last-child {
+  border: 1px solid red;
+}
+nav .navigation-container .desktop-items .hidden-children-popup {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(255, 255, 255, 0);
+}
+nav .navigation-container .desktop-items .hidden-children-popup:hover {
+  background-color: red;
+}
+nav .navigation-container .desktop-items .hidden-children-popup div {
+  background-color: rgb(0, 126, 194);
+  color: white;
+}
 nav .navigation-container .desktop-items div {
-
+  flex-shrink: 0;
 }
 nav .mobile-navigation-list {
   flex-direction: column;

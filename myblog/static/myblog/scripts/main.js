@@ -8,14 +8,10 @@ $(document).ready(() => {
     handleMobileNavigation();
     handleComments();
 
-    const windowNodes = {
-        desktopItems: $("nav .navigation-container .desktop-items"),
-        searchForm: $("nav .navigation-container #search")
-    }
-    handleDesktopNavigation(windowNodes);
-
-    //handleDesktopNavigation(windowNodes);
-    $(window).resize(() => {
-        handleDesktopNavigation(windowNodes);
+    let desktopItems = $("nav .navigation-container .desktop-items");
+    let window_ = $(window);
+    handleDesktopNavigation(desktopItems, window_.width());
+    window_.resize(() => {
+        handleDesktopNavigation(desktopItems, window_.width());
     })
 })
