@@ -32,9 +32,9 @@ class Entry(models.Model):
                                        validators=[
                                            MinValueValidator(0)
                                        ])
-    # Field containing first 100 letters of a corresponding article
-    text_fragment = models.CharField(_("text fragment"), max_length=100,
-                                     null=True)
+    # Entry html code. Cannot be edited manually, it's populated
+    # Programically
+    html = models.TextField(editable=False, blank=True)
     image = models.ImageField(_("image"), upload_to=get_upload_path,
                               null=True)
 
