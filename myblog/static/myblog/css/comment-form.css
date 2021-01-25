@@ -16,6 +16,10 @@ label {
     height: 5em;
     width: 98%;
 }
+#comment-form input:invalid,
+textarea:invalid {
+    border: 1px solid red;
+}
 #comment-form .errorlist {
     font-size: .4em;
     color: red;

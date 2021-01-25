@@ -1,3 +1,4 @@
+import json
 import os
 
 from django import views
@@ -130,11 +131,26 @@ class EntryView(View):
         # Get comments written for a given entry
         comments = entry.comment_set.all()
         comment_form = CommentForm()
+
         context = {
             "entry": entry,
             "comments": comments,
             "comment_form": comment_form
         }
+
+        # Serialize entry to JSON, then convert it to native dict object
+        serialized_entry = json.loads(serializers.serialize("json", [entry]))[0]
+        recently_key = "recently_watched_entries"
+        # Add entry 'dict' to request.session[recently_key]
+        try:
+            recently_watched_entries = request.session[recently_key]
+            context[recently_key] = recently_watched_entries
+            recently_watched_entries.append(serialized_entry)
+            request.session[recently_key] = recently_watched_entries
+        except KeyError:
+            request.session[recently_key] = [serialized_entry]
+        print(request.session[recently_key])
+
         context = _get_context_with_categories(context)
         # Increment entry.visits_count each time this view is called
         entry.visits_count += 1
