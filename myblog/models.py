@@ -120,9 +120,9 @@ def entry_and_category_pre_save(sender, instance, **kwargs):
     if sender == Entry:
         instance.slug = slugify(instance.title)
         try:
-            # Update total_visits_count field for each category
+            # Increase by 1 total_visits_count field for each category
             for category in instance.category_set.all():
-                category.total_visits_count += instance.visits_count
+                category.total_visits_count += 1
                 category.save()
         except ValueError:
             # When Entry object is saved for the very first time,

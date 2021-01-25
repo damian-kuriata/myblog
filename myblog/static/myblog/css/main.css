@@ -34,17 +34,19 @@ h4{
 }
 
 h1 {
-  font-size: 1em;
+  font-size: 3.5rem;
   margin-bottom: 0.7em;
+  width: 100%;
 }
 
 h2 {
-  font-size: 0.9em;
+  font-size: 2.6rem;
   margin-bottom: 0.3em;
+  color: rgb(0, 126, 194);
 }
 
 h3 {
-  font-size: 0.8em;
+  font-size: 2rem;
   margin-bottom: 0.4em;
 }
 h4 {
@@ -56,7 +58,7 @@ a {
   text-decoration: none;
   color: inherit;
   transition-property: color;
-  transition-duration: 0.1s;
+  transition-duration: 0.3s;
 }
 
 a:hover,
@@ -78,9 +80,11 @@ input[type=submit] {
   border-radius: 10px;
   padding: 5px;
   outline: none;
+  color: white;
 }
 
-button:hover {
+button:hover,
+input[type="submit"]:hover {
   background-color: rgba(0, 126, 194, 0.6);
 }
 
@@ -135,6 +139,11 @@ nav .navigation-container .icon-home {
   margin-top: 5px;
   margin-left: 5px;
   font-size: 1.2em;
+  transition-property: color;
+  transition-duration: 0.3s;
+}
+nav .navigation-container .icon-home:hover {
+  color: #7a7979;
 }
 nav .navigation-container .icon-home:active {
   color: #b0b0b0;
@@ -185,17 +194,20 @@ nav .mobile-navigation-list .socialmedia-icons {
   border-radius: 6px;
   background-color: white;
 }
-#search input[type=search] {
+#search button[type="submit"] {
+  color: black;
+}
+#search input[type="search"] {
   border-radius: 5px;
   width: 90%;
   border: 0;
   font-size: 0.6em;
 }
-#search input[type=search]:active {
+#search input[type="search"]:active {
   border: none;
   outline: none;
 }
-#search input[type=search]:focus {
+#search input[type="search"]:focus {
   border: none;
   outline: none;
 }
@@ -483,14 +495,7 @@ footer p {
   }
 
   #search {
-    position: relative;
-    display: flex;
-    right: 0.1em;
-    margin-left: auto;
     width: 15%;
-    height: 70%;
-    border-radius: 6px;
-    background-color: white;
   }
 
   nav .navigation-container .desktop-items {
