@@ -7,12 +7,13 @@ from django.core.paginator import Paginator
 from django.db.models import Sum
 from django.http import Http404, HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.template import TemplateDoesNotExist
+from django.template import TemplateDoesNotExist, Context
 from django.urls import reverse
 from django.views import View
 from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, DetailView, TemplateView
 from django.core import serializers
+from django.template import Engine
 
 from myblog.forms import CommentForm
 from myblog.models import Entry, Category, Comment
@@ -135,30 +136,44 @@ class EntryView(View):
         context = {
             "entry": entry,
             "comments": comments,
-            "comment_form": comment_form
+            "comment_form": comment_form,
         }
-
-        # Serialize entry to JSON, then convert it to native dict object
-        serialized_entry = json.loads(serializers.serialize("json", [entry]))[0]
         recently_key = "recently_watched_entries"
+        context[recently_key] = list()
         # Add entry 'dict' to request.session[recently_key]
         try:
             recently_watched_entries = request.session[recently_key]
-            context[recently_key] = recently_watched_entries
-            recently_watched_entries.append(serialized_entry)
+            print("recently_watched: ", recently_watched_entries)
+            for id_ in recently_watched_entries:
+                try:
+                    context[recently_key].append(Entry.objects.get(id=id_))
+                except Entry.DoesNotExist:
+                    pass
+
+            if len(recently_watched_entries) >= 5:
+                del recently_watched_entries[0]
+            if recently_watched_entries[-1] != entry.id:
+                recently_watched_entries.append(entry.id)
             request.session[recently_key] = recently_watched_entries
         except KeyError:
-            request.session[recently_key] = [serialized_entry]
+            request.session[recently_key] = [entry.id]
         print(request.session[recently_key])
 
         context = _get_context_with_categories(context)
         # Increment entry.visits_count each time this view is called
         entry.visits_count += 1
         entry.save()
+        '''
         try:
             return render(request, template_name, context)
         except TemplateDoesNotExist:
             return HttpResponse("Error: Template Does Not Exist")
+        '''
+        # Render HTML stored in entry.html as HttpResponse object
+        rendered_html = Engine.get_default().from_string(template_code=entry.html).\
+            render(Context(context))
+        return HttpResponse(rendered_html)
+
 
 
 # --- API ---

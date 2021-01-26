@@ -109,26 +109,3 @@ class Comment(models.Model):
         ordering = ["creation_datetime"]
         verbose_name = _("comment")
         verbose_name_plural = _("comments")
-
-
-# --- SIGNALS ---
-@receiver(pre_save)
-def entry_and_category_pre_save(sender, instance, **kwargs):
-    '''
-        Callback for pre_save signal
-    '''
-    if sender == Entry:
-        instance.slug = slugify(instance.title)
-        try:
-            # Increase by 1 total_visits_count field for each category
-            for category in instance.category_set.all():
-                category.total_visits_count += 1
-                category.save()
-        except ValueError:
-            # When Entry object is saved for the very first time,
-            # it doesn't have an id.
-            # So Value Error is raised by Django.
-            # Just ignore it and don't update field
-            pass
-    elif sender == Category:
-        instance.slug = slugify(instance.name)

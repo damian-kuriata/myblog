@@ -1,6 +1,8 @@
 import os
 
 from django.apps import AppConfig
+from django.db.models.signals import pre_save
+from django.template import TemplateDoesNotExist
 from django.template.loader import render_to_string
 
 
@@ -13,10 +15,30 @@ class MyblogConfig(AppConfig):
 
         # For each entry, update it's html attribute
         for entry in Entry.objects.all():
-            template_name = entry.slug + ".html"
-            partial_path = os.path.join(self.name, "entries", template_name)
-            entry.html = render_to_string(partial_path)
-            entry.save()
+            template_name = entry.title.lower().strip() + ".html"
+            template_path = os.path.join(settings.BASE_DIR.parent,
+                                         self.name,
+                                         "templates",
+                                         self.name,
+                                         "entries",
+                                         template_name)
+            try:
+                with open(template_path) as template:
+                    entry.html = template.read()
+            except FileNotFoundError:
+                print(f"Error: template {template_path} not found.")
+                entry.html = ''
+            finally:
+                entry.save()
+
+    def _register_signals(self):
+        from myblog.models import Entry, Category
+        from myblog.signals import populate_category_slug_field, \
+            populate_entry_slug_field
+
+        pre_save.connect(populate_category_slug_field, sender=Category)
+        pre_save.connect(populate_entry_slug_field, sender=Entry)
 
     def ready(self):
         self._update_entries_html()
+        self._register_signals()

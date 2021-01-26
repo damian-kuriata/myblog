@@ -4,13 +4,9 @@
     <h4>{% translate 'Recently watched'%}</h4>
     <div class="entries-list">
         {% for entry in recently_watched_entries %}
+            {{ entry }}
             <p><a href="{{ entry.get_absolute_url }}">{{ entry.name }}</a></p>
         {% endfor %}
-        <div>First entrysss sss sss sss sss sss sss sss sss sss ssss</div>
-        <div>Second entry</div>
-        <div>Third entry</div>
-        <div>ass</div>
-        <div>saasas</div>
     </div>
     <h4>{% translate 'Suggested' %}</h4>
     <div class="entries-list">
