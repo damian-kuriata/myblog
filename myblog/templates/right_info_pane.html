@@ -3,20 +3,14 @@
 <aside class="right-info-pane">
     <h4>{% translate 'Recently watched'%}</h4>
     <div class="entries-list">
-        {% for entry in recently_watched_entries %}
-            {{ entry }}
-            <p><a href="{{ entry.get_absolute_url }}">{{ entry.name }}</a></p>
+        {% for entry in recently_visited_entries %}
+            <p><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></p>
         {% endfor %}
     </div>
     <h4>{% translate 'Suggested' %}</h4>
     <div class="entries-list">
         {% for entry in suggested_entries %}
-        <p><a href="{{ entry.get_absolute_url }}">{{ entry.name }}</a></p>
+        <p><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></p>
         {% endfor %}
-    <div>fourth entry</div>
-        <div>fifth entry</div>
-        <div>sixth entry</div>
-    <div>sasasass</div>
-    <div>lllk</div>
     </div>
 </aside>

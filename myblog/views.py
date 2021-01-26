@@ -126,9 +126,11 @@ class EntryView(View):
     def get(self, request, *args, **kwargs):
         entry_slug = kwargs["slug"].lower()
         entry = get_object_or_404(Entry, slug__iexact=entry_slug)
-        # Template name should be in form <entry.title>.html
-        template_name = os.path.join("myblog", "entries",
-                                     entry_slug + ".html")
+
+        # Increment entry.visits_count each time this view is called
+        entry.visits_count += 1
+        entry.save()
+
         # Get comments written for a given entry
         comments = entry.comment_set.all()
         comment_form = CommentForm()
@@ -138,37 +140,67 @@ class EntryView(View):
             "comments": comments,
             "comment_form": comment_form,
         }
-        recently_key = "recently_watched_entries"
+        recently_key = "recently_visited_entries"
         context[recently_key] = list()
-        # Add entry 'dict' to request.session[recently_key]
+
+        # Process and save recently visited entries to request.session
         try:
-            recently_watched_entries = request.session[recently_key]
-            print("recently_watched: ", recently_watched_entries)
-            for id_ in recently_watched_entries:
+            # request.session[recently_key] holds a list of recently
+            # Visited entries' ids, e.g. [1, 2, 3]
+            recently_visited_entries = request.session[recently_key]
+            for id_ in recently_visited_entries:
                 try:
                     context[recently_key].append(Entry.objects.get(id=id_))
                 except Entry.DoesNotExist:
                     pass
 
-            if len(recently_watched_entries) >= 5:
-                del recently_watched_entries[0]
-            if recently_watched_entries[-1] != entry.id:
-                recently_watched_entries.append(entry.id)
-            request.session[recently_key] = recently_watched_entries
+            recently_visited_entries_limit = 5
+            # Recently_visited_entries is a list where the first element
+            # Holds the oldest entry id, and the last element holds the
+            # Latest entry id
+            if len(recently_visited_entries) >= recently_visited_entries_limit:
+                # Remove the oldest entry id when a limit was exceeded
+                del recently_visited_entries[0]
+            # Prevent saving the same entry id one after another
+            # (multiple times)
+            if recently_visited_entries[-1] != entry.id:
+                recently_visited_entries.append(entry.id)
+            request.session[recently_key] = recently_visited_entries
         except KeyError:
             request.session[recently_key] = [entry.id]
-        print(request.session[recently_key])
 
+        # Get suggested entries
+        suggested_key = "suggested_entries"
+        entry_categories = entry.category_set.all()
+        if len(entry_categories) == 0:
+            suggested_entries = Entry.objects.order_by("-creation_datetime",
+                                                       "-visits_count")
+            context[suggested_key] = suggested_entries
+
+        elif len(entry_categories) == 1:
+            entry_category = entry_categories.first()
+            most_popular_entries_in_category = \
+                entry_category.entries.order_by("-visits_count",
+                                                "-creation_datetime",
+                                                "-title")
+            context[suggested_key] = most_popular_entries_in_category
+
+        else:
+            most_popular_entry_category = \
+                entry_categories.order_by("-total_visits_count").first()
+            most_popular_entries_in_category = \
+                most_popular_entry_category.entries.order_by(
+                    "-visits_count",
+                    "-creation_datetime",
+                    "-title")
+            entries_limit = 5
+            context[suggested_key] = \
+                most_popular_entries_in_category[entries_limit]
+
+        context[suggested_key] = \
+            context[suggested_key].exclude(id=entry.id)
         context = _get_context_with_categories(context)
-        # Increment entry.visits_count each time this view is called
-        entry.visits_count += 1
-        entry.save()
-        '''
-        try:
-            return render(request, template_name, context)
-        except TemplateDoesNotExist:
-            return HttpResponse("Error: Template Does Not Exist")
-        '''
+
         # Render HTML stored in entry.html as HttpResponse object
         rendered_html = Engine.get_default().from_string(template_code=entry.html).\
             render(Context(context))

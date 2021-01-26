@@ -47,6 +47,11 @@ class Entry(models.Model):
     def get_in_text_url(self):
         return self.image.url + "/../in_text"
 
+    def get_text_fragment(self, character_limit=100):
+        # Text fragment is obtained from first <p> tag text in html
+        regex = r"<p.*>(.{,100})*?</p>"
+
+
     class Meta:
         ordering = ["-creation_datetime"]
         verbose_name = _("entry")
