@@ -49,7 +49,8 @@ class Entry(models.Model):
 
     def get_text_fragment(self, character_limit=100):
         # Text fragment is obtained from first <p> tag text in html
-        regex = r"<p.*>(.{,100})*?</p>"
+        # TODO: Implement fragment obtaining
+        regex = r"<p.*>(.{,100})</p>"
 
 
     class Meta:

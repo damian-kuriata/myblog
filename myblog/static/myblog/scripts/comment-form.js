@@ -19,7 +19,7 @@ function escapeHtml(unsafe) {
  }
 function renderFormErrors(form, allErrors) {
     allErrors = JSON.parse(allErrors);
-    let formFieldset = form.children[1];
+    let formFieldset = form.children[0];
     let fieldsetChildren = formFieldset.children;
 
     for(let fields in allErrors) {

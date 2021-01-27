@@ -50,7 +50,7 @@ h3 {
   margin-bottom: 0.4em;
 }
 h4 {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
   margin: .1em 0 .4em 0;
 }
 
@@ -223,6 +223,10 @@ nav .mobile-navigation-list {
   overflow: auto;
 }
 
+nav .expanded-categories {
+  display: flex;
+}
+
 .text-image-container {
   margin-left: auto;
   margin-right: auto;
@@ -274,9 +278,10 @@ main .entry-info-bar {
 }
 
 .entry-preview div {
-  max-width: 70%;
+  width: 90%;
   margin-left: auto;
   margin-right: auto;
+  border: 1px solid red;
 }
 
 .entry-preview div * {
@@ -297,7 +302,7 @@ main .entry-info-bar {
 }
 
 .entry-preview figure img {
-  max-width: 90%;
+  max-width: 100%;
 }
 
 #sorting-form {
@@ -328,18 +333,26 @@ select {
   display: none;
   width: 24%;
   position: fixed;
-  top: 10em;
+  top: 20em;
   right: 1em;
   border-radius: 6px;
   background-color: rgba(0, 126, 194, 0.3);
   font-size: .5em;
+  font-weight: lighter;
 }
 .right-info-pane .entries-list {
-  margin: 0 0 .5em .5em;
-}
-.right-info-pane .entries-list div {
+  margin: 0 0 .5em 0;
   font-size: 1.3em;
+  padding: 0 .2em 0 1em;
+  list-style-type: "→";
+}
+.right-info-pane .entries-list li {
   margin-bottom: .3em;
+}
+/* Create distance between <ul> bullet and <li> text */
+.right-info-pane .entries-list li span {
+  position: relative;
+  left: .4em;
 }
 .pagination {
   font-size: 0.5em;
@@ -516,6 +529,16 @@ footer p {
   .text-image-container {
     margin-left: 3rem;
     text-align: center;
-    width: 80%;
+    width: 60%;
+  }
+
+  .entry-preview div {
+      max-width: 70%;
+        margin-left: auto;
+  margin-right: auto;
+}
+
+  .entry-preview figure img {
+    max-width: 90%;
   }
 }

@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea
+from django.forms import ModelForm, Textarea, EmailInput
 from django.utils.translation import gettext_lazy as _
 
 from myblog.models import Comment
