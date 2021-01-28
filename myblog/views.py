@@ -14,6 +14,8 @@ from django.views.decorators.http import require_http_methods
 from django.views.generic import ListView, DetailView, TemplateView
 from django.core import serializers
 from django.template import Engine
+from django.conf import settings
+import django.contrib.postgres
 
 from myblog.forms import CommentForm
 from myblog.models import Entry, Category, Comment
@@ -87,17 +89,28 @@ class SearchView(View):
 
     def get(self, request, *args, **kwargs):
         search_query = request.GET.get("search", '')
-        categories = Category.objects.filter(
-            name__icontains=search_query)
-        entries = Entry.objects.filter(title__icontains=search_query)
-        users = User.objects.filter(username__icontains=search_query)
+        # Are we using Postgres?
+        if settings.DATABASES["default"]["ENGINE"] \
+            == "django.db.backends.postgresql_psycopg2":
+            print("Using Postgre")
+            categories = Category.objects.filter(name__search=
+                                                 search_query)
+            entries = Entry.objects.filter(title__search=
+                                           search_query)
+            users = User.objects.filter(username__search=
+                                        search_query)
+        else:
+            categories = Category.objects.filter(
+                name__icontains=search_query)
+            entries = Entry.objects.filter(title__icontains=search_query)
+            users = User.objects.filter(username__icontains=search_query)
         context = {
             "categories": categories,
             "entries": entries,
             "users": users
         }
         context["search_query"] = search_query
-        context = _get_context_with_categories(context)
+        #context = _get_context_with_categories(context)
         return render(request, self.template_name, context)
 
 

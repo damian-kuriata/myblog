@@ -8,36 +8,40 @@
         <div class="comments-list">
             {% if comments %}
             {% for comment in comments %}
-            <p class="comment">
-                {{ comment.author_nickname }}, {{ comment.creation_datetime }}: <br>{{ comment.text }}
-            </p>
+            <article>
+                <p class="comment">
+                    {{ comment.author_nickname }}, {{ comment.creation_datetime }}: <br>{{ comment.text }}
+                </p>
+            </article>
             {% endfor %}
             {% else %}
                 <p style="font-size: .7em;">{% translate 'No comments yet' %}</p>
             {% endif %}
         </div>
-        <div class="comment-input apply-top-border">
-            <form action="/entry/{{ entry.slug }}/add-comment/" method="POST" id="comment-form">
-                {% csrf_token %}
-                <fieldset>
-                    <legend>{% translate 'Add comment' %}</legend>
-                    <div>
-                        {{ comment_form.author_email.label_tag }}
-                        {{ comment_form.author_email }}
-                    </div>
-                    <div>
-                        {{ comment_form.author_nickname.label_tag }}
-                        {{ comment_form.author_nickname }}
-                    </div>
-                    <div>
+        <article>
+            <div class="comment-input apply-top-border">
+                <form action="/entry/{{ entry.slug }}/add-comment/" method="POST" id="comment-form">
+                    {% csrf_token %}
+                    <fieldset>
+                        <legend>{% translate 'Add comment' %}</legend>
                         <div>
-                            {{ comment_form.text.label_tag }}
+                            {{ comment_form.author_email.label_tag }}
+                            {{ comment_form.author_email }}
                         </div>
-                        {{ comment_form.text }}
-                    </div>
-                    <input type="submit" value="{% translate 'Send' %}">
-                </fieldset>
-            </form>
-        </div>
+                        <div>
+                            {{ comment_form.author_nickname.label_tag }}
+                            {{ comment_form.author_nickname }}
+                        </div>
+                        <div>
+                            <div>
+                                {{ comment_form.text.label_tag }}
+                            </div>
+                            {{ comment_form.text }}
+                        </div>
+                        <input type="submit" value="{% translate 'Send' %}">
+                    </fieldset>
+                </form>
+            </div>
+        </article>
     </div>
 </section>

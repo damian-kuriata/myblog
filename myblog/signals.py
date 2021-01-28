@@ -21,4 +21,4 @@ def populate_category_slug_field(sender, instance, **kwargs):
     :return:
     '''
 
-    instance.slug = slugify(instance.title)
+    instance.slug = slugify(instance.name)

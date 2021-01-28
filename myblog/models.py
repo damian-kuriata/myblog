@@ -47,10 +47,21 @@ class Entry(models.Model):
     def get_in_text_url(self):
         return self.image.url + "/../in_text"
 
-    def get_text_fragment(self, character_limit=100):
-        # Text fragment is obtained from first <p> tag text in html
-        # TODO: Implement fragment obtaining
-        regex = r"<p.*>(.{,100})</p>"
+    def get_text_fragment(self):
+        # Text fragment is a content of first paragraph tag
+        # (text between <p> and </p>)
+        paragraph_tag_part = "<p"
+        paragraph_tag_part_index = self.html.find(paragraph_tag_part)
+        if paragraph_tag_part_index == -1:
+            return ''
+        paragraph_tag_closing_index = self.html.find('>', paragraph_tag_part_index)
+        if paragraph_tag_closing_index == -1:
+            return ''
+        paragraph_tag_end_index = self.html.find('</p>')
+        from_ = paragraph_tag_closing_index + 1
+        to = paragraph_tag_end_index
+        text_fragment = self.html[from_:to]
+        return text_fragment
 
 
     class Meta:

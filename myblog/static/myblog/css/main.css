@@ -98,7 +98,6 @@ p {
 ul {
   font-size: 0.5em;
 }
-
 /* UTILITIES */
 .hidden {
   display: none;
@@ -153,6 +152,28 @@ nav .navigation-container .desktop-items {
   color: white;
   font-size: 1em;
   width: 75%;
+}
+nav .navigation-container .desktop-items .categories-dropdown {
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(0, 126, 194, 0.6);
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 0.6s ease;
+  padding: 5px;
+}
+nav .navigation-container .desktop-items .dropdown-expand {
+  position: relative;
+}
+nav .navigation-container .desktop-items .dropdown-expand a {
+  display: block;
+}
+nav .navigation-container .desktop-items .dropdown-expand a:hover {
+  cursor: pointer;
+}
+nav .navigation-container .desktop-items .dropdown-expand:hover .categories-dropdown {
+  visibility: visible;
+  opacity: 1;
 }
 nav .navigation-container .desktop-items div {
   flex-shrink: 0;
@@ -275,6 +296,10 @@ nav i {
 main .entry-info-bar {
   font-size: 0.4em;
   margin: 0 0 0.5em 0.4em;
+}
+
+main .entry-info-bar address span {
+  font-size: inherit;
 }
 
 .entry-preview div {

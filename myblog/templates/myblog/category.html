@@ -39,7 +39,7 @@
                         <img src="{{ entry.image.url }}" alt="User-uploaded-image">
                     </a>
                     <figcaption>
-                        {{ entry.text_fragment }}...
+                        {{ entry.get_text_fragment|truncatechars:100 }}...
                     </figcaption>
                     <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
                         {% translate 'Read more' %}

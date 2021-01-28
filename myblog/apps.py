@@ -40,5 +40,6 @@ class MyblogConfig(AppConfig):
         pre_save.connect(populate_entry_slug_field, sender=Entry)
 
     def ready(self):
+        pass
         self._update_entries_html()
         self._register_signals()
