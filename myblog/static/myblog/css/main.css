@@ -54,6 +54,12 @@ h4 {
   margin: .1em 0 .4em 0;
 }
 
+h6 {
+  font-size: 1rem;
+  margin: 0;
+  font-weight: normal;
+}
+
 a {
   text-decoration: none;
   color: inherit;
@@ -86,6 +92,7 @@ input[type=submit] {
 button:hover,
 input[type="submit"]:hover {
   background-color: rgba(0, 126, 194, 0.6);
+  cursor: pointer;
 }
 
 p {
@@ -103,6 +110,9 @@ ul {
   display: none;
 }
 
+.display-block {
+  display: block;
+}
 .display-flex {
   display: flex;
 }
@@ -147,12 +157,31 @@ nav .navigation-container .icon-home:hover {
 nav .navigation-container .icon-home:active {
   color: #b0b0b0;
 }
+
 nav .navigation-container .desktop-items {
   display: none;
   color: white;
   font-size: 1em;
-  width: 75%;
 }
+
+nav .navigation-container .desktop-items .dropdown-expand {
+  position: relative;
+}
+
+nav .navigation-container .desktop-items .dropdown-expand a {
+  display: block;
+}
+nav .navigation-container .desktop-items .dropdown-expand a:hover,
+nav .navigation-container .desktop-items .dropdown-expand a:active,
+nav .navigation-container .desktop-items .dropdown-expand a:focus {
+  cursor: pointer;
+  color: #7a7979;
+}
+nav .navigation-container .desktop-items .dropdown-expand:hover .categories-dropdown {
+  visibility: visible;
+  opacity: 1;
+}
+
 nav .navigation-container .desktop-items .categories-dropdown {
   position: fixed;
   z-index: 1;
@@ -161,23 +190,17 @@ nav .navigation-container .desktop-items .categories-dropdown {
   opacity: 0;
   transition: visibility 0s, opacity 0.6s ease;
   padding: 5px;
+  word-break: break-all;
+  max-width: 10em;
+  font-size: .8em;
+  max-height: 10em;
+  overflow-y: auto;
 }
-nav .navigation-container .desktop-items .dropdown-expand {
-  position: relative;
-}
-nav .navigation-container .desktop-items .dropdown-expand a {
-  display: block;
-}
-nav .navigation-container .desktop-items .dropdown-expand a:hover {
-  cursor: pointer;
-}
-nav .navigation-container .desktop-items .dropdown-expand:hover .categories-dropdown {
-  visibility: visible;
-  opacity: 1;
-}
+
 nav .navigation-container .desktop-items div {
   flex-shrink: 0;
 }
+
 nav .navigation-container .desktop-items .hidden-children-popup {
   display: flex;
   flex-direction: column;
@@ -306,7 +329,6 @@ main .entry-info-bar address span {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
-  border: 1px solid red;
 }
 
 .entry-preview div * {
@@ -379,6 +401,7 @@ select {
   position: relative;
   left: .4em;
 }
+
 .pagination {
   font-size: 0.5em;
   margin: 0 auto 0.3em auto;
@@ -425,8 +448,8 @@ select {
 
 .comments-section .comments-list .comment {
   font-size: 0.4em;
-  margin-left: 0;
-  width: 95%;
+  margin: .3em 0 1em 1em;
+  width: 73%;
   word-wrap: break-word;
 }
 
@@ -514,7 +537,7 @@ footer p {
   }
 }
 /* For screens wider than 950px */
-@media screen and (min-width: 950px) {
+@media screen and (min-width: 800px) {
   /* Grab all p's that are not a direct child of footer */
   p:not(footer>p) {
     width: 80%;
@@ -558,12 +581,16 @@ footer p {
   }
 
   .entry-preview div {
-      max-width: 70%;
-        margin-left: auto;
-  margin-right: auto;
-}
+    max-width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
 
   .entry-preview figure img {
     max-width: 90%;
+  }
+
+  .aboutme p {
+    width: 70%;
   }
 }

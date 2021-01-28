@@ -10,8 +10,9 @@ $(document).ready(() => {
 
     let desktopItems = $("nav .navigation-container .desktop-items");
     let window_ = $(window);
-    handleDesktopNavigation(desktopItems, window_.width());
+    let categoriesDropdown = $(".categories-dropdown");
+    handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
     window_.resize(() => {
-        handleDesktopNavigation(desktopItems, window_.width());
+        handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
     })
 })

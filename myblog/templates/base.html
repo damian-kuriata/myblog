@@ -32,14 +32,14 @@
                     {% for category in categories %}
                     <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
                     {% endfor %}
-                    <div>
+                     <div>
                         <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
                     </div>
-                    <div class="dropdown-expand">
+
+                    <div class="dropdown-expand hidden">
                         {% translate 'Other' %}
                         <div class="categories-dropdown">
-                            <a>Test1</a>
-                            <a>Test2</a>
+
                         </div>
                     </div>
                 </div>

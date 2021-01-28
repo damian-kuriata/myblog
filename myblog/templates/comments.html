@@ -9,8 +9,9 @@
             {% if comments %}
             {% for comment in comments %}
             <article>
+                <h6>{{ comment.author_nickname }}, {{ comment.creation_datetime }}:</h6>
                 <p class="comment">
-                    {{ comment.author_nickname }}, {{ comment.creation_datetime }}: <br>{{ comment.text }}
+                    {{ comment.text }}
                 </p>
             </article>
             {% endfor %}

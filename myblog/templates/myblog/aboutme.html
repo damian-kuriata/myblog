@@ -4,8 +4,9 @@
 {% block description %}{% translate 'A page about me' %}{% endblock %}
 
 {% block content %}
-    <h1>{% translate 'About me' %}</h1>
     <article class="aboutme">
+        <h1>{% translate 'About me' %}</h1>
+        {% include "right_info_pane.html" %}
     <p>
         Cześć, jestem Damian Kuriata, witaj na moim blogu! Mam 19 lat i aktualnie jestem uczniem 3 klasy liceum
         ogólnokształcącego.
@@ -18,8 +19,6 @@
         nawet szeroko pojętej filozofii.
         Możliwe, że pojawią się też zdjęcia kolei jako, że jestem małym fanem trainspottingu :)
     </p>
-    </article>
-    <article class="aboutme">
         <h2 class="apply-top-border">No dobrze, ale po co?</h2>
         <p>
             Stworzyłem ten blog głównie w celach edukacyjnych. Stanowi on moje małe portfolio, ale również chciałbym

@@ -28,7 +28,7 @@ function renderFormErrors(form, allErrors) {
         let errorsHtml = ``;
         for(let messagesArray in field) {
             let message = field[messagesArray].message;
-            errorsHtml += `<li>${message}</li>`;
+            errorsHtml += `<li role="alert">${message}</li>`;
         }
 
         let errorList = document.createElement("ul");
