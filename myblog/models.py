@@ -36,7 +36,7 @@ class Entry(models.Model):
     # Programically
     html = models.TextField(editable=False, blank=True)
     image = models.ImageField(_("image"), upload_to=get_upload_path,
-                              null=True)
+                              null=True, blank=True)
 
     def __str__(self):
         return self.title
@@ -45,7 +45,24 @@ class Entry(models.Model):
         return reverse("myblog:entry", kwargs={"slug": self.slug})
 
     def get_in_text_url(self):
-        return self.image.url + "/../in_text"
+        print("get")
+        try:
+            return self.image.url + "/../in_text"
+        except ValueError:
+            # When Entry has no file associated with it,
+            # just return empty string
+            return ''
+
+    def get_image_url(self):
+        '''
+            Use this function instead of Entry.image.url,
+            Otherwise ValueError will be
+            Raised if Entry has no image associated with it
+        '''
+        try:
+            return self.image.url
+        except ValueError:
+            return ''
 
     def get_text_fragment(self):
         # Text fragment is a content of first paragraph tag

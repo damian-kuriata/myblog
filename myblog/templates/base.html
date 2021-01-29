@@ -87,7 +87,7 @@
         {% if entry %}
             <aside>
                 <p class="entry-info-bar">
-                    <span>{% translate 'Created: ' %}{{ entry.creation_datetime }},</span>
+                    <span>{% translate 'Created: ' %}<date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>,</span>
                     <span>{% translate 'Author: ' %}
                         <a href="{% url 'myblog:user' slug=entry.author %}">{{ entry.author.username }}</a>
 

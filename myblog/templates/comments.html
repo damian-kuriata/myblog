@@ -12,6 +12,7 @@
                 <h6>{{ comment.author_nickname }}, {{ comment.creation_datetime }}:</h6>
                 <p class="comment">
                     {{ comment.text }}
+                    <button type="button" class="reply-button">{% translate 'Reply' %}</button>
                 </p>
             </article>
             {% endfor %}
@@ -19,7 +20,7 @@
                 <p style="font-size: .7em;">{% translate 'No comments yet' %}</p>
             {% endif %}
         </div>
-        <article>
+        <article id="comment-input">
             <div class="comment-input apply-top-border">
                 <form action="/entry/{{ entry.slug }}/add-comment/" method="POST" id="comment-form">
                     {% csrf_token %}

@@ -14,7 +14,7 @@
             </h3>
             <div>
                 <p>
-                    {{ entry.creation_datetime }}, {% translate 'by' %}
+                    <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>, {% translate 'by' %}
                     <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
                     {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
                     ,{% translate 'categories:' %}
@@ -23,9 +23,13 @@
                     {% endfor %}
                 </p>
                 <figure>
+                    {% with image_url=entry.get_image_url %}
+                    {% if image_url %}
                     <a href="{{ entry.get_absolute_url }}">
-                        <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                        <img src="{{ image_url }}" alt="User-uploaded-image">
                     </a>
+                    {% endif %}
+                    {% endwith %}
                     <figcaption>
                         {{ entry.get_text_fragment|truncatechars:100 }}...
                     </figcaption>
@@ -47,7 +51,7 @@
             </a>
             <div>
                 <p>
-                    {{ entry.creation_datetime }}, {% translate 'by' %}
+                    <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>, {% translate 'by' %}
                     <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
                     {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
                     ,{% translate 'categories:' %}
@@ -56,9 +60,13 @@
                     {% endfor %}
                 </p>
                 <figure>
+                    {% with image_url=entry.get_image_url %}
+                    {% if image_url %}
                     <a href="{{ entry.get_absolute_url }}">
-                        <img src="{{ entry.image.url }}" alt="User-uploaded-image">
+                        <img src="{{ entry.get_image_url }}" alt="User-uploaded-image">
                     </a>
+                    {% endif %}
+                    {% endwith %}
                     <figcaption>
                         {{ entry.get_text_fragment|truncatechars:100 }}...
                     </figcaption>

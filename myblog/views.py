@@ -64,8 +64,10 @@ class CategoryView(View):
             slug = kwargs.get("slug").strip().lower()
             category = Category.objects.get(slug__iexact=slug)
             if entries_sort_by in ["title", "author__username",
-                           "creation_datetime", "visits_count"]:
+                           "-creation_datetime", "-visits_count"]:
                 entries = category.entries.order_by(entries_sort_by)
+
+                print(entries)
             else:
                 entries = category.entries.order_by("title")
 

@@ -11,13 +11,17 @@ body {
   position: relative;
 }
 
+main {
+  background-color: #f5f2f0;
+}
 nav {
-  background-color: #007ec2;
+  background-color: rgb(0, 126, 194);
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 1.3em;
+  z-index: 99;
 }
 
 input,
@@ -237,7 +241,7 @@ nav .mobile-navigation-list .mobile-categories-container {
 nav .mobile-navigation-list .socialmedia-icons {
   font-size: 1.5em;
   margin-bottom: .3em;
-  background-color: rgba(0, 126, 194, .9);
+  background-color: rgba(0, 126, 194, 1);
 }
 
 #search {
@@ -310,6 +314,37 @@ nav i {
 
 .logo span {
   color: #007ec2;
+  animation-duration: 5s;
+  animation-delay: 3s;
+  animation-name: changecolor;
+  animation-iteration-count: infinite;
+  animation-direction: alternate;
+}
+
+@keyframes changecolor {
+  from {
+    color: #007ec2;
+  }
+
+  20% {
+    color: #004e78;
+  }
+
+  40% {
+    color: #014469;
+  }
+
+  60% {
+    color: #015887;
+  }
+
+  80% {
+    color: #003b5c;
+  }
+
+  to {
+    color: black;
+  }
 }
 
 main .entry-info-bar {
@@ -386,9 +421,9 @@ select {
 
 .right-info-pane {
   display: none;
-  width: 24%;
-  position: fixed;
-  top: 20em;
+  width: 20%;
+  position: absolute;
+  top: 18em;
   right: 1em;
   border-radius: 6px;
   background-color: rgba(0, 126, 194, 0.3);
@@ -401,6 +436,7 @@ select {
   padding: 0 .2em 0 1em;
   list-style-type: "→";
 }
+
 .right-info-pane .entries-list li {
   margin-bottom: .3em;
 }
@@ -408,6 +444,11 @@ select {
 .right-info-pane .entries-list li span {
   position: relative;
   left: .4em;
+}
+.right-info-pane  p {
+  font-size: 1.3em;
+  text-align: left;
+  margin: 0;
 }
 
 .pagination {
@@ -454,6 +495,9 @@ select {
   overflow-y: auto;
 }
 
+.comments-section .comments-list .reply-button {
+  font-size: 1em;
+}
 .comments-section .comments-list .comment {
   font-size: 0.4em;
   margin: .3em 0 1em 1em;
@@ -467,7 +511,7 @@ select {
   padding: 0.2em 0 0.2em 0;
   margin-bottom: 0.3em;
   text-align: center;
-  background-color: rgba(0, 126, 194, 1);
+  background-color: rgb(0, 126, 194);
   color: white;
 }
 
@@ -585,9 +629,6 @@ footer p {
     overflow: auto;
   }
 
-  .right-info-pane {
-    display: block;
-  }
   .text-image-container {
     margin-left: 3rem;
     text-align: center;
@@ -606,5 +647,11 @@ footer p {
 
   .aboutme p {
     width: 70%;
+  }
+}
+
+@media screen and (min-width: 769px) {
+  .right-info-pane {
+    display: block;
   }
 }

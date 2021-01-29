@@ -13,8 +13,8 @@
         <select id="sort_by" name="sort_by">
             <option value="title" selected>{% translate 'title' %}</option>
             <option value="author__username">{% translate 'author' %}</option>
-            <option value="creation_datetime">{% translate 'creation date' %}</option>
-            <option value="visits_count">{% translate 'visits' %}</option>
+            <option value="-creation_datetime">{% translate 'creation date' %}</option>
+            <option value="-visits_count">{% translate 'visits' %}</option>
         </select>
         <button type="submit">OK</button>
     </form>
@@ -35,9 +35,13 @@
                     {% endfor %}
                 </p>
                 <figure>
+                    {% with image_url=entry.get_image_url %}
+                    {% if image_url %}
                     <a href="{{ entry.get_absolute_url }}">
                         <img src="{{ entry.image.url }}" alt="User-uploaded-image">
                     </a>
+                    {% endif %}
+                    {% endwith %}
                     <figcaption>
                         {{ entry.get_text_fragment|truncatechars:100 }}...
                     </figcaption>

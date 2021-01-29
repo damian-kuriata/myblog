@@ -44,6 +44,7 @@ function renderFormErrors(form, allErrors) {
         else if(fields === "author_email") {
             fieldsetChildren[1].appendChild(errorList);
         }
+        globalVars.canAddComment = true;
     }
 }
 
