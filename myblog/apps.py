@@ -1,9 +1,11 @@
 import os
 
 from django.apps import AppConfig
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.template import TemplateDoesNotExist
 from django.template.loader import render_to_string
+
+from myblog.signals import update_entry_category_visits_count
 
 
 class MyblogConfig(AppConfig):
@@ -37,7 +39,9 @@ class MyblogConfig(AppConfig):
             populate_entry_slug_field
 
         pre_save.connect(populate_category_slug_field, sender=Category)
-        pre_save.connect(populate_entry_slug_field, sender=Entry)
+        pre_save.connect(populate_entry_slug_field,
+                         sender=Entry)
+        post_save.connect(update_entry_category_visits_count, sender=Entry)
 
     def ready(self):
         pass

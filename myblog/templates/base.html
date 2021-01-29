@@ -50,19 +50,17 @@
         </div>
 
         <div class="mobile-navigation-list hidden">
-            <div>
-                <a href="/">{% translate 'Main page' %}</a>
-            </div>
-            {% with categories_limit=5 %}
-            <!-- Display only categories_limit first categories -->
-            {% for category in categories %}
-            {% if forloop.counter0 < categories_limit %}
-            <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
-            {% endif %}
-            {% endfor %}
-            {% endwith %}
-            <div>
-                <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
+            <div class="mobile-categories-container">
+                <div>
+                    <a href="/">{% translate 'Main page' %}</a>
+                </div>
+                <!-- Display only categories_limit first categories -->
+                {% for category in categories %}
+                <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
+                {% endfor %}
+                <div>
+                    <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
+                </div>
             </div>
             <!-- Social media icons -->
             <div class="socialmedia-icons">

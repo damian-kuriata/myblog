@@ -208,10 +208,9 @@ class EntryView(View):
                     "-title")
             entries_limit = 5
             context[suggested_key] = \
-                most_popular_entries_in_category[entries_limit]
+                most_popular_entries_in_category.exclude(
+                    id=entry.id)[:entries_limit]
 
-        context[suggested_key] = \
-            context[suggested_key].exclude(id=entry.id)
         context = _get_context_with_categories(context)
 
         # Render HTML stored in entry.html as HttpResponse object

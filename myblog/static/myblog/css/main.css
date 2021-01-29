@@ -23,6 +23,7 @@ nav {
 input,
 textarea {
   border: 1px solid #007ec2;
+  border-radius: 6px;
 }
 
 h1,
@@ -219,13 +220,23 @@ nav .mobile-navigation-list {
   background-color: rgba(0, 126, 194, 0.9);
   z-index: 99;
   padding-top: 0.2em;
-  font-size: 0.85em;
+  font-size: 1em;
   height: 100vh;
+  overflow: auto;
+  color: white;
+}
+
+nav .mobile-navigation-list div {
+  margin-bottom: .2em;
+}
+
+nav .mobile-navigation-list .mobile-categories-container {
+  height: 77%;
   overflow: auto;
 }
 nav .mobile-navigation-list .socialmedia-icons {
-  margin-top: 0.5em;
   font-size: 1.5em;
+  margin-bottom: .3em;
 }
 
 #search {
@@ -256,17 +267,6 @@ nav .mobile-navigation-list .socialmedia-icons {
   outline: none;
 }
 
-nav .mobile-navigation-list {
-  flex-direction: column;
-  text-align: center;
-  background-color: rgba(0, 126, 194, 0.9);
-  z-index: 99;
-  padding-top: 0.2em;
-  font-size: 0.85em;
-  height: 100vh;
-  overflow: auto;
-}
-
 nav .expanded-categories {
   display: flex;
 }
@@ -293,11 +293,6 @@ nav .expanded-categories {
 .text-image-container figcaption {
   font-size: 0.3em;
   font-weight: lighter;
-}
-
-nav .mobile-navigation-list .socialmedia-icons {
-  margin-top: 0.5em;
-  font-size: 1.5em;
 }
 
 /* Social media icons */
@@ -329,6 +324,12 @@ main .entry-info-bar address span {
   width: 90%;
   margin-left: auto;
   margin-right: auto;
+  border: 4px dashed rgb(0, 126, 194);
+  border-radius: 6px;
+}
+
+.entry-preview div:last-child {
+  margin-bottom: 1em;
 }
 
 .entry-preview div * {
@@ -341,6 +342,12 @@ main .entry-info-bar address span {
   width: 80%;
   margin-left: auto;
   margin-right: auto;
+}
+
+.entry-preview figure {
+  margin: 0;
+  padding: 0 0 .3em 0;
+  width: 100%;
 }
 
 .entry-preview figure figcaption {
@@ -587,7 +594,7 @@ footer p {
   }
 
   .entry-preview figure img {
-    max-width: 90%;
+    max-width: 100%;
   }
 
   .aboutme p {
