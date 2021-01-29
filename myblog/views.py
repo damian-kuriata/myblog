@@ -24,6 +24,8 @@ from myblog.models import Entry, Category, Comment
 def _get_context_with_categories(context):
     context["categories"] = \
         Category.objects.all().order_by("-total_visits_count")
+    for cat in Category.objects.all().order_by("-total_visits_count"):
+        print(cat)
     return context
 
 

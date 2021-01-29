@@ -31,7 +31,7 @@ export function handleDesktopNavigation(desktopItems,
     if(previousWindowWidth.value === -1 || previousWindowWidth.value > windowWidth)  {
         previousWindowWidth.value = windowWidth;
         //desktopItems = $(".desktop-items");
-        while(desktopItems.width() + 0.1 * windowWidth >= 0.8 * windowWidth) {
+        while(desktopItems.width() + 0.05 * windowWidth >= 0.8 * windowWidth) {
         	let children = desktopItems.children();
         	//console.log(categoriesDropdown);
         	children.last().addClass("display-block");

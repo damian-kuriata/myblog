@@ -237,6 +237,7 @@ nav .mobile-navigation-list .mobile-categories-container {
 nav .mobile-navigation-list .socialmedia-icons {
   font-size: 1.5em;
   margin-bottom: .3em;
+  background-color: rgba(0, 126, 194, .9);
 }
 
 #search {
@@ -466,6 +467,8 @@ select {
   padding: 0.2em 0 0.2em 0;
   margin-bottom: 0.3em;
   text-align: center;
+  background-color: rgba(0, 126, 194, 1);
+  color: white;
 }
 
 .socialmedia p {
@@ -542,9 +545,13 @@ footer p {
   nav .mobile-navigation-list {
     height: 83vh;
   }
+
+  nav .mobile-navigation-list .socialmedia-icons {
+    margin-bottom: .2em;
+  }
 }
-/* For screens wider than 950px */
-@media screen and (min-width: 800px) {
+
+@media screen and (min-width: 481px) {
   /* Grab all p's that are not a direct child of footer */
   p:not(footer>p) {
     width: 80%;

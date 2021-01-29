@@ -30,8 +30,11 @@
                 <!-- Element for devices with screens wider than 950px -->
                 <div class="desktop-items">
                     {% for category in categories %}
+
                     <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
+
                     {% endfor %}
+
                      <div>
                         <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
                     </div>
@@ -102,12 +105,12 @@
     </main>
     {% block comments %}
     {% endblock %}
-    <article class="socialmedia">
+    <section class="socialmedia">
          <a href="https://facebook.com"><i class="icon-facebook"></i></a>
          <a href="https://instagram.com"><i class="icon-instagram"></i></a>
          <a href="https://youtube.com"><i class="icon-play"></i></a>
          <a href="https://twitter.com"><i class="icon-twitter"></i></a>
-     </article>
+     </section>
     <footer>
         <p>
             {% translate 'Created by Damian Kuriata. All right reserved' %}. Email:
