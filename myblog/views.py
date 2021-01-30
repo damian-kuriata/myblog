@@ -1,31 +1,26 @@
-import json
-import os
-
-from django import views
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
-from django.db.models import Sum
-from django.http import Http404, HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.template import TemplateDoesNotExist, Context
+from django.template import Context
 from django.urls import reverse
 from django.views import View
-from django.views.decorators.http import require_http_methods
-from django.views.generic import ListView, DetailView, TemplateView
-from django.core import serializers
+from django.views.generic import ListView, TemplateView
 from django.template import Engine
 from django.conf import settings
-import django.contrib.postgres
 
 from myblog.forms import CommentForm
 from myblog.models import Entry, Category, Comment
 
 
 def _get_context_with_categories(context):
+    """
+    Adds QuerySet of categories ordered by -total_visits_count to
+    Context. Should be called in each view that isn't an API.
+    """
+
     context["categories"] = \
         Category.objects.all().order_by("-total_visits_count")
-    for cat in Category.objects.all().order_by("-total_visits_count"):
-        print(cat)
     return context
 
 
@@ -41,15 +36,9 @@ class IndexView(ListView):
         # Get 5 latest entries
         latest_entires = \
             Entry.objects.order_by("-creation_datetime")[:5]
-        # To prevent the same entry from being both in latest and most popular,
-        # Filter most popular and latest entries using filter function
-        # self.queryset contains 5 most popular entries
-        different_latest_entires = filter(lambda latest_entry:
-                                            latest_entry not in self.queryset,
-                                            latest_entires)
-        # For now don't implement the above feature
         context["latest_entries"] = latest_entires
         context = _get_context_with_categories(context)
+
         return context
 
 
@@ -61,19 +50,18 @@ class CategoryView(View):
         try:
             # Indicates by what sort returned entries in category
             entries_sort_by = request.GET.get("sort_by")
-            slug = kwargs.get("slug").strip().lower()
+            slug = kwargs.get("slug")
             category = Category.objects.get(slug__iexact=slug)
             if entries_sort_by in ["title", "author__username",
                            "-creation_datetime", "-visits_count"]:
                 entries = category.entries.order_by(entries_sort_by)
-
-                print(entries)
             else:
+                # Sort by title if sorting option is not present or invalid
                 entries = category.entries.order_by("title")
 
             # Enable entries pagination
-            ENTRIES_PER_PAGE = 10
-            entries_paginator = Paginator(entries, ENTRIES_PER_PAGE)
+            entries_per_page = 10
+            entries_paginator = Paginator(entries, entries_per_page)
             page_number = request.GET.get("page")
             page_obj = entries_paginator.get_page(page_number)
             context = {
@@ -96,7 +84,6 @@ class SearchView(View):
         # Are we using Postgres?
         if settings.DATABASES["default"]["ENGINE"] \
             == "django.db.backends.postgresql_psycopg2":
-            print("Using Postgre")
             categories = Category.objects.filter(name__search=
                                                  search_query)
             entries = Entry.objects.filter(title__search=
@@ -114,20 +101,14 @@ class SearchView(View):
             "users": users
         }
         context["search_query"] = search_query
-        #context = _get_context_with_categories(context)
         return render(request, self.template_name, context)
 
 
 class UserView(View):
+    """ Temporarily rediects to aboutme page. """
+
     def get(self, request, *args, **kwargs):
         return HttpResponseRedirect(reverse("myblog:aboutme"))
-
-    '''
-    model = User
-    template_name = "myblog/user.html"
-    slug_field = "username"
-    context_object_name = "user"
-    '''
 
 
 class AboutmeView(TemplateView):
@@ -141,7 +122,7 @@ class AboutmeView(TemplateView):
 
 class EntryView(View):
     def get(self, request, *args, **kwargs):
-        entry_slug = kwargs["slug"].lower()
+        entry_slug = kwargs["slug"]
         entry = get_object_or_404(Entry, slug__iexact=entry_slug)
 
         # Increment entry.visits_count each time this view is called
@@ -189,12 +170,15 @@ class EntryView(View):
         # Get suggested entries
         suggested_key = "suggested_entries"
         entry_categories = entry.category_set.all()
-        if len(entry_categories) == 0:
+        entry_categories_len = len(entry_categories)
+        # When entry has no categories (rare case)
+        if entry_categories_len == 0:
             suggested_entries = Entry.objects.order_by("-creation_datetime",
                                                        "-visits_count")
             context[suggested_key] = suggested_entries
 
-        elif len(entry_categories) == 1:
+        # When entry is in 1 category (the most frequent case)
+        elif entry_categories_len == 1:
             entry_category = entry_categories.first()
             most_popular_entries_in_category = \
                 entry_category.entries.order_by("-visits_count",
@@ -202,6 +186,7 @@ class EntryView(View):
                                                 "-title")
             context[suggested_key] = most_popular_entries_in_category
 
+        # When entry is in multiple categories
         else:
             most_popular_entry_category = \
                 entry_categories.order_by("-total_visits_count").first()
