@@ -1,4 +1,4 @@
-from django.forms import ModelForm, Textarea, EmailInput
+from django.forms import ModelForm, Textarea
 from django.utils.translation import gettext_lazy as _
 
 from myblog.models import Comment
@@ -20,4 +20,4 @@ class CommentForm(ModelForm):
         css = {
             "all": ("myblog/css/comment-form.css",)
         }
-        js = ("myblog/scripts/comment-form.js", )
+        js = ("myblog/scripts/comment-form.js",)

@@ -11,14 +11,14 @@ from myblog.signals import update_entry_category_visits_count
 class MyblogConfig(AppConfig):
     name = 'myblog'
 
-    def _update_entries_html(self):
+    def update_entries_html(self):
         from myblog.models import Entry
         from django.conf import settings
 
         # For each entry, update it's html attribute
         for entry in Entry.objects.all():
-            # Not empty html attribute means that it was edited manually,
-            # So don't override it.
+            # Not empty html attribute means that it was edited
+            # Manually, so don't override it.
             if entry.html:
                 continue
             template_name = entry.title.lower().strip() + ".html"
@@ -30,6 +30,7 @@ class MyblogConfig(AppConfig):
                                          template_name)
             try:
                 with open(template_path) as template:
+                    # Write template contents to Entry.html
                     entry.html = template.read()
             except FileNotFoundError:
                 print(f"Error: template {template_path} not found.")
@@ -37,7 +38,7 @@ class MyblogConfig(AppConfig):
             finally:
                 entry.save()
 
-    def _register_signals(self):
+    def register_signals(self):
         from myblog.models import Entry, Category
         from myblog.signals import populate_category_slug_field, \
             populate_entry_slug_field
@@ -48,5 +49,5 @@ class MyblogConfig(AppConfig):
         post_save.connect(update_entry_category_visits_count, sender=Entry)
 
     def ready(self):
-        self._update_entries_html()
-        self._register_signals()
+        self.update_entries_html()
+        self.register_signals()

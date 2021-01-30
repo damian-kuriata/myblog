@@ -1,3 +1,5 @@
+import re
+
 from django.contrib.auth.models import User
 from django.core.validators import MinLengthValidator, MinValueValidator
 from django.db import models
@@ -13,10 +15,7 @@ def get_upload_path(instance, filename):
     return f"blog/{instance.title}/{filename}"
 
 class Entry(models.Model):
-    # Each time new entry is created in templates,
-    # corresponding Entry object must be created as well
-    title = models.CharField(_("title"), max_length=60,
-                             unique=True)
+    title = models.CharField(_("title"), max_length=60, unique=True)
     slug = models.SlugField(max_length=60, blank=True, editable=False,
                             help_text=_("Should not be edited manually, "
                                         "it is automatically"
@@ -32,12 +31,13 @@ class Entry(models.Model):
                                        validators=[
                                            MinValueValidator(0)
                                        ])
-    # Entry html code. Can be edited manually, although it's not recommended.
-    # It's automatically populated each time an app starts.
+    # Entry html code. Can be edited manually, although it's not
+    # Recommended. It's automatically populated each time an app starts.
     html = models.TextField(blank=True, help_text=_("Editing manually is not "
                                                     "recommended, as it's "
                                                     "automatically populated "
                                                     "when an app starts."))
+    # Image acting as an entry 'thumbnail'
     image = models.ImageField(_("image"), upload_to=get_upload_path,
                               null=True, blank=True)
 
@@ -48,40 +48,42 @@ class Entry(models.Model):
         return reverse("myblog:entry", kwargs={"slug": self.slug})
 
     def get_in_text_url(self):
+        """
+        Returns an url pointing to 'in_text' directory containing
+        All images that will be used in Entry HTML template
+        """
+
         try:
             return self.image.url + "/../in_text"
         except ValueError:
-            # When Entry has no file associated with it,
-            # just return empty string
+            # When Entry has no file associated with it, just return
+            # Empty string
             return ''
 
     def get_image_url(self):
         """
-            Use this function instead of Entry.image.url,
-            Otherwise ValueError will be
-            Raised if Entry has no image associated with it
+        This function should be used instead of Entry.image.url,
+        Otherwise ValueError will be Raised if Entry has no image
+        Associated with it
         """
+
         try:
             return self.image.url
         except ValueError:
+            # Ignore ValueError, just return empty string
             return ''
 
     def get_text_fragment(self):
-        # Text fragment is a content of first paragraph tag
-        # (text between <p> and </p>)
-        paragraph_tag_part = "<p"
-        paragraph_tag_part_index = self.html.find(paragraph_tag_part)
-        if paragraph_tag_part_index == -1:
+        """
+        Returns contents of first <p> tag (if it exists). For example
+        when tag <p>Test</p> is present, it returns 'Test'
+        """
+        regex = r"<p(.*?)>(?P<text>.*?)</p>"
+        result = re.search(regex, self.html, flags=re.DOTALL)
+        if result:
+            return result.group("text")
+        else:
             return ''
-        paragraph_tag_closing_index = self.html.find('>', paragraph_tag_part_index)
-        if paragraph_tag_closing_index == -1:
-            return ''
-        paragraph_tag_end_index = self.html.find('</p>')
-        from_ = paragraph_tag_closing_index + 1
-        to = paragraph_tag_end_index
-        text_fragment = self.html[from_:to]
-        return text_fragment
-
 
     class Meta:
         ordering = ["-creation_datetime"]
@@ -99,9 +101,8 @@ class Category(models.Model):
                                         ))
     entries = models.ManyToManyField(Entry, verbose_name=_("entries"),
                                      blank=True)
-    # Sum of visits of all entries belonging to this category
-    # Cannot be manually edited. It is automatically updated on
-    # Pre_save signal (code below)
+    # Sum of visits of all entries belonging to this category cannot be
+    # Manually edited. It is automatically updated on 'pre_save' signal
     total_visits_count = models.IntegerField(editable=False, default=0)
 
     def __str__(self):
@@ -111,10 +112,10 @@ class Category(models.Model):
         return reverse("myblog:category", kwargs={"slug": self.slug})
 
     def get_total_visits_count(self):
-        '''
-        DEPRECATED!
-        Return summarized visits counts from all entries
-        '''
+        """
+        DEPRECATED! Use total_visits_count property instead
+        Returns summarized visits counts from all entries
+        """
 
         return self.entries.all().\
             aggregate(Sum("visits_count"))["visits_count__sum"]
