@@ -2,7 +2,7 @@ import {handleMobileNavigation} from "./modules/mobile.js";
 import {handleComments} from "./modules/comments.js";
 import {handleDesktopNavigation} from "./modules/desktop.js";
 
-$(document).ready(() => {
+$(document).ready(function() {
     //const isMobile =  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
    // console.log(isMobile);
     handleMobileNavigation();
@@ -12,7 +12,7 @@ $(document).ready(() => {
     let window_ = $(window);
     let categoriesDropdown = $(".categories-dropdown");
     handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
-    window_.resize(() => {
+    window_.resize(function() {
         handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
-    })
-})
+    });
+});

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2021-01-22 01:30+0100\n"
+"POT-Creation-Date: 2021-01-29 15:29+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -28,51 +28,47 @@ msgstr "Twój email"
 msgid "Your nickname"
 msgstr "Twój pseudonim"
 
-#: .\models.py:30 .\templates\myblog\category.html:11
+#: .\models.py:18 .\templates\myblog\category.html:14
 msgid "title"
 msgstr "tytuł"
 
-#: .\models.py:32
+#: .\models.py:21
 msgid ""
 "Should not be edited manually, it is automaticallyupdated when save() is "
 "called on Entry"
 msgstr ""
-"Nie powinno być edytowane manualnie, to jest aktualizowane automatycznie"
-" gdy wywołana jest funkcja save() na obiekcie Entry"
+"Nie powinno być edytowane manualnie, to jest aktualizowane automatycznie gdy "
+"wywołana jest funkcja save() na obiekcie Entry"
 
-#: .\models.py:37 .\templates\myblog\category.html:12
+#: .\models.py:26 .\templates\myblog\category.html:15
 msgid "author"
 msgstr "autor"
 
-#: .\models.py:38
+#: .\models.py:27
 msgid "creation datetime"
 msgstr "data utworzenia"
 
-#: .\models.py:40
+#: .\models.py:29
 msgid "visits count"
 msgstr "liczba wizyt"
 
-#: .\models.py:45
-msgid "text fragment"
-msgstr "fragment tekstu"
-
-#: .\models.py:47
+#: .\models.py:38
 msgid "image"
 msgstr "obraz"
 
-#: .\models.py:58 .\models.py:103
+#: .\models.py:86 .\models.py:137
 msgid "entry"
 msgstr "wpis"
 
-#: .\models.py:59 .\models.py:70 .\templates\myblog\search.html:19
+#: .\models.py:87 .\models.py:98 .\templates\myblog\search.html:19
 msgid "entries"
 msgstr "wpisy"
 
-#: .\models.py:63
+#: .\models.py:91
 msgid "name"
 msgstr "nazwa"
 
-#: .\models.py:65
+#: .\models.py:93
 msgid ""
 "Should not be edited manually, it is automaticallyupdated when save() is "
 "called on Category"
@@ -80,59 +76,70 @@ msgstr ""
 "Nie powinno być edytowane ręcznie, jest aktualizowane automatycznie gdy "
 "wywołana jest funkcja save() na obiekcie Category"
 
-#: .\models.py:89
+#: .\models.py:122
 msgid "category"
 msgstr "kategoria"
 
-#: .\models.py:90
+#: .\models.py:123
 msgid "categories"
 msgstr "kategorie"
 
-#: .\models.py:94
+#: .\models.py:127
 msgid "author email"
 msgstr "email autora"
 
-#: .\models.py:95
+#: .\models.py:128
 msgid "author nickname"
 msgstr "pseudonim autora"
 
-#: .\models.py:99
+#: .\models.py:133
 msgid "text"
 msgstr "tekst"
 
-#: .\models.py:100
+#: .\models.py:134
 msgid "creation_datetime"
 msgstr "data utworzenia"
 
-#: .\models.py:110
+#: .\models.py:144
 msgid "comment"
 msgstr "komentarz"
 
-#: .\models.py:111
+#: .\models.py:145
 msgid "comments"
 msgstr "komentarze"
 
-#: .\templates\base.html:28
-msgid "Search"
-msgstr "Szukaj"
-
-#: .\templates\base.html:34
-msgid "Main page"
-msgstr "Strona główna"
-
-#: .\templates\base.html:40 .\templates\myblog\aboutme.html:7
+#: .\templates\base.html:39 .\templates\base.html:65
+#: .\templates\myblog\aboutme.html:8 .\templates\right_info_pane.html:20
 msgid "About me"
 msgstr "O mnie"
 
+#: .\templates\base.html:43
+msgid "Other"
+msgstr "Inne"
+
+#: .\templates\base.html:50
+msgid "Search"
+msgstr "Szukaj"
+
 #: .\templates\base.html:58
+msgid "Main page"
+msgstr "Strona główna"
+
+#: .\templates\base.html:91
 msgid "Created: "
 msgstr "Utworzono: "
 
-#: .\templates\base.html:60
+#: .\templates\base.html:92
 msgid "Author: "
-msgstr "Author: "
+msgstr "Autor: "
 
-#: .\templates\base.html:75
+#: .\templates\base.html:96
+#, fuzzy
+#| msgid "Categories"
+msgid "Categories: "
+msgstr "Kategorie"
+
+#: .\templates\base.html:117
 msgid "Created by Damian Kuriata. All right reserved"
 msgstr "Stworzone przez Damiana Kuriatę. Wszelkie prawa zastrzeżone"
 
@@ -144,11 +151,21 @@ msgstr "Komentarze:"
 msgid "hide"
 msgstr "schowaj"
 
-#: .\templates\comments.html:21
+#: .\templates\comments.html:15
+msgid "Reply"
+msgstr "Odpowiedz"
+
+#: .\templates\comments.html:20
+#, fuzzy
+#| msgid "comments"
+msgid "No comments yet"
+msgstr "komentarze"
+
+#: .\templates\comments.html:28
 msgid "Add comment"
 msgstr "Dodaj komentarz"
 
-#: .\templates\comments.html:36
+#: .\templates\comments.html:43
 msgid "Send"
 msgstr "Wyślij"
 
@@ -173,47 +190,53 @@ msgid "Category: "
 msgstr "Kategoria: "
 
 #: .\templates\myblog\category.html:9
+#, fuzzy
+#| msgid "visits"
+msgid "Total visits: "
+msgstr "liczba wizyt"
+
+#: .\templates\myblog\category.html:12
 msgid "Sorting: "
 msgstr "Sortowanie"
 
-#: .\templates\myblog\category.html:13
+#: .\templates\myblog\category.html:16
 msgid "creation date"
 msgstr "data utworzenia"
 
-#: .\templates\myblog\category.html:14 .\templates\myblog\search.html:22
+#: .\templates\myblog\category.html:17 .\templates\myblog\search.html:22
 msgid "visits"
 msgstr "liczba wizyt"
 
-#: .\templates\myblog\category.html:26 .\templates\myblog\index.html:17
-#: .\templates\myblog\index.html:50 .\templates\myblog\search.html:37
+#: .\templates\myblog\category.html:29 .\templates\myblog\index.html:17
+#: .\templates\myblog\index.html:54 .\templates\myblog\search.html:37
 msgid "by"
 msgstr "przez"
 
-#: .\templates\myblog\category.html:28 .\templates\myblog\index.html:19
-#: .\templates\myblog\index.html:52 .\templates\myblog\search.html:39
+#: .\templates\myblog\category.html:31 .\templates\myblog\index.html:19
+#: .\templates\myblog\index.html:56 .\templates\myblog\search.html:39
 msgid "views:"
 msgstr "wyświetleń:"
 
-#: .\templates\myblog\category.html:28 .\templates\myblog\index.html:19
-#: .\templates\myblog\index.html:52 .\templates\myblog\search.html:39
+#: .\templates\myblog\category.html:31 .\templates\myblog\index.html:19
+#: .\templates\myblog\index.html:56 .\templates\myblog\search.html:39
 msgid "comments:"
 msgstr "komentarzy:"
 
-#: .\templates\myblog\category.html:29 .\templates\myblog\index.html:20
-#: .\templates\myblog\index.html:53 .\templates\myblog\search.html:40
+#: .\templates\myblog\category.html:32 .\templates\myblog\index.html:20
+#: .\templates\myblog\index.html:57 .\templates\myblog\search.html:40
 msgid "categories:"
 msgstr "kategorie:"
 
-#: .\templates\myblog\category.html:42 .\templates\myblog\index.html:33
-#: .\templates\myblog\index.html:66 .\templates\myblog\search.html:53
+#: .\templates\myblog\category.html:49 .\templates\myblog\index.html:37
+#: .\templates\myblog\index.html:74 .\templates\myblog\search.html:57
 msgid "Read more"
 msgstr "Czytaj dalej"
 
-#: .\templates\myblog\category.html:55
+#: .\templates\myblog\category.html:61
 msgid "Page"
 msgstr "Strona"
 
-#: .\templates\myblog\category.html:61
+#: .\templates\myblog\category.html:67
 msgid "of"
 msgstr "z"
 
@@ -231,7 +254,7 @@ msgstr ""
 msgid "Latest"
 msgstr "Najnowsze"
 
-#: .\templates\myblog\index.html:40
+#: .\templates\myblog\index.html:44
 msgid "Most popular"
 msgstr "Najpopularniejsze"
 
@@ -255,6 +278,17 @@ msgstr "Kategorie"
 msgid "Entries"
 msgstr "Wpisy"
 
-#: .\templates\myblog\search.html:61
+#: .\templates\myblog\search.html:65
 msgid "Users"
 msgstr "Użytkownicy"
+
+#: .\templates\right_info_pane.html:4
+msgid "Recently watched"
+msgstr "Ostatnio oglądane"
+
+#: .\templates\right_info_pane.html:12
+msgid "Suggested"
+msgstr "Sugerowane"
+
+#~ msgid "text fragment"
+#~ msgstr "fragment tekstu"

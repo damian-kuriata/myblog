@@ -89,7 +89,8 @@ input[type=submit] {
   font-size: 0.5em;
   border: none;
   border-radius: 10px;
-  padding: 5px;
+  /*padding: 5px;*/
+  line-height: 1.5;
   outline: none;
   color: white;
 }

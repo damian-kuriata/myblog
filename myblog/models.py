@@ -32,9 +32,12 @@ class Entry(models.Model):
                                        validators=[
                                            MinValueValidator(0)
                                        ])
-    # Entry html code. Cannot be edited manually, it's populated
-    # Programically
-    html = models.TextField(editable=False, blank=True)
+    # Entry html code. Can be edited manually, although it's not recommended.
+    # It's automatically populated each time an app starts.
+    html = models.TextField(blank=True, help_text=_("Editing manually is not "
+                                                    "recommended, as it's "
+                                                    "automatically populated "
+                                                    "when an app starts."))
     image = models.ImageField(_("image"), upload_to=get_upload_path,
                               null=True, blank=True)
 
@@ -45,7 +48,6 @@ class Entry(models.Model):
         return reverse("myblog:entry", kwargs={"slug": self.slug})
 
     def get_in_text_url(self):
-        print("get")
         try:
             return self.image.url + "/../in_text"
         except ValueError:
@@ -54,11 +56,11 @@ class Entry(models.Model):
             return ''
 
     def get_image_url(self):
-        '''
+        """
             Use this function instead of Entry.image.url,
             Otherwise ValueError will be
             Raised if Entry has no image associated with it
-        '''
+        """
         try:
             return self.image.url
         except ValueError:

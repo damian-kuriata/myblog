@@ -1,14 +1,15 @@
-// Namespace for global variables
+/* Namespace for global variables */
 let globalVars = {
     commentAddingThresholdMillis: 10000,
     canAddComment: true
-}
+};
 
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(';').shift();
+  if (parts.length === 2) return parts.pop().split(";").shift();
 }
+
 function escapeHtml(unsafe) {
     return unsafe
          .replace(/&/g, "&amp;")
@@ -16,7 +17,8 @@ function escapeHtml(unsafe) {
          .replace(/>/g, "&gt;")
          .replace(/"/g, "&quot;")
          .replace(/'/g, "&#039;");
- }
+}
+
 function renderFormErrors(form, allErrors) {
     allErrors = JSON.parse(allErrors);
     let formFieldset = form.children[0];

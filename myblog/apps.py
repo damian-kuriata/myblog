@@ -17,6 +17,10 @@ class MyblogConfig(AppConfig):
 
         # For each entry, update it's html attribute
         for entry in Entry.objects.all():
+            # Not empty html attribute means that it was edited manually,
+            # So don't override it.
+            if entry.html:
+                continue
             template_name = entry.title.lower().strip() + ".html"
             template_path = os.path.join(settings.BASE_DIR.parent,
                                          self.name,
@@ -44,6 +48,5 @@ class MyblogConfig(AppConfig):
         post_save.connect(update_entry_category_visits_count, sender=Entry)
 
     def ready(self):
-        pass
         self._update_entries_html()
         self._register_signals()

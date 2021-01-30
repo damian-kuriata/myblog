@@ -1,32 +1,36 @@
-export function handleComments() {
-    // Comments hiding/showing
+function handleComments() {
+    /* Comments showing/hiding */
     const showHideButton = $(".comments-section > button");
     const commentsContainer = $(".comments-section .comments-list");
     let commentsHidden = false;
 
-    showHideButton.click((event) => {
-        if(commentsHidden) {
+    showHideButton.click(function(event) {
+        /* Gettext is a function provided by Django */
+        if (commentsHidden) {
             commentsContainer.show();
             showHideButton.text(gettext("hide"));
             commentsHidden = false;
-        }
-        else {
+        } else {
             commentsContainer.hide();
             showHideButton.text(gettext("show"));
             commentsHidden = true;
         }
     });
-
-    // Comments reply system
+    /* Comments reply system */
     const commentTextInput = $("#id_text");
-    for(let singleComment of commentsContainer.children("article")) {
+    commentsContainer.children("article").each(function(index, comment) {
         // Convert to JQuery object
-        singleComment = $(singleComment);
-        const replyButton = singleComment.find(".reply-button").eq(0);
-        replyButton.click((event) => {
-            let commentHeaderText = singleComment.children("h6").eq(0).text();
-            let nickname = commentHeaderText.substr(0, commentHeaderText.indexOf(','));
-            commentTextInput.text(commentTextInput.text() + `@${ nickname }: `);
+        comment = $(comment);
+        const replyButton = comment.find(".reply-button").eq(0);
+        replyButton.click(function (event) {
+            let commentHeaderText = comment.children("h6").eq(0).text();
+            const from = 0;
+            const to = commentHeaderText.indexOf(",")
+            let nickname = commentHeaderText.substr(from, to);
+            /* Append @nickname to current input value */
+            commentTextInput.val(commentTextInput.val() + `@${nickname}`);
         });
-    }
+    });
 }
+
+export {handleComments};
