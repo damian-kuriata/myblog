@@ -80,7 +80,7 @@ submitButton.click((event) => {
     }
     globalVars.canAddComment = false;
 
-    /* Block adding comments for a gien threshold */
+    /* Block adding comments for a given threshold */
     setTimeout(() => {
         globalVars.canAddComment = true;
     }, globalVars.commentAddingThresholdMillis);
@@ -91,7 +91,8 @@ submitButton.click((event) => {
     let formData = new FormData(commentForm);
     /* Escape HTML in text and author_nickname fields */
     formData.set("text", escapeHtml(formData.get("text")));
-    formData.set("author_nickname", escapeHtml(formData.get("author_nickname")));
+    formData.set("author_nickname",
+        escapeHtml(formData.get("author_nickname")));
     let csrftoken = getCookie("csrftoken");
     const actionUrl = commentForm.action;
     const init = {

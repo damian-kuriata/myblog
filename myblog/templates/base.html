@@ -3,129 +3,127 @@
 <head>
     {% load static %}
     {% load i18n %}
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="description" content="{% block description %}{% endblock %}" />
+    <meta charset="UTF-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta name="description" content="{% block description %}{% endblock %}"/>
     <title>{% block title %}{% endblock %}</title>
-    <link rel="stylesheet" href="{% static 'myblog/css/main.css' %}" />
+    <link rel="stylesheet" href="{% static 'myblog/css/main.css' %}"/>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     {# Download Prism.css (syntax highlighting tool) only when on entry page #}
     {% if entry %}
-        <link href="{% static 'myblog/css/prism.css' %}" rel="stylesheet" />
+        <link href="{% static 'myblog/css/prism.css' %}" rel="stylesheet"/>
         {{ comment_form.media.css }}
     {% endif %}
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 </head>
 <body>
-    <nav>
-        <div class="navigation-container">
-                <div class="mobile-nav-button-container">
-                    <i class="icon-menu mobile-nav-button"></i>
-                </div>
-                <div>
-                    <a href="/"><i class="icon-home"></i></a>
-                </div>
-                <!-- Element for devices with screens wider than 950px -->
-                <div class="desktop-items">
-                    {% for category in categories %}
-
-                    <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
-
-                    {% endfor %}
-
-                     <div>
-                        <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
-                    </div>
-
-                    <div class="dropdown-expand hidden">
-                        {% translate 'Other' %}
-                        <div class="categories-dropdown">
-
-                        </div>
-                    </div>
-                </div>
-                <form id="search" role="search" method="GET" action="/search">
-                    <input type="search" name="search" placeholder="{% translate 'Search' %}">
-                    <button type="submit">Go</button>
-                </form>
+<nav>
+    <div class="navigation-container">
+        <div class="mobile-nav-button-container">
+            <i class="icon-menu mobile-nav-button"></i>
         </div>
+        <div>
+            <a href="/"><i class="icon-home"></i></a>
+        </div>
+        <div class="desktop-items">
+            {% for category in categories %}
 
-        <div class="mobile-navigation-list hidden">
-            <div class="mobile-categories-container">
-                <div>
-                    <a href="/">{% translate 'Main page' %}</a>
-                </div>
-                <!-- Display only categories_limit first categories -->
-                {% for category in categories %}
                 <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
-                {% endfor %}
-                <div>
-                    <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
+
+            {% endfor %}
+
+            <div>
+                <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
+            </div>
+
+            <div class="dropdown-expand hidden">
+                {% translate 'Other' %}
+                <div class="categories-dropdown">
+                    <!-- Will be populated in JavaScript --->
                 </div>
             </div>
-            <!-- Social media icons -->
-            <div class="socialmedia-icons">
-                <a href="https://facebook.com"><i class="icon-facebook"></i></a>
-                <a href="https://instagram.com"><i class="icon-instagram"></i></a>
-                <a href="https://youtube.com"><i class="icon-play"></i></a>
-                <a href="https://twitter.com"><i class="icon-twitter"></i></a>
+        </div>
+        <form id="search" role="search" method="GET" action="/search">
+            <input type="search" name="search" placeholder="{% translate 'Search' %}">
+            <button type="submit">Go</button>
+        </form>
+    </div>
+
+    <div class="mobile-navigation-list hidden">
+        <div class="mobile-categories-container">
+            <div>
+                <a href="/">{% translate 'Main page' %}</a>
+            </div>
+            <!-- Display only categories_limit first categories -->
+            {% for category in categories %}
+                <div><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></div>
+            {% endfor %}
+            <div>
+                <a href="{% url 'myblog:aboutme' %}">{% translate 'About me' %}</a>
             </div>
         </div>
-    </nav>
-
-    {% comment %} <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}"> {% endcomment %}
-
-    <div class="logo">
-        <a href="/"><span>DamianKuriata</span>.com</a>
+        <!-- Social media icons -->
+        <div class="socialmedia-icons">
+            <a href="https://facebook.com"><i class="icon-facebook"></i></a>
+            <a href="https://instagram.com"><i class="icon-instagram"></i></a>
+            <a href="https://youtube.com"><i class="icon-play"></i></a>
+            <a href="https://twitter.com"><i class="icon-twitter"></i></a>
+        </div>
     </div>
-    <header>
-        <h1 class="main-header">{% block mainheader %}{% endblock %}</h1>
-    </header>
-    <main>
-        {% if entry %}
-            <aside>
-                <p class="entry-info-bar">
-                    <span>{% translate 'Created: ' %}<date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>,</span>
-                    <span>{% translate 'Author: ' %}
+</nav>
+
+{% comment %} <img class="logo" src="{% static 'myblog/images/logo-mobile.png'%}"> {% endcomment %}
+
+<div class="logo">
+    <a href="/"><span>DamianKuriata</span>.com</a>
+</div>
+<header>
+    <h1 class="main-header">{% block mainheader %}{% endblock %}</h1>
+</header>
+<main>
+    {% if entry %}
+        <aside>
+            <p class="entry-info-bar">
+                <span>{% translate 'Created: ' %}
+                    <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>,</span>
+                <span>{% translate 'Author: ' %}
                         <a href="{% url 'myblog:user' slug=entry.author %}">{{ entry.author.username }}</a>
 
                     </span>
-                    <span>{% translate 'Categories: ' %}
+                <span>{% translate 'Categories: ' %}
                     {% for category in entry.category_set.all %}
                         <a href="{{ category.get_absolute_url }}">{{ category.name }}</a>
                     {% endfor %}
                     </span>
-                </p>
-            </aside>
-        {% comment %}
-        {% include "right_info_pane.html" %}
-        {% endcomment %}
-        {% endif  %}
-        {% block content %}{% endblock %}
-    </main>
-    {% block comments %}
-    {% endblock %}
-    <section class="socialmedia">
-         <a href="https://facebook.com"><i class="icon-facebook"></i></a>
-         <a href="https://instagram.com"><i class="icon-instagram"></i></a>
-         <a href="https://youtube.com"><i class="icon-play"></i></a>
-         <a href="https://twitter.com"><i class="icon-twitter"></i></a>
-     </section>
-    <footer>
-        <p>
-            {% translate 'Created by Damian Kuriata. All right reserved' %}. Email:
-                <a href="mailto:damian.kuriata2001@gmail.com">damian.kuriata2001@gmail.com</a>
-        </p>
-    </footer>
-    <!-- Javascript translate functions -->
-    <script src="{% url 'javascript-catalog' %}"></script>
-    <script type="module" src="{% static 'myblog/scripts/main.js' %}"></script>
-    {# Download Prism.js (syntax highlighting tool) only when on entry page #}
-    {% if entry %}
-        <script src="{% static 'myblog/scripts/prism.js' %}"></script>
-        {{ comment_form.media.js }}
+            </p>
+        </aside>
     {% endif %}
+    {% block content %}{% endblock %}
+</main>
+{% include "additional-info.html" %}
+{% block comments %}
+{% endblock %}
+<section class="socialmedia">
+    <a href="https://facebook.com"><i class="icon-facebook"></i></a>
+    <a href="https://instagram.com"><i class="icon-instagram"></i></a>
+    <a href="https://youtube.com"><i class="icon-play"></i></a>
+    <a href="https://twitter.com"><i class="icon-twitter"></i></a>
+</section>
+<footer>
+    <p>
+        {% translate 'Created by Damian Kuriata. All right reserved' %}. Email:
+        <a href="mailto:damian.kuriata2001@gmail.com">damian.kuriata2001@gmail.com</a>
+    </p>
+</footer>
+<!-- Javascript translate functions -->
+<script src="{% url 'javascript-catalog' %}"></script>
+<script type="module" src="{% static 'myblog/scripts/main.js' %}"></script>
+{# Download Prism.js (syntax highlighting tool) only when on entry page #}
+{% if entry %}
+    <script src="{% static 'myblog/scripts/prism.js' %}"></script>
+    {{ comment_form.media.js }}
+{% endif %}
 </body>
 </html>

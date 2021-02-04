@@ -130,15 +130,15 @@ ul li {
   margin-left: 0;
 }
 
-
 ul li::marker {
   color: rgb(0, 126, 194);
   margin-left: 0;
 }
 
-/* ul nested inside li */
+/* ul nested inside other ul */
 ul li ul {
   font-size: 1em;
+  margin-left: 1em;
 }
 
 figure img {
@@ -163,7 +163,6 @@ figure figcaption {
 
 .apply-top-border {
   border-top: 2px solid #007ec2;
-  padding-top: 0.5em;
 }
 
 /* OTHER */
@@ -319,7 +318,6 @@ nav .expanded-categories {
   margin-left: auto;
   margin-right: auto;
   width: 90%;
-  border: 1px solid red;
   text-align: center;
 }
 
@@ -396,6 +394,12 @@ main .entry-info-bar address span {
   font-size: inherit;
 }
 
+figure.code {
+  margin-left: auto;
+  margin-right: auto;
+  width: 90%;
+}
+
 .entry-preview div {
   width: 90%;
   margin-left: auto;
@@ -459,33 +463,31 @@ select {
   margin: 0;
 }
 
-.right-info-pane {
-  display: none;
-  width: 20%;
-  position: absolute;
-  top: 18em;
-  right: 1em;
-  border-radius: 6px;
-  background-color: rgba(0, 126, 194, 0.3);
+.additional-info {
+  width: 90%;
   font-size: .5em;
   font-weight: lighter;
+  margin-left: auto;
+  margin-right: auto;
 }
-.right-info-pane .entries-list {
-  margin: 0 0 .5em 0;
+.additional-info .entries-list {
+  list-style: "→" inside;
   font-size: 1.3em;
-  padding: 0 .2em 0 1em;
-  list-style-type: "→";
+  padding: 0;
+  margin: 0;
 }
-
-.right-info-pane .entries-list li {
+.additional-info .entries-list li {
   margin-bottom: .3em;
 }
+.additional-info .entries-list li:last-child {
+  margin-bottom: 0;
+}
 /* Create distance between <ul> bullet and <li> text */
-.right-info-pane .entries-list li span {
+.additional-info .entries-list li span {
   position: relative;
   left: .4em;
 }
-.right-info-pane  p {
+.additional-info p {
   font-size: 1.3em;
   text-align: left;
   margin: 0;
@@ -641,6 +643,14 @@ footer p {
   }
 
   dl {
+    width: 70%;
+  }
+
+  figure.code {
+    width: 70%;
+  }
+
+  aside.additional-info {
     width: 70%;
   }
   /* Grab all p's that are not a direct child of footer */

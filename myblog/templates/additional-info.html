@@ -1,15 +1,7 @@
 {% load i18n %}
 
-<aside class="right-info-pane">
-    <h4>{% translate 'Recently watched'%}</h4>
-    <ul class="entries-list">
-        {% for entry in recently_visited_entries %}
-            <li>
-                <span><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></span>
-            </li>
-        {% endfor %}
-    </ul>
-    <h4>{% translate 'Suggested' %}</h4>
+<aside class="additional-info apply-top-border">
+    <h3>{% translate 'See also' %}...</h3>
     <ul class="entries-list">
         {% for entry in suggested_entries %}
         <li>
@@ -17,13 +9,14 @@
         </li>
         {% endfor %}
     </ul>
-    <h4>{% translate 'About me' %}</h4>
-    <p>
-        Witaj na moim blogu! Jestem Damian, tworzę tego bloga hobbystycznie.
-        <br />
-        Możesz mnie znaleźć na GitHubie oraz Social Mediach:
-        <i class="icon-facebook"></i><i class="icon-instagram"></i><i class="icon-twitter"></i>
-    </p>
+    <h3>{% translate 'Recently watched'%}</h3>
+    <ul class="entries-list">
+        {% for entry in recently_visited_entries %}
+            <li>
+                <span><a href="{{ entry.get_absolute_url }}">{{ entry.title }}</a></span>
+            </li>
+        {% endfor %}
+    </ul>
     {% comment %}
     <div class="entries-list">
         {% for entry in recently_visited_entries %}
