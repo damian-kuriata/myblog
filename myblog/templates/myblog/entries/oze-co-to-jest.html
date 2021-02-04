@@ -1,0 +1,133 @@
+{% extends "entry_base.html" %}
+
+{% block title %}
+    OZE - co to jest?
+{% endblock %}
+{% block description %}
+    W tym artykule postram się opisać Ci, czym jest OZE(odnawialne źródła energii)
+{% endblock %}
+{% block mainheader %}
+    OZE - wszystko, co powinieneś wiedzieć
+{% endblock %}
+{% block content %}
+    <figure class="text-image-container">
+        <img class="image-big" src="{{ entry.get_image_url }}"/>
+        <figcaption>
+            Źródło: https://cdn.nowiny.pl/im/v1/news-900-widen-wm/2020/09/11/169406_1599823476_54153600.jpg
+        </figcaption>
+    </figure>
+    <p>
+        OZE, czyli <b>Odnawialne Źródła Energii</b> to takie źródła energii, których wykorzystywanie nie doprowadzi do
+        ich
+        deficytu, ponieważ w krótkim czasie odnawiają się, tak jak sugeruje ich nazwa. W przeciwieństwie do
+        nieodnawialnych
+        źródeł energii, czyli takich które kiedyś w końcu się skończą, takich jak węgiel, gaz czy ropa naftowa.
+        Dodatkowo, wytwarzanie energii z tych źródeł, czyli ich spalanie, wiąże się często z zanieczyszczeniem
+        środowiska.
+    </p>
+    <h2>Jakie mamy odnawialne źródła energii?</h2>
+    <ul>
+        <li>
+            Energia słoneczna, czyli energia czerpana ze słońca
+            <ul>
+                <li>
+                    Odbiornikiem energii słonecznej mogą być panele fotowoltaiczne, które skierowane pod odpowiednim
+                    <br/>
+                    kątem do promieni słonecznych zamieniają energię tych promieni na energię elektryczną
+                </li>
+                <li>Można również użyć kolektorów słonecznych, które służą do podgrzewania wody</li>
+            </ul>
+        </li>
+        <li>
+            Energia wiatrowa
+            <ul>
+                <li>
+                    Odbiornikiem energii wiatrowej są turbiny wiatrowe
+                </li>
+            </ul>
+        </li>
+        <li>
+            Energia wodna
+            <ul>
+                <li>Energię tę możemy pozyskiwać za pomocą turbiny lub koła wodnego</li>
+            </ul>
+        </li>
+        <li>
+            Energia biomasy (biodegradalna substancje pochodzenia roślinnego i zwierzęcego)<br/>
+            Energię tę możemy pozyskiwać z:
+            <ul>
+                <li>Drewna</li>
+                <li>Odchodów zwierząt</li>
+                <li>Słomy</li>
+                <li>Odpadów ściekowych</li>
+                <li>Olejów roślinnych i tłuczczów zwierzęcych</li>
+            </ul>
+        </li>
+        <li>
+            Energia geotermalna (energia z wnętrza ziemi)
+            <ul>
+                <li>Pozyskuje się nią za pomocą pomp ciepła</li>
+            </ul>
+        </li>
+    </ul>
+    <h2>Jakie są korzyści płynące z korzystania z OZE?</h2>
+    <p>
+        Z pewnością korzyścią jest fakt, że korzystając z OZE nie zanieczyszczamy środowiska. Dodatkowo, jak wcześniej
+        powiedziałem, OZE jest samoodnawialne, więc nie musimy się martwić, że za kilka (tysięcy lat) "zabraknie"
+        nam źródeł energii. Dodatkowo, korzystanie z OZE na dłuższą metę znacznie zmniejsza koszta energii,
+        ponieważ jedyne za co płacimy, jest np. zamontowanie instalacji fotowoltaicznej, a później energię pozyskujemy
+        za darmo. Bezemisyjne źródła energii to przyszłość. W związku z ekspansją samochodów elektrycznych, w
+        przyszłości koszta poruszania się własnym środkiem transportu będą znacznie mniejsze niż obecnie, ponieważ
+        instalację fotowoltaiczną może mieć w domu praktycznie każdy, więc ponosi jedynie koszta eksploatacji samochodu
+        takie jak wymiana opon, a samo "paliwo" jest darmowe.
+    </p>
+    <h2>Co przemawia na niekorzyść OZE?</h2>
+    <p>
+        Jak zawsze, nie ma róży bez kolców. Wśród niekorzyści możemy wymienić wysokie koszty początkowe. Chociaż w wielu
+        krajach można uzyskać liczne ulgi czy rabaty, to i tak technologie takie są droższe od tradycyjnych generatorów
+        energii. Dodatkowo mamy ograniczenia geograficzne, np. gdy mamy zamkniętą przestrzeń lub sąsiedztwo wysokich
+        budynków to korzystanie z paneli fotowoltaicznych jest utrudnione.
+    </p>
+    <h2>OZE w gospodarstwie domowym </h2>
+    <p>
+        Z OZE może korzystać każdy, który ma zaplecze finansowe na inwestycje z nim związane. Urządzenia służące do
+        pozyskiwania energii z OZE są wymienione poniżej:
+    </p>
+    <!--
+    <ul>
+        <li>
+            Kolektor słoneczny: może służyć do podrzegwania wody albo do ogrzewania pomieszczeń
+        </li>
+        <li>
+            Pompa ciepła - wykorzystujemy ją do pobierania energii zmagazynowanej w glebie
+        </li>
+        <li>
+            Panele fotowoltaiczne - energia padających na nie promieni słonecznych zamieniana jest w energię
+            elektryczną
+        </li>
+    </ul>-->
+    <dl>
+        <dt><b>Kolektor słoneczny:</b></dt>
+            <dd>
+                 może służyć do podrzegwania wody albo do ogrzewania pomieszczeń
+            </dd>
+        <dt><b>Pompa ciepła:</b></dt>
+            <dd>
+                Pompa ciepła - wykorzystujemy ją do pobierania energii zmagazynowanej w glebie
+            </dd>
+        </dt>
+        <dt><b>Panele fotowoltaiczne:</b></dt>
+
+            <dd>
+                energia padających na nie promieni słonecznych zamieniana jest w energię elektryczną
+            </dd>
+    </dl>
+    <h2>Podsumowanie</h2>
+    <p>
+        Odnawialne źródła energii są przyszłością. Z roku na rok koszta inwestycji, które trzeba poczynić maleją, a
+        dofinansowania oferowane przez część państw sprawiają, że coraz więcej ludzi może sobie na nie pozwolić.
+        Bezemisyjność
+        sprawia, że efekt cieplarniany będzie zredukowany. Gospodarstwa domowe korzystające z OZE są w dużej mierze
+        samowystarczalne. Choć wady tego rozwiązania są duże, to z czasem będą się one redukować.
+    </p>
+{% endblock %}

@@ -12,7 +12,7 @@ from django.utils.translation import gettext_lazy as _
 
 
 def get_upload_path(instance, filename):
-    return f"blog/{instance.title}/{filename}"
+    return f"blog/{instance.slug}/{filename}"
 
 class Entry(models.Model):
     title = models.CharField(_("title"), max_length=60, unique=True)
@@ -69,6 +69,7 @@ class Entry(models.Model):
 
         try:
             return self.image.url
+
         except ValueError:
             # Ignore ValueError, just return empty string
             return ''

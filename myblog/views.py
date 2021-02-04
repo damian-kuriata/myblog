@@ -1,3 +1,5 @@
+import os
+
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
@@ -201,6 +203,26 @@ class EntryView(View):
                     id=entry.id)[:entries_limit]
 
         context = _get_context_with_categories(context)
+
+        if settings.DEBUG:
+            # When debug is enabled, update entry HTML each time new
+            # Request is made
+            template_name = entry.slug.lower().strip() + ".html"
+            template_path = os.path.join(settings.BASE_DIR.parent,
+                                         "myblog",
+                                         "templates",
+                                         "myblog",
+                                         "entries",
+                                         template_name)
+            try:
+                with open(template_path, encoding="utf-8") as template:
+                    # Write template contents to Entry.html
+                    entry.html = template.read()
+            except FileNotFoundError:
+                print(f"Error: template {template_path} not found.")
+                entry.html = ''
+            finally:
+                entry.save()
 
         # Render HTML stored in entry.html as HttpResponse object
         rendered_html = Engine.get_default().from_string(template_code=entry.html).\

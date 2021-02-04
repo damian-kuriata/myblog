@@ -3,8 +3,6 @@ import {handleComments} from "./modules/comments.js";
 import {handleDesktopNavigation} from "./modules/desktop.js";
 
 $(document).ready(function() {
-    //const isMobile =  /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-   // console.log(isMobile);
     handleMobileNavigation();
     handleComments();
 

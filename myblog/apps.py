@@ -17,11 +17,10 @@ class MyblogConfig(AppConfig):
 
         # For each entry, update it's html attribute
         for entry in Entry.objects.all():
-            # Not empty html attribute means that it was edited
-            # Manually, so don't override it.
-            if entry.html:
-                continue
-            template_name = entry.title.lower().strip() + ".html"
+            #if entry.html:
+             #   continue
+            print("slug: " + entry.slug)
+            template_name = entry.slug.lower().strip() + ".html"
             template_path = os.path.join(settings.BASE_DIR.parent,
                                          self.name,
                                          "templates",
@@ -29,12 +28,15 @@ class MyblogConfig(AppConfig):
                                          "entries",
                                          template_name)
             try:
-                with open(template_path) as template:
+                with open(template_path, encoding="utf-8") as template:
                     # Write template contents to Entry.html
                     entry.html = template.read()
             except FileNotFoundError:
                 print(f"Error: template {template_path} not found.")
-                entry.html = ''
+                # Not empty html attribute means that it was edited
+                # Manually, so don't override it.
+                if not entry.html:
+                    entry.html = ''
             finally:
                 entry.save()
 

@@ -7,7 +7,9 @@ let globalVars = {
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
-  if (parts.length === 2) return parts.pop().split(";").shift();
+  if (parts.length === 2) {
+      return parts.pop().split(";").shift();
+  }
 }
 
 function escapeHtml(unsafe) {
@@ -57,7 +59,7 @@ function renderNewComment(commentsList, commentData) {
 }
 
 function updateCommentsHeaderValue(commentsHeader) {
-    // Add 1 to current value
+    /* Add 1 to current value */
     const regex = /\d+/;
     let commentsHeaderValue = parseInt(commentsHeader.text().match(regex).join(''));
     commentsHeaderValue += 1;
@@ -78,7 +80,7 @@ submitButton.click((event) => {
     }
     globalVars.canAddComment = false;
 
-    // Block adding comments for a given threshold
+    /* Block adding comments for a gien threshold */
     setTimeout(() => {
         globalVars.canAddComment = true;
     }, globalVars.commentAddingThresholdMillis);
@@ -87,7 +89,7 @@ submitButton.click((event) => {
     const commentTextarea = $("#comment-form textarea");
     const commentsHeader = $(".comments-section h3");
     let formData = new FormData(commentForm);
-    // Escape HTML in text and author_nickname fields
+    /* Escape HTML in text and author_nickname fields */
     formData.set("text", escapeHtml(formData.get("text")));
     formData.set("author_nickname", escapeHtml(formData.get("author_nickname")));
     let csrftoken = getCookie("csrftoken");
