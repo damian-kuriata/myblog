@@ -11,7 +11,6 @@ function getCookie(name) {
       return parts.pop().split(";").shift();
   }
 }
-
 function escapeHtml(unsafe) {
     return unsafe
          .replace(/&/g, "&amp;")
@@ -20,7 +19,6 @@ function escapeHtml(unsafe) {
          .replace(/"/g, "&quot;")
          .replace(/'/g, "&#039;");
 }
-
 function renderFormErrors(form, allErrors) {
     allErrors = JSON.parse(allErrors);
     let formFieldset = form.children[0];

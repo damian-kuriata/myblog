@@ -4,7 +4,7 @@ from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
-from django.template import Context
+from django.template import RequestContext
 from django.urls import reverse
 from django.views import View
 from django.views.generic import ListView, TemplateView
@@ -226,7 +226,7 @@ class EntryView(View):
 
         # Render HTML stored in entry.html as HttpResponse object
         rendered_html = Engine.get_default().from_string(template_code=entry.html).\
-            render(Context(context))
+            render(RequestContext(request, context))
         return HttpResponse(rendered_html)
 
 
