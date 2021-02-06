@@ -34,9 +34,10 @@ textarea {
 h1,
 h2,
 h3,
-h4{
+h4 {
   text-align: center;
   font-weight: normal;
+  color: rgb(0, 126, 194);
 }
 
 h1 {
@@ -117,7 +118,8 @@ p {
 }
 
 
-ul {
+ul,
+ol {
   margin-left: auto;
   margin-right: auto;
   width: 90%;
@@ -130,13 +132,14 @@ ul li {
   margin-left: 0;
 }
 
-ul li::marker {
-  color: rgb(0, 126, 194);
+ul li::marker,
+ol li::marker {
   margin-left: 0;
 }
 
-/* ul nested inside other ul */
-ul li ul {
+/* ul nested inside other ul, ol */
+ul li ul,
+ol li ul {
   font-size: 1em;
   margin-left: 1em;
 }
@@ -638,7 +641,8 @@ footer p {
 }
 
 @media screen and (min-width: 481px) {
-  ul {
+  ul,
+  ol {
     width: 70%;
   }
 

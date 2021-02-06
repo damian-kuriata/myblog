@@ -7,6 +7,7 @@ function handleDesktopNavigation(desktopItems,
      With search form(box), it replaces that link with 3 dots('...') and places
      It in the dropdown menu
     */
+    /* TODO: Fix navigation */
     if (handleDesktopNavigation.previousWindowWidth === undefined) {
         handleDesktopNavigation.previousWindowWidth = -1;
     }

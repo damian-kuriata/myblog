@@ -1,4 +1,4 @@
-function handleComments() {
+function handleCommentsHideShow() {
     /* Comments showing/hiding */
     const showHideButton = $(".comments-section > button");
     const commentsContainer = $(".comments-section .comments-list");
@@ -19,18 +19,18 @@ function handleComments() {
     /* Comments reply system */
     const commentTextInput = $("#id_text");
     commentsContainer.children("article").each(function(index, comment) {
-        // Convert to JQuery object
+        /* Convert to JQuery object */
         comment = $(comment);
         const replyButton = comment.find(".reply-button").eq(0);
         replyButton.click(function (event) {
             let commentHeaderText = comment.children("h6").eq(0).text();
-            const from = 0;
-            const to = commentHeaderText.indexOf(",")
-            let nickname = commentHeaderText.substr(from, to);
+            const fromIndex = 0;
+            const toIndex = commentHeaderText.indexOf(",")
+            let nickname = commentHeaderText.substr(fromIndex, toIndex);
             /* Append @nickname to current input value */
-            commentTextInput.val(commentTextInput.val() + `@${nickname}`);
+            commentTextInput.val(commentTextInput.val() + ` @${nickname}`);
         });
     });
 }
 
-export {handleComments};
+export {handleCommentsHideShow};

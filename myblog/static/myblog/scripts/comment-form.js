@@ -3,7 +3,6 @@ let globalVars = {
     commentAddingThresholdMillis: 10000,
     canAddComment: true
 };
-
 function getCookie(name) {
   const value = `; ${document.cookie}`;
   const parts = value.split(`; ${name}=`);
@@ -21,7 +20,11 @@ function escapeHtml(unsafe) {
 }
 function renderFormErrors(form, allErrors) {
     allErrors = JSON.parse(allErrors);
-    let formFieldset = form.children[0];
+    /*
+    children[1] instead of children[0] because children[0] contains hidden
+    Field with CSRF token
+    */
+    let formFieldset = form.children[1];
     let fieldsetChildren = formFieldset.children;
 
     for(let fields in allErrors) {
@@ -36,7 +39,7 @@ function renderFormErrors(form, allErrors) {
         let errorList = document.createElement("ul");
         errorList.innerHTML = errorsHtml;
         errorList.classList.add(errorListClassName);
-
+        /* Append errorList to appear under the invalid field */
         if(fields === "text") {
             fieldsetChildren[3].appendChild(errorList);
         }
@@ -46,22 +49,31 @@ function renderFormErrors(form, allErrors) {
         else if(fields === "author_email") {
             fieldsetChildren[1].appendChild(errorList);
         }
+        /* fieldsetChildren[0] contains <legend> tag */
         globalVars.canAddComment = true;
     }
 }
 
 function renderNewComment(commentsList, commentData) {
-    let newComment = $(`<p>${commentData.author_nickname}, ${commentData.creation_datetime}: <br>${commentData.text}</p>`);
+    const element = `
+        <p>
+        ${commentData.author_nickname},${commentData.creation_datetime}: <br>
+        ${commentData.text}
+        </p>
+    `
+    let newComment = $(element);
     newComment.attr("class", "comment");
     commentsList.append(newComment);
 }
 
-function updateCommentsHeaderValue(commentsHeader) {
+function updateCommentsCountHeaderValue(commentsHeader) {
     /* Add 1 to current value */
     const regex = /\d+/;
-    let commentsHeaderValue = parseInt(commentsHeader.text().match(regex).join(''));
+    let commentsHeaderValue = parseInt(commentsHeader.text().match(regex).
+        join(""));
     commentsHeaderValue += 1;
-    commentsHeader.text(commentsHeader.text().replace(regex, commentsHeaderValue.toString()))
+    commentsHeader.text(commentsHeader.text().replace(regex,
+        commentsHeaderValue.toString()))
 }
 function cleanFormErrors() {
     const classToDelete = "errorlist";
@@ -78,11 +90,12 @@ submitButton.click((event) => {
     }
     globalVars.canAddComment = false;
 
-    /* Block adding comments for a given threshold */
+    /* Block adding comments for a given time */
     setTimeout(() => {
         globalVars.canAddComment = true;
     }, globalVars.commentAddingThresholdMillis);
 
+    /* Get native JavaScript object */
     const commentForm = $("#comment-form").get(0);
     const commentTextarea = $("#comment-form textarea");
     const commentsHeader = $(".comments-section h3");
@@ -115,9 +128,9 @@ submitButton.click((event) => {
         }
         else {
             renderNewComment(commentsList, data);
-            // Clean the comment area
+            /* Clean the comment input */
             commentTextarea.val("");
-            updateCommentsHeaderValue(commentsHeader);
+            updateCommentsCountHeaderValue(commentsHeader);
         }
     }).catch((error) => {
         alert(error);
