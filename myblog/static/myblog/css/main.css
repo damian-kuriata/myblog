@@ -9,6 +9,7 @@ body {
   font-family: "Lato", sans-serif;
   width: 100%;
   position: relative;
+  background-color: antiquewhite;
 }
 
 main {
@@ -166,6 +167,10 @@ figure figcaption {
 
 .apply-top-border {
   border-top: 2px solid #007ec2;
+}
+
+.letter-phrase::after {
+  /* Will be populated in JavaScript */
 }
 
 /* OTHER */
@@ -503,8 +508,9 @@ select {
   width: 60%;
 }
 
-.pagination a {
-  font-size: 1.3em;
+.pagination > a {
+  font-size: 2em;
+  color: rgb(0, 126, 194);
 }
 
 .pagination form {
@@ -517,7 +523,7 @@ select {
 }
 
 .pagination form input {
-  width: 10%;
+  width: 15%;
 }
 
 .comments-section {
@@ -706,6 +712,9 @@ footer p {
     max-width: 100%;
   }
 
+  .pagination form input {
+    width: 3%;
+  }
   .comments-section {
     margin-left: 2rem;
   }

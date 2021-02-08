@@ -2,6 +2,7 @@ import os
 
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
+from django.db.models import Q
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
@@ -26,24 +27,34 @@ def _get_context_with_categories(context):
     return context
 
 
-class IndexView(ListView):
+class IndexView(View):
     template_name = "myblog/index.html"
-    model = Entry
-    # Get 5 most popular entires
-    queryset = Entry.objects.order_by("visits_count")[:5]
-    context_object_name = "most_popular_entries"
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
+    def get(self, request, *args, **kwargs):
+        context = {}
+        page_number = request.GET.get("page", '1')
+        # Get 5 most popular entries
+        most_popular_entries = Entry.objects.order_by("visits_count")[:5]
         # Get 5 latest entries
-        latest_entires = \
-            Entry.objects.order_by("-creation_datetime")[:5]
-        context["latest_entries"] = latest_entires
+        latest_entries = Entry.objects.order_by("-creation_datetime")[:5]
+        # For exclude method
+        most_popular_entries_ids = most_popular_entries.values("visits_count")
+        print(most_popular_entries_ids)
+        latest_entries_ids = latest_entries.values("creation_datetime")
+        other_entries = Entry.objects.exclude(
+            id__in=most_popular_entries_ids).exclude(
+            id__in=latest_entries_ids)
+        if page_number == '1':
+            context["most_popular_entries"] = most_popular_entries
+            context["latest_entries"] = latest_entries
+
+        entries_per_page = 1
+        paginator = Paginator(other_entries, entries_per_page)
+        page_obj = paginator.get_page(page_number)
+        context["page_obj"] = page_obj
         context = _get_context_with_categories(context)
 
-        return context
-
-
+        return render(request, self.template_name, context)
 
 class CategoryView(View):
     template_name = "myblog/category.html"

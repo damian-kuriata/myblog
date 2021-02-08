@@ -6,78 +6,157 @@
 {% endblock %}
 {% block content %}
     <section>
-        <h2>{% translate 'Latest' %}</h2>
-        {% for entry in latest_entries %}
-        <article class="entry-preview">
-            <h3>
-                <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
-            </h3>
-            <div>
-                <p>
-                    <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>, {% translate 'by' %}
-                    <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
-                    {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
-                    ,{% translate 'categories:' %}
-                    {% for category in entry.category_set.all %}
-                        <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
-                    {% endfor %}
-                </p>
-                <figure>
-                    {% with image_url=entry.get_image_url %}
-                    {% if image_url %}
+        {% if page_obj.number == 1 %}
+            <h2>{% translate 'Latest' %}</h2>
+            {% for entry in latest_entries %}
+                <article class="entry-preview">
+                    <h3>
+                        <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+                    </h3>
+                    <div>
+                        <p>
+                            <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>
+                            , {% translate 'by' %}
+                            <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                            {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                            ,{% translate 'categories:' %}
+                            {% for category in entry.category_set.all %}
+                                <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                            {% endfor %}
+                        </p>
+                        <figure>
+                            {% with image_url=entry.get_image_url %}
+                                {% if image_url %}
+                                    <a href="{{ entry.get_absolute_url }}">
+                                        <img src="{{ image_url }}" alt="User-uploaded-image">
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <figcaption>
+                                {{ entry.get_text_fragment|truncatechars:100 }}...
+                            </figcaption>
+                            <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
+                                {% translate 'Read more' %}
+                            </button>
+                        </figure>
+                    </div>
+                </article>
+            {% endfor %}
+            <h2>{% translate 'Most popular' %}</h2>
+            {% for entry in most_popular_entries %}
+                <article class="entry-preview">
                     <a href="{{ entry.get_absolute_url }}">
-                        <img src="{{ image_url }}" alt="User-uploaded-image">
+                        <h3>
+                            <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+                        </h3>
                     </a>
-                    {% endif %}
-                    {% endwith %}
-                    <figcaption>
-                        {{ entry.get_text_fragment|truncatechars:100 }}...
-                    </figcaption>
-                    <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
-                        {% translate 'Read more' %}
-                    </button>
-                </figure>
-            </div>
-        </article>
-        {% endfor %}
+                    <div>
+                        <p>
+                            <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>
+                            , {% translate 'by' %}
+                            <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                            {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                            ,{% translate 'categories:' %}
+                            {% for category in entry.category_set.all %}
+                                <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                            {% endfor %}
+                        </p>
+                        <figure>
+                            {% with image_url=entry.get_image_url %}
+                                {% if image_url %}
+                                    <a href="{{ entry.get_absolute_url }}">
+                                        <img src="{{ entry.get_image_url }}" alt="User-uploaded-image">
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <figcaption>
+                                {{ entry.get_text_fragment|truncatechars:100 }}...
+                            </figcaption>
+                            <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
+                                {% translate 'Read more' %}
+                            </button>
 
-        <h2>{% translate 'Most popular' %}</h2>
-        {% for entry in most_popular_entries %}
-        <article class="entry-preview">
-            <a href="{{ entry.get_absolute_url }}">
-            <h3>
-                <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
-            </h3>
-            </a>
-            <div>
-                <p>
-                    <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>, {% translate 'by' %}
-                    <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
-                    {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
-                    ,{% translate 'categories:' %}
-                    {% for category in entry.category_set.all %}
-                        <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
-                    {% endfor %}
-                </p>
-                <figure>
-                    {% with image_url=entry.get_image_url %}
-                    {% if image_url %}
+                        </figure>
+                    </div>
+                </article>
+            {% endfor %}
+            <h2>{% translate 'Other' %}</h2>
+            {% for entry in page_obj %}
+                <article class="entry-preview">
                     <a href="{{ entry.get_absolute_url }}">
-                        <img src="{{ entry.get_image_url }}" alt="User-uploaded-image">
+                        <h3>
+                            <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+                        </h3>
                     </a>
-                    {% endif %}
-                    {% endwith %}
-                    <figcaption>
-                        {{ entry.get_text_fragment|truncatechars:100 }}...
-                    </figcaption>
-                    <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
-                        {% translate 'Read more' %}
-                    </button>
+                    <div>
+                        <p>
+                            <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>
+                            , {% translate 'by' %}
+                            <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                            {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                            ,{% translate 'categories:' %}
+                            {% for category in entry.category_set.all %}
+                                <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                            {% endfor %}
+                        </p>
+                        <figure>
+                            {% with image_url=entry.get_image_url %}
+                                {% if image_url %}
+                                    <a href="{{ entry.get_absolute_url }}">
+                                        <img src="{{ entry.get_image_url }}" alt="User-uploaded-image">
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <figcaption>
+                                {{ entry.get_text_fragment|truncatechars:100 }}...
+                            </figcaption>
+                            <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
+                                {% translate 'Read more' %}
+                            </button>
 
-                </figure>
-            </div>
-        </article>
-        {% endfor %}
+                        </figure>
+                    </div>
+                </article>
+            {% endfor %}
+        {% else %}
+            {% for entry in page_obj %}
+                <article class="entry-preview">
+                    <a href="{{ entry.get_absolute_url }}">
+                        <h3>
+                            <a href="{{ entry.get_absolute_url }}"><q>{{ entry.title }}</q></a>
+                        </h3>
+                    </a>
+                    <div>
+                        <p>
+                            <date datetime="{{ entry.creation_datetime }}">{{ entry.creation_datetime }}</date>
+                            , {% translate 'by' %}
+                            <a href="{{ entry.author.get_absolute_url }}">{{ entry.author.username }}</a> ,
+                            {% translate 'views:' %} {{ entry.visits_count }}, {% translate 'comments:' %} {{ entry.comment_set.count }}
+                            ,{% translate 'categories:' %}
+                            {% for category in entry.category_set.all %}
+                                <span><a href="{{ category.get_absolute_url }}">{{ category }}</a></span>
+                            {% endfor %}
+                        </p>
+                        <figure>
+                            {% with image_url=entry.get_image_url %}
+                                {% if image_url %}
+                                    <a href="{{ entry.get_absolute_url }}">
+                                        <img src="{{ entry.get_image_url }}" alt="User-uploaded-image">
+                                    </a>
+                                {% endif %}
+                            {% endwith %}
+                            <figcaption>
+                                {{ entry.get_text_fragment|truncatechars:100 }}...
+                            </figcaption>
+                            <button type="button" onclick="window.location.href='{{ entry.get_absolute_url }}'">
+                                {% translate 'Read more' %}
+                            </button>
 
+                        </figure>
+                    </div>
+                </article>
+            {% endfor %}
+        {% endif %}
     </section>
+    {% include "pagination.html" %}
 {% endblock %}

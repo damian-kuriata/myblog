@@ -17,9 +17,6 @@ class MyblogConfig(AppConfig):
 
         # For each entry, update it's html attribute
         for entry in Entry.objects.all():
-            #if entry.html:
-             #   continue
-            print("slug: " + entry.slug)
             template_name = entry.slug.lower().strip() + ".html"
             template_path = os.path.join(settings.BASE_DIR.parent,
                                          self.name,
