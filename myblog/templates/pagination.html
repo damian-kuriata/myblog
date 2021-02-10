@@ -1,7 +1,9 @@
 <div class="pagination">
-{% load i18n %}
+    {% load i18n %}
     {% if page_obj.has_previous %}
-        <a href="?page={{ page_obj.previous_page_number }}">☚</a>
+        {# First page link #}
+        <a href="?page=1" title="{% translate 'Jump to first page' %}">«</a>
+        <a href="?page={{ page_obj.previous_page_number }}" title="{% translate 'Jump to previous page' %}">‹</a>
     {% endif %}
     <span>
             {% translate 'Page' %}
@@ -13,6 +15,8 @@
             {% translate 'of' %} {{ page_obj.paginator.num_pages }}
         </span>
     {% if page_obj.has_next %}
-        <a href="?page={{ page_obj.next_page_number }}">☛</a>
+        <a href="?page={{ page_obj.next_page_number }}" title="{% translate 'Jump to next page' %}">›</a>
+        {# Last page link #}
+        <a href="?page={{ page_obj.paginator.num_pages }}" title="{% translate 'Jump to last page' %}">»</a>
     {% endif %}
 </div>

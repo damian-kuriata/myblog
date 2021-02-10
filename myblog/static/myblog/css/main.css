@@ -509,13 +509,16 @@ select {
 }
 
 .pagination > a {
+  position: relative;
+  top: 5px;
   font-size: 2em;
-  color: rgb(0, 126, 194);
 }
 
 .pagination form {
   display: inline;
   width: 50%;
+  position: relative;
+  bottom: 3px;
 }
 
 .pagination form button {
@@ -523,7 +526,13 @@ select {
 }
 
 .pagination form input {
-  width: 15%;
+  width: 10%;
+  position: relative;
+  top: 1px;
+  border: none;
+  border-bottom: 1px solid rgb(0, 126, 194);
+  border-radius: 0;
+  background-color: rgba(255, 255, 255, 0);
 }
 
 .comments-section {
@@ -713,7 +722,7 @@ footer p {
   }
 
   .pagination form input {
-    width: 3%;
+    width: 2%;
   }
   .comments-section {
     margin-left: 2rem;

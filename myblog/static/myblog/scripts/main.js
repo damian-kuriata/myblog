@@ -12,9 +12,9 @@ $(document).ready(function() {
     let desktopItems = $("nav .navigation-container .desktop-items");
     let window_ = $(window);
     let categoriesDropdown = $(".categories-dropdown");
-    handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
+    //handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
     window_.resize(function() {
-        handleDesktopNavigation(desktopItems, window_.width(),
+        //handleDesktopNavigation(desktopItems, window_.width(),
             categoriesDropdown);
     });
 });

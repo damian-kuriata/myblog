@@ -17,8 +17,7 @@ from myblog.models import Entry, Category, Comment
 
 
 def _get_context_with_categories(context):
-    """
-    Adds QuerySet of categories ordered by -total_visits_count to
+    """ Adds QuerySet of categories ordered by -total_visits_count to
     Context. Should be called in each view that isn't an API.
     """
 
@@ -32,22 +31,28 @@ class IndexView(View):
 
     def get(self, request, *args, **kwargs):
         context = {}
-        page_number = request.GET.get("page", '1')
-        # Get 5 most popular entries
-        most_popular_entries = Entry.objects.order_by("visits_count")[:5]
-        # Get 5 latest entries
-        latest_entries = Entry.objects.order_by("-creation_datetime")[:5]
-        # For exclude method
-        most_popular_entries_ids = most_popular_entries.values("visits_count")
-        print(most_popular_entries_ids)
-        latest_entries_ids = latest_entries.values("creation_datetime")
-        other_entries = Entry.objects.exclude(
-            id__in=most_popular_entries_ids).exclude(
-            id__in=latest_entries_ids)
+        page_number = request.GET.get("page", '')
+        if page_number == '':
+            page_number = '1'
+        all_entries = Entry.objects.all()
+        # Get 5 most popular entries.
+        most_popular_entries = all_entries.order_by("visits_count")[:5]
+        most_popular_entries_ids = most_popular_entries.values_list("id")
+        # Get 5 latest entries, order by -creation_datetime as defined
+        # In Entry.Meta class.
+        latest_entries = Entry.objects.all()[:5]
+        latest_entries_ids = latest_entries.values_list("id")
+        # Other entries are entries that DO NOT belong to most popular
+        # And latest entries, order by -creation_datetime as defined in
+        # Entry.Meta class
+        other_entries = \
+            all_entries.exclude(Q(id__in=most_popular_entries_ids)
+                              | Q(id__in=latest_entries_ids))
         if page_number == '1':
             context["most_popular_entries"] = most_popular_entries
             context["latest_entries"] = latest_entries
 
+        # TODO: Change to 10
         entries_per_page = 1
         paginator = Paginator(other_entries, entries_per_page)
         page_obj = paginator.get_page(page_number)
@@ -61,7 +66,7 @@ class CategoryView(View):
 
     def get(self, request, *args, **kwargs):
         try:
-            # Indicates by what sort returned entries in category
+            # Indicates by what sort returned entries in category.
             entries_sort_by = request.GET.get("sort_by")
             slug = kwargs.get("slug")
             category = Category.objects.get(slug__iexact=slug)
@@ -69,7 +74,7 @@ class CategoryView(View):
                            "-creation_datetime", "-visits_count"]:
                 entries = category.entries.order_by(entries_sort_by)
             else:
-                # Sort by title if sorting option is not present or invalid
+                # Sort by title if sorting option is not present or invalid.
                 entries = category.entries.order_by("title")
 
             # Enable entries pagination
