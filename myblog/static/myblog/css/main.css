@@ -62,6 +62,11 @@ h4 {
   margin: .1em 0 .4em 0;
 }
 
+h5 {
+  font-size: 1.3rem;
+  font-weight: normal;
+}
+
 h6 {
   font-size: 1rem;
   margin: 0;
@@ -157,6 +162,10 @@ figure figcaption {
 /* UTILITIES */
 .hidden {
   display: none;
+}
+
+.visibility-hidden {
+  visibility: hidden;
 }
 
 .display-block {
@@ -301,20 +310,29 @@ nav .mobile-navigation-list .socialmedia-icons {
   border-radius: 6px;
   background-color: white;
 }
-#search button[type="submit"] {
-  color: black;
+
+form#search button[type="submit"] {
+   transform: rotate(45deg);
+  font-size: 0.9em;
+    position: relative;
+    bottom: 4px;
+    left: 0;
 }
-#search input[type="search"] {
+
+form#search button[type="submit"] span {
+  color: grey;
+}
+form#search input[type="search"] {
   border-radius: 5px;
   width: 90%;
   border: 0;
   font-size: 0.6em;
 }
-#search input[type="search"]:active {
+form#search input[type="search"]:active {
   border: none;
   outline: none;
 }
-#search input[type="search"]:focus {
+form#search input[type="search"]:focus {
   border: none;
   outline: none;
 }
@@ -367,6 +385,43 @@ nav i {
 
 .logo span {
   color: #007ec2;
+}
+
+aside > .categories-expand {
+  position: fixed;
+  top: 50vh;
+  left: 0;
+  font-size: 3rem;
+  visibility: hidden; /* Not visible on mobile */
+}
+
+aside > .left-categories-panel {
+  position: fixed;
+  top: 5vh;
+  background-color: rgba(0, 126, 194, 0.4);
+  height: 60vh;
+  width: 15%;
+}
+
+aside > .left-categories-panel > .categories-container {
+    width: 80%;
+    height: 100%;
+}
+
+aside > .left-categories-panel > .categories-container > p {
+  font-size: .5em;
+  text-align: left;
+}
+
+aside > .categories-shrink-container {
+  position: relative;
+  top: 10vh;
+  left: 10px;
+  border: 1px solid red;
+}
+
+aside > .categories-container > button {
+  border: 1px solid red;
 }
 
 main .entry-info-bar {
@@ -664,8 +719,12 @@ footer p {
     margin-left: 0.1em;
   }
 
-  #search {
+  form#search {
     width: 15%;
+  }
+
+  form#search input[type="submit"] {
+    left: 3px;
   }
 
   nav .navigation-container .desktop-items {
@@ -702,5 +761,12 @@ footer p {
   }
   .comments-section {
     margin-left: 2rem;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  aside > .categories-expand {
+    display: inline;
+    visibility: visible;
   }
 }
