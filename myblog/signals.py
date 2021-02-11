@@ -2,7 +2,7 @@ from django.utils.text import slugify
 
 def update_entry_category_visits_count(sender, instance, **kwargs):
     """
-    For each category that instance belongs to, updatees its visits count
+    For each category that instance belongs to, updates its visits count
     """
     for category in instance.category_set.all():
         category.total_visits_count += 1

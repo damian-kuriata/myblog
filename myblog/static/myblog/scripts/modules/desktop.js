@@ -7,19 +7,18 @@ function handleDesktopNavigation(desktopItems,
      With search form(box), it replaces that link with 3 dots('...') and places
      It in the dropdown menu
     */
-    /* TODO: Fix navigation */
     if (handleDesktopNavigation.previousWindowWidth === undefined) {
         handleDesktopNavigation.previousWindowWidth = -1;
     }
-    let previousWindowWidth = handleDesktopNavigation.previousWindowWidth;
-    if (previousWindowWidth === -1 || previousWindowWidth > windowWidth)  {
+    if (handleDesktopNavigation.previousWindowWidth === -1 ||
+        handleDesktopNavigation.previousWindowWidth > windowWidth)  {
         handleDesktopNavigation.previousWindowWidth = windowWidth;
-        previousWindowWidth = handleDesktopNavigation.previousWindowWidth;
         let desktopItemsWidth = desktopItems.width();
-        let desktopItemsChildren = desktopItems.children();
         while (desktopItemsWidth + 0.05 * windowWidth >= 0.8 * windowWidth) {
+            let desktopItemsChildren = desktopItems.children();
             desktopItemsChildren.last().addClass("display-block");
             desktopItemsChildren.eq(-2).detach().appendTo(categoriesDropdown);
+            desktopItemsWidth = desktopItems.width();
         }
     }
 }

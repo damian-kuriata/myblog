@@ -116,6 +116,7 @@ p {
   font-size: 0.5em;
   margin-left: auto;
   margin-right: auto;
+  line-height: 1.5;
 }
 
 
@@ -358,39 +359,14 @@ nav i {
   font-size: 1em;
 }
 
-.logo span {
-  color: #007ec2;
-  animation-duration: 5s;
-  animation-delay: 3s;
-  animation-name: changecolor;
-  animation-iteration-count: infinite;
-  animation-direction: alternate;
+.logo > a .main-logo > span {
+  padding: 0;
+  margin: 0;
+  letter-spacing: inherit;
 }
 
-@keyframes changecolor {
-  from {
-    color: #007ec2;
-  }
-
-  20% {
-    color: #004e78;
-  }
-
-  40% {
-    color: #014469;
-  }
-
-  60% {
-    color: #015887;
-  }
-
-  80% {
-    color: #003b5c;
-  }
-
-  to {
-    color: black;
-  }
+.logo span {
+  color: #007ec2;
 }
 
 main .entry-info-bar {

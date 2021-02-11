@@ -8,13 +8,15 @@ $(document).ready(function() {
     handleCommentsHideShow();
 
     const logo = $(".logo");
-    //animateLogo(logo);
+    let mainLogo = logo.find(".main-logo");
+    let letters = mainLogo.children();
+    animateLogo(letters);
     let desktopItems = $("nav .navigation-container .desktop-items");
     let window_ = $(window);
     let categoriesDropdown = $(".categories-dropdown");
-    //handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
+    handleDesktopNavigation(desktopItems, window_.width(), categoriesDropdown);
     window_.resize(function() {
-        //handleDesktopNavigation(desktopItems, window_.width(),
+        handleDesktopNavigation(desktopItems, window_.width(),
             categoriesDropdown);
     });
 });
