@@ -1,8 +1,9 @@
-from django.urls import path
+from django.urls import path, re_path
 from rest_framework import routers
 
 from myblog import views
 from myblog.views import IndexView, CategoryView, SearchView, UserView, EntryView, AboutmeView, AddCommentView
+from myblog.api import Entries
 
 app_name = "myblog"
 urlpatterns = [
@@ -15,5 +16,6 @@ urlpatterns = [
     path("aboutme/", AboutmeView.as_view(), name="aboutme"),
     # --- API ---
     path("entry/<slug:slug>/add-comment/", AddCommentView.as_view(),
-         name="add_comment")
+         name="add_comment"),
+    re_path(r"api/entries/((?P<pk>\d+))?", Entries.as_view(), name="entries"),
 ]

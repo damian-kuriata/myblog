@@ -9,15 +9,13 @@ function animateLogo(letters) {
         let styles = {};
         if (previousLetter !== null) {
             styles = {
-                color: defaultColor,
-                fontSize: defaultFontSize
+                color: defaultColor
             };
             previousLetter.css(styles);
         }
         let currentLetter = letters.eq(currentLetterIndex);
         styles = {
-            color: highlightColor,
-            fontSize: "1.2em"
+            color: highlightColor
         };
         currentLetter.css(styles);
         currentLetterIndex += 1;

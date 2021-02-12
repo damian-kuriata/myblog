@@ -41,10 +41,11 @@ function handleLeftNavigationExpand(categoriesExpand, leftCategoriesPanel) {
     const animationDuration = 400;
     leftCategoriesPanel.find(".categories-shrink").click(() => {
         leftCategoriesPanel.toggleClass("visibility-hidden");
-        categoriesExpand.toggleClass("visibility-hidden");
+        categoriesExpand.css("visibility", "visible");
     });
     categoriesExpand.click(() => {
         leftCategoriesPanel.toggleClass("visibility-hidden");
+        categoriesExpand.css("visibility", "hidden");
         //categoriesExpand.addClass("visibility-hidden");
         //categoriesExpand.hasClass("visibility-hidden")?categoriesExpand.removeClass("visibility-hidden"):categoriesExpand.addClass("visibility-hidden");
         /* TODO: Write an animation */

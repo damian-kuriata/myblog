@@ -37,7 +37,7 @@ class Entry(models.Model):
                                                     "recommended, as it's "
                                                     "automatically populated "
                                                     "when an app starts."))
-    # Image acting as an entry 'thumbnail'
+    # Header image
     image = models.ImageField(_("image"), upload_to=get_upload_path,
                               null=True, blank=True)
 
