@@ -12,7 +12,6 @@ from django.views import View
 from django.views.generic import ListView, TemplateView
 from django.template import Engine
 from django.conf import settings
-from sqlalchemy.sql.functions import localtime
 
 from myblog.forms import CommentForm
 from myblog.models import Entry, Category, Comment
