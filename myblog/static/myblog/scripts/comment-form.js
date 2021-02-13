@@ -64,6 +64,7 @@ function renderNewComment(commentsList, commentData) {
     let newComment = $(element);
     newComment.attr("class", "comment");
     commentsList.append(newComment);
+    location.reload();
 }
 
 function updateCommentsCountHeaderValue(commentsHeader) {

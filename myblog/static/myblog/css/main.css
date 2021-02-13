@@ -169,6 +169,10 @@ figure figcaption {
     font-weight: 100;
 }
 
+address {
+    display: inline;
+    font-size: 1em;
+}
 /* UTILITIES */
 .hidden {
     display: none;
@@ -429,7 +433,7 @@ aside > .categories-expand {
 aside > .left-categories-panel {
     position: fixed;
     top: 5vh;
-    background-color: rgba(0, 126, 194, 0.4);
+    background-color: antiquewhite;
     height: 95vh;
     width: 15%;
 }
@@ -663,9 +667,18 @@ aside.scroll-top > button {
     color: white;
 }
 
+footer {
+    text-align: center;
+}
 footer p {
     font-size: 0.3em;
-    text-align: center;
+    display: inline;
+}
+
+footer address {
+    display: inline;
+    font-size: 0.3em;
+    font-style: normal;
 }
 
 /* IcoMoon fonts */
