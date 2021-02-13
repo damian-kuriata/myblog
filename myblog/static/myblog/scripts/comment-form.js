@@ -64,6 +64,7 @@ function renderNewComment(commentsList, commentData) {
     let newComment = $(element);
     newComment.attr("class", "comment");
     commentsList.append(newComment);
+    /* Refresh page */
     location.reload();
 }
 

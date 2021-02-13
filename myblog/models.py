@@ -1,7 +1,7 @@
 import re
 
 from django.contrib.auth.models import User
-from django.core.validators import MinLengthValidator, MinValueValidator
+from django.core.validators import MinLengthValidator, MinValueValidator, MaxValueValidator
 from django.db import models
 from django.db.models import Sum
 from django.db.models.signals import pre_save, pre_delete
@@ -14,6 +14,7 @@ from django.utils.translation import gettext_lazy as _
 def get_upload_path(instance, filename):
     return f"blog/{instance.slug}/{filename}"
 
+
 class Entry(models.Model):
     title = models.CharField(_("title"), max_length=60, unique=True)
     slug = models.SlugField(max_length=60, blank=True, editable=False,
@@ -22,7 +23,7 @@ class Entry(models.Model):
                                         "updated when save() is called on Entry"
                                         ))
     author = models.ForeignKey(User, on_delete=models.CASCADE,
-                                verbose_name=_("author"))
+                               verbose_name=_("author"))
     creation_datetime = models.DateTimeField(_("creation datetime"),
                                              auto_now_add=True)
     visits_count = models.IntegerField(_("visits count"),
@@ -118,7 +119,7 @@ class Category(models.Model):
         Returns summarized visits counts from all entries
         """
 
-        return self.entries.all().\
+        return self.entries.all(). \
             aggregate(Sum("visits_count"))["visits_count__sum"]
 
     class Meta:
