@@ -13,13 +13,14 @@ from django.views.generic import ListView, TemplateView
 from django.template import Engine
 from django.conf import settings
 from django.contrib.auth.models import User, Group
-from rest_framework import viewsets, status, generics
+from rest_framework import viewsets, status, generics, views
 from rest_framework import permissions
 from rest_framework.decorators import api_view, permission_classes, action
-from rest_framework.parsers import JSONParser
+from rest_framework.parsers import JSONParser, FileUploadParser
 from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework.reverse import reverse as rest_reverse
+from PIL import Image
 
 from myblog.permissions import IsOwnerOrReadOnly
 from myblog.serializers import UserSerializer, CategorySerializer, EntrySerializer, CommentSerializer
@@ -364,5 +365,30 @@ class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
     permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class EntryImageUpload(views.APIView):
+    parser_classes = [FileUploadParser]
+
+    def check_file_data(self, uploaded_file):
+        pass
+
+    def put(self, request, entry_name, filename, format=None):
+        entry = get_object_or_404(Entry, title=entry_name)
+        print(entry)
+        file_obj = request.data["file"]
+        target_dir = os.path.join(settings.MEDIA_ROOT, "blog", entry_name)
+        try:
+            os.makedirs(target_dir)
+        except:
+            # Exception is raised when directory already exists,
+            # Ignore it
+            pass
+
+        with open(os.path.join(target_dir, filename), "wb") as img:
+            for chunk in file_obj.chunks():
+                img.write(chunk)
+
+        return Response(status=status.HTTP_204_NO_CONTENT)
 
 

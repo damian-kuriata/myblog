@@ -667,6 +667,10 @@ aside.scroll-top > button {
     color: white;
 }
 
+.share {
+    text-align: right;
+}
+
 footer {
     text-align: center;
 }

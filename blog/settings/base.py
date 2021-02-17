@@ -17,7 +17,8 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'myblog',
     'storages',
-    'rest_framework'
+    'rest_framework',
+    'django_social_share'
 ]
 
 MIDDLEWARE = [

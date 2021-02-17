@@ -5,8 +5,8 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 from myblog import views
 from myblog.views import IndexView, CategoryView, SearchView, UserView, EntryView, AboutmeView, AddCommentView, \
-     UserViewSet, UserDetail, UserList, CategoryList, CategoryDetail, EntryDetail, EntryList, api_root, \
-    CommentList, CommentDetail
+    UserViewSet, UserDetail, UserList, CategoryList, CategoryDetail, EntryDetail, EntryList, api_root, \
+    CommentList, CommentDetail, EntryImageUpload
 from myblog.api import Entries
 
 app_name = "myblog"
@@ -36,5 +36,6 @@ urlpatterns = [
     path('api/entries/<int:pk>/', EntryDetail.as_view(), name="entry-detail"),
     path('api/comments/', CommentList.as_view(), name="comment-list"),
     path("api/comments/<int:pk>/", CommentDetail.as_view(), name="comment-detail"),
-    path('api/', api_root, name="api-root")
+    path('api/', api_root, name="api-root"),
+    path('api/entry-image-upload/<entry_name>/<filename>/', EntryImageUpload.as_view(), name="entry-image-upload")
 ]

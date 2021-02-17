@@ -24,3 +24,4 @@ whitenoise==5.2.0
 djangorestframework
 boto3
 django-storages
+django-social-share

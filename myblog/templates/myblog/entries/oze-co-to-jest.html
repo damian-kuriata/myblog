@@ -130,4 +130,9 @@
         sprawia, że efekt cieplarniany będzie zredukowany. Gospodarstwa domowe korzystające z OZE są w dużej mierze
         samowystarczalne. Choć wady tego rozwiązania są duże, to z czasem będą się one redukować.
     </p>
+    <p class="share">
+    {% load social_share %}
+    {% post_to_facebook entry "<i class='icon-facebook'></i>" %}
+    {% post_to_twitter "Nowy wpis: " entry "<i class='icon-twitter'></i>" %}
+    </p>
 {% endblock %}
