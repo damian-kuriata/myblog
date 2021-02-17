@@ -22,7 +22,8 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include("myblog.urls")),
-    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog')
+    path('jsi18n/', JavaScriptCatalog.as_view(), name='javascript-catalog'),
+    path('api-auth/', include('rest_framework.urls'))
 ]
 # Serve media files in debug mode
 if settings.DEBUG:

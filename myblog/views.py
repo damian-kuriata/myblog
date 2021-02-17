@@ -3,7 +3,7 @@ import os
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator
 from django.db.models import Q
-from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
+from django.http import HttpResponse, JsonResponse, HttpResponseRedirect, Http404
 from django.shortcuts import render, get_object_or_404
 from django.template import RequestContext
 from django.urls import reverse
@@ -12,7 +12,17 @@ from django.views import View
 from django.views.generic import ListView, TemplateView
 from django.template import Engine
 from django.conf import settings
+from django.contrib.auth.models import User, Group
+from rest_framework import viewsets, status, generics
+from rest_framework import permissions
+from rest_framework.decorators import api_view, permission_classes, action
+from rest_framework.parsers import JSONParser
+from rest_framework.response import Response
+from rest_framework.views import APIView
+from rest_framework.reverse import reverse as rest_reverse
 
+from myblog.permissions import IsOwnerOrReadOnly
+from myblog.serializers import UserSerializer, CategorySerializer, EntrySerializer, CommentSerializer
 from myblog.forms import CommentForm
 from myblog.models import Entry, Category, Comment
 
@@ -269,3 +279,90 @@ class AddCommentView(View):
             # Serialize form errors to json
             errors = {"errors": comment_form.errors.as_json()}
             return JsonResponse(errors, status=400, safe=False)
+
+
+@api_view(["GET"])
+def api_root(request, format=None):
+    return Response({
+        'users': rest_reverse("myblog:user-list", request=request, format=format),
+        'entries': rest_reverse("myblog:entry-list", request=request, format=format),
+        "categories": rest_reverse("myblog:category-list", request=request, format=format)
+    })
+class UserViewSet(viewsets.ModelViewSet):
+    """
+    API endpoint that allows users to be viewed or edited.
+    """
+    queryset = User.objects.all().order_by('-date_joined')
+    serializer_class = UserSerializer
+    #permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+    @action(detail=True)
+    def test_action(self, request, *args, **kwargs):
+        user = self.get_object()
+        return Response(user.username)
+
+    def perform_create(self, serializer):
+        serializer.save(owner=self.request.user)
+        print(self.get_object().owner)
+
+
+
+class UserList(generics.ListCreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    # Read/Write for authenticated users, read only for not auth.
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class UserDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+
+class CategoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class EntryList(generics.ListCreateAPIView):
+    queryset = Entry.objects.all()
+    serializer_class = EntrySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_create(self, serializer):
+        image_data = serializer.validated_data["image"]
+
+        serializer.save()
+
+
+
+
+class EntryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Entry.objects.all()
+    serializer_class = EntrySerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+    def perform_update(self, serializer):
+        print(serializer.data)
+        instance = serializer.save()
+
+
+
+class CommentList(generics.ListCreateAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+
+class CommentDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
+    permission_classes = [permissions.IsAuthenticatedOrReadOnly]
+
+

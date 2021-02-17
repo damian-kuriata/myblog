@@ -38,7 +38,7 @@ function handleLeftNavigationExpand(categoriesExpand, leftCategoriesPanel) {
     /*
      Controls whether expand button is visible or not
      */
-    const animationDuration = 400;
+    const animationDuration = 1000;
     leftCategoriesPanel.find(".categories-shrink").click(() => {
         leftCategoriesPanel.toggleClass("visibility-hidden");
         categoriesExpand.css("visibility", "visible");
@@ -46,16 +46,6 @@ function handleLeftNavigationExpand(categoriesExpand, leftCategoriesPanel) {
     categoriesExpand.click(() => {
         leftCategoriesPanel.toggleClass("visibility-hidden");
         categoriesExpand.css("visibility", "hidden");
-        //categoriesExpand.addClass("visibility-hidden");
-        //categoriesExpand.hasClass("visibility-hidden")?categoriesExpand.removeClass("visibility-hidden"):categoriesExpand.addClass("visibility-hidden");
-        /* TODO: Write an animation */
-        /*console.log(leftCategoriesPanel.width());
-        leftCategoriesPanel.animate({
-            width: "toggle"
-        }, animationDuration, () => {
-            categoriesExpand.toggleClass("visibility-hidden");
-            leftCategoriesPanel.toggleClass("visibility-hidden");
-        });*/
     });
 }
 

@@ -171,7 +171,7 @@ msgstr "Wyślij"
 
 #: .\templates\myblog\aboutme.html:3
 msgid "Blog Damian Kuriata|About me"
-msgstr ""
+msgstr "Blog Damian Kuriata| O mnie"
 
 #: .\templates\myblog\aboutme.html:4
 msgid "A page about me"
@@ -179,7 +179,7 @@ msgstr "Strona o mnie"
 
 #: .\templates\myblog\category.html:3
 msgid "Blog Damian Kuriata|Category "
-msgstr ""
+msgstr "Blog Damian Kuriata|Kategoria"
 
 #: .\templates\myblog\category.html:4
 msgid "Preview of entries that are under "
